@@ -1,0 +1,51 @@
+#include <stdio.h>
+#define SIZE 6
+#define STU 13
+int main(void)
+{
+    int key, result = 0, i, j;
+
+    struct student {                //建立一結構名字為student
+        char name[STU];             //第一個成員(member)的資料型態為字元型態(char)且為一陣列長度為STU=13
+        unsigned int stu_id;        //第二個成員(member)的資料型態為無正負符號的整數型態存放學生學號
+        float math;                 //第三個成員(member)的資料型態為浮點數存放數學成績
+        float computer;             //第四個成員(member)的資料型態為浮點數存放計概成績
+        float chinese;              //第五個成員(member)的資料型態為浮點數存放國文成績
+        float science;              //第六個成員(member)的資料型態為浮點數存放自然成績
+        float avg;                  //第五個成員(member)的資料型態為浮點數存放平均成績
+    };
+
+    typedef struct student STUDENT;      //typdef為struct student取了個好記的別名STUDENT 
+    STUDENT stu ,stu_class[STU]=          //結構STUDENT存放的資料內容有......
+                        {{ "Alice",2,98,72,76,60,0},
+                        {"Danny",3,76,32,48,55,0},
+                        {"Tom",6,98,67,74,86,0},
+                        {"Nina",7,89,32,57,60,0},
+                        {"May",8,98,55,70,58,0},
+                        {"Sindy",9,89,32,82,90,0},
+                        { "Steven",10,98,65,72.80,0},
+                        {"Ellen",11,99,32,67,84.0},
+                        {"Nicole",12,98,71,72,76,0},
+                        {"Tan",13,76,91,66,70,0},
+                        {"Jenny",18,93,49,88,80,0},
+                        {"Bob",19,67,82,56,86,0},
+                        {"Tim",20,66,98,82,76,0}, };
+       
+        for (j = 0; j < STU; j++)
+            stu_class[j].avg = (stu_class[j].math + stu_class[j].computer+stu_class[j].chinese+ stu_class[j].science) / 4;         //stu_class.xxx可取出結構內的資料
+    
+
+        for (j = 0; j < STU; j++)
+        {
+            printf("%6s", stu_class[j].name);
+            printf("%6d", stu_class[j].stu_id);
+            printf("%8.2f", stu_class[j].math);
+            printf("%8.2f", stu_class[j].computer);
+            printf("%8.2f", stu_class[j].chinese);
+            printf("%8.2f", stu_class[j].science);
+            printf("%8.2f", stu_class[j].avg);
+            puts("");
+        }
+
+       
+    }
