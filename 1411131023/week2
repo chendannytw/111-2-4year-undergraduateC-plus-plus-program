@@ -1,0 +1,12 @@
+建立一個結構，成員定義如下:
+struct student
+{
+    char name[20];
+    unsigned int age;
+    float math;
+    float computer;
+    double average;
+};
+
+建立一個結構陣列，請使用鍵盤輸入資料至該結構陣列中，再呼叫副程式把結構內容依據平均成績(由小到大)逐筆印出。
+
