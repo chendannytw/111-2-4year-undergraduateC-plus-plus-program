@@ -24,10 +24,9 @@ int main()
 {
     int i,j;
     struct student STU[5];
-    struct student* ePtr = &STU[5];
 
     for (i = 0; i < 5; ++i) {
-        scanf_s("%s", ePtr->name,20);
+        scanf_s("%s", STU[i].name,20);
         scanf_s("%u", &STU[i].age);
         scanf_s("%f%f", &STU[i].math, &STU[i].computer);
         STU[i].average = (STU[i].math + STU[i].computer) / 2;
@@ -36,7 +35,8 @@ int main()
     void average(struct student STU[]);
     
     for (i = 0; i < 5; ++i)
-        printf("%s%u%f%f%lf\n", ePtr->name, STU[i].age, STU[i].math, STU[i].computer, STU[i].average);
+        printf("%21s  %4u  %.2f  %.2f  %.2f\n", 
+            STU[i].name, STU[i].age, STU[i].math, STU[i].computer, STU[i].average);
    
     system("pause");
     return 0;
