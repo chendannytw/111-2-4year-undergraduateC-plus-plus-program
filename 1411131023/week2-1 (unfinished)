@@ -1,0 +1,56 @@
+建立一個結構，成員定義如下:
+struct student
+{
+    char name[20];
+    unsigned int age;
+    float math;
+    float computer;
+    double average;
+};
+
+建立一個結構陣列，請使用鍵盤輸入資料至該結構陣列中，再呼叫副程式把結構內容依據平均成績(由小到大)逐筆印出。
+#include <stdio.h>
+void average(struct student STU[]);
+struct student
+{
+    char name[20];
+    unsigned int age;
+    float math;
+    float computer;
+    double average;
+};
+int main()
+{
+    int i,j;
+    struct student STU[5];
+    struct student* ePtr = &STU[5];
+
+    for (i = 0; i < 5; ++i) {
+        scanf_s("%s", ePtr->name,20);
+        scanf_s("%u", &STU[i].age);
+        scanf_s("%f%f", &STU[i].math, &STU[i].computer);
+        STU[i].average = (STU[i].math + STU[i].computer) / 2;
+    }
+
+    void average(struct student STU[]);
+    
+    for (i = 0; i < 5; ++i)
+        printf("%s%u%f%f%lf\n", ePtr->name, STU[i].age, STU[i].math, STU[i].computer, STU[i].average);
+   
+ 
+}
+void average(struct student STU[]) {
+    int i,j;
+    for (i = 0; i < 5; i++)
+    {
+        for (j = 0; j < 5 - i - 1; j++)
+        {
+            if (STU[j].average > STU[j + 1].average)
+            {
+                struct student tmp = STU[j];
+                STU[j] = STU[j + 1];
+                STU[j + 1] = tmp;
+            }
+        }
+    }
+}
