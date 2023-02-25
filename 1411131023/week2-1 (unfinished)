@@ -10,6 +10,7 @@ struct student
 
 建立一個結構陣列，請使用鍵盤輸入資料至該結構陣列中，再呼叫副程式把結構內容依據平均成績(由小到大)逐筆印出。
 #include <stdio.h>
+#include <stdlib.h>
 void average(struct student STU[]);
 struct student
 {
@@ -37,6 +38,8 @@ int main()
     for (i = 0; i < 5; ++i)
         printf("%s%u%f%f%lf\n", ePtr->name, STU[i].age, STU[i].math, STU[i].computer, STU[i].average);
    
+    system("pause");
+    return 0;
  
 }
 void average(struct student STU[]) {
