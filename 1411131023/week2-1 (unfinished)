@@ -42,7 +42,7 @@ int main()
     {
         for (j = 0; j < 5 - i - 1; j++)
         {
-            if (STU[j].average < STU[j + 1].average)
+            if (STU[j].average > STU[j + 1].average)
             {
                 swap(&STU[j].average, &STU[j + 1].average);
             }
