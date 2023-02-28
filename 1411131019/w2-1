@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct stud {
+		char name[20];
+		int id;
+		float score;
+	};
+int main()
+{
+	struct stud student[5];
+	int i = 0;
+	for (i = 0; i < 5; i++) {
+		scanf("%s", student[i].name);
+		scanf("%d", &student[i].id);
+		scanf("%f", &student[i].score);
+	}
+	
+	for(i=0;i<5;i++)
+	printf("%20s %3d %5.2f\n",student[i].name,student[i].id,student[i].score) ;
+	
+	system("pause");
+	return 0;
+}
