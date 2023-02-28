@@ -32,3 +32,61 @@ struct stud {
 	int computer;
 	double average;
 };
+
+
+//錯誤
+#include <stdio.h>
+void deal(struct stud student[]);
+void swap (char *element1Ptr, char *element2Ptr);
+struct stud {
+	char firstname[20];
+	char lastname[20];
+	unsigned int age;
+	int math;
+	int computer;
+	double average;
+};
+
+int main() {
+	struct stud student[5];
+	int i=0;
+	for (i=0 ; i<5 ; ++i){
+		scanf("%s",student[i].firstname);
+		scanf("%s",student[i].lastname);
+		scanf("%u",&student[i].age);
+		scanf("%d",&student[i].math);
+		scanf("%d",&student[i].computer);
+		student[i].average = (student[i].math + student[i].computer)/2.0;
+		puts(" ");
+	}
+	
+	deal(student);
+	
+	for (i=0 ; i<5 ; ++i){
+	    printf("%s" "%s" "%u" "%d" "%d" "%.2lf\n",student[i].firstname,student[i].lastname,
+		student[i].age,student[i].math,student[i].computer,student[i].average);
+	}
+}
+
+void deal(struct stud student[]){
+	int pass,i;
+	for ( pass = 1 ; pass<5 ;++pass){
+	  for ( i = 0 ; i < 4 ;++i){
+	  	if (student[i].average > student[i+1].average){
+	  		swap(&student[i].firstname,&student[i+1].firstname);
+	  		swap(&student[i].lastname,&student[i+1].lastname);
+	  		swap(&student[i].age,&student[i+1].age);
+	  		swap(&student[i].math,&student[i+1].math);
+	  		swap(&student[i].computer,&student[i+1].computer);
+		}
+	  }
+	}
+}
+
+
+void swap (char *element1Ptr, char *element2Ptr)
+	{
+		int hold = *element1Ptr;
+		*element1Ptr = *element2Ptr;
+		*element2Ptr = hold;
+	}
