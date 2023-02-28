@@ -1,0 +1,29 @@
+#include <stdio.h>
+
+struct student{
+    char firstname[20];
+    char lastname[20];
+    unsigned int age;
+    int math;
+    int computer;
+    double average;
+};
+
+struct student stu;
+
+void sub1(struct student *s);
+int main(void){
+    scanf("%s", stu.lastname);
+    scanf("%s", stu.firstname);
+    scanf("%d", &stu.age);
+    scanf("%d", &stu.math);
+    scanf("%d", &stu.computer);
+	
+    sub1(&stu);
+    printf("average : %.2lf", stu.average);
+
+} 
+
+void sub1(struct student *s){ 
+    s->average = (s->math + s->computer) / 2; 
+}
