@@ -1,0 +1,23 @@
+#include<stdio.h>
+struct stud{
+	int id;
+	float score;
+	char name[20];
+};
+main()
+{
+	struct stud student[5];
+	int i;
+	for(i=0;i<5;i++){
+		printf("請輸入第%d位學生學號：",i+1);
+		scanf("%d",&student[i].id);
+		printf("請輸入第%d位學生成績：",i+1);
+		scanf("%f",&student[i].score);
+		printf("請輸入第%d位學生姓名：",i+1);
+		scanf("%s",student[i].name);
+	}
+	printf("\n%2s%8s　　%4s\n","學號","姓名","成績");
+	for(i=0;i<5;i++){
+		printf("%2d%10s　　%.1f\n",student[i].id,student[i].name,student[i].score);
+	}
+}
