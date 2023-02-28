@@ -1,0 +1,40 @@
+#include<stdio.h>
+#define SIZE 5
+struct stud{
+	int id;
+	float score;
+	char name[20];
+};
+int sort(struct stud s[SIZE]);
+main()
+{
+	struct stud student[SIZE];
+	int i;
+	for(i=0;i<SIZE;i++){
+		printf("請輸入第%d位學生學號：",i+1);
+		scanf("%d",&student[i].id);
+		printf("請輸入第%d位學生成績：",i+1);
+		scanf("%f",&student[i].score);
+		printf("請輸入第%d位學生姓名：",i+1);
+		scanf("%s",student[i].name);
+		printf("\n");
+	}
+	sort(student);
+	printf("\n%2s%8s　　%4s\n","學號","姓名","成績");
+	for(i=0;i<SIZE;i++){
+		printf("%2d%10s　　%.1f\n",student[i].id,student[i].name,student[i].score);
+	}
+}
+int sort(struct stud s[]){
+	int i,j,pass;
+	struct stud hold;
+	for(pass=1;pass<SIZE;pass++){
+		for(i=0;i<SIZE-pass;i++){
+			if(s[i].score>s[i+1].score){
+				hold=s[i];
+				s[i]=s[i+1];
+				s[i+1]=hold;
+			}
+		}
+	}
+}
