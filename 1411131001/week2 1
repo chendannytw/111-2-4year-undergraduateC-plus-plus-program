@@ -1,0 +1,60 @@
+/*建立一個結構，成員定義如下:
+struck student{
+
+   char firstname[20];
+   char lastname [20];
+   unsigned int age;
+   int math;
+   int computer;
+   double average;};
+建立一個結構陣列，請使用鍵盤輸入資料至該結構陣列中，在乎叫副程式把結構內容依據平均成績(由小到大)逐筆印出。
+
+*/
+#include<stdio.h>
+#include<stdlib.h>
+
+
+struct student{
+
+   const char name[20];
+   unsigned int id;
+   unsigned int age;
+   int math;
+   int computer;
+   double average; };
+
+
+//void swap()
+
+int main(void) {
+
+	struct student stu[5];
+
+	int i = 0;
+
+	for (i = 0; i < 5; ++i) {
+		scanf_s("%s", student[i].name);
+		scanf_s("%d", &student[i].id);
+		scanf_s("%d", &student[i].age);
+		scanf_s("%d", &student[i].math);
+		scanf_s("%d", &student[i].computer);
+		student[i].average = (student[i].math + student[i].computer) / 2;
+
+		printf("%s", student[i].name);
+		printf("%d", student[i].id);
+		printf("%d", student[i].age);
+		printf("%d", student[i].math);
+		printf("%d", student[i].computer);
+		printf("%.2f", student[i].average);
+	}
+
+
+
+	//swap(stu,student[i].name,student[i].id,student[i].age,student[i].math,student[i].computer,student[i].average)
+
+
+
+
+
+
+}
