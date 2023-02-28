@@ -1,0 +1,34 @@
+quiz1
+建立一組學生的結構陣列，透過鍵盤輸入資料後，在印出報表
+#include <stdio.h>
+
+struct stud {
+	int ID;
+	float score;
+	char name[20];
+};
+
+int main() {
+	struct stud student[5];
+	int i=0;
+	for (i=0 ; i<5 ; ++i){
+		scanf("%s",student[i].name);
+		scanf("%d",&student[i].ID);
+		scanf("%f",&student[i].score);
+		puts(" ");
+	}
+	for (i=0 ; i<5 ; ++i){
+	    printf("%4s" "%4d"  "%10.2f" "\n",student[i].name,student[i].ID,student[i].score);
+	}
+}
+
+quiz2
+
+struct stud {
+	char firstname[20];
+	char lastname[20];
+	unsigned int age;
+	int math;
+	int computer;
+	double average;
+};
