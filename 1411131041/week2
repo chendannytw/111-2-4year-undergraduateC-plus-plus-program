@@ -1,0 +1,93 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define SIZE 4
+#define STU 13
+    struct student {
+        char name[20];
+        unsigned int stu_id;
+        float math;
+        float computer;
+        float avg;
+    };
+    typedef struct student  STUDENT;
+
+
+    void sort(STUDENT mystu[STU]);
+int main(void)
+{
+    int key, result = 0, i, j;
+    // initialize a
+
+    STUDENT stu, stu_class[STU] = { {"Alice",2,98,72,0},
+                        {"Danny",3,76,32,0},
+                        {"Tom",6,98,67,0},
+                        {"Nina",7,89,32,0},
+                        {"May",8,98,55,0},
+                        {"Tim",9,89,32,0},
+                        {"Sindy",10,98,65,0},
+                        {"Bob",11,99,32,0},
+                        {"Steven",12,98,71,0},
+                        {"Ellen",13,76,91,0},
+                        {"Nicole",18,93,49,0},
+                        {"Tan",19,67,82,0},
+                        {"Jenny",20,66,98,0} };
+
+
+
+    puts("Name ID items in original order");
+    for (j = 0; j < STU; j++)
+        stu_class[j].avg = (stu_class[j].math + stu_class[j].computer) / 2;
+
+    for (j = 0; j < STU; j++)
+    {
+        printf("%d", j + 1);
+        printf("%28s", stu_class[j].name);
+        printf(" %d", stu_class[j].stu_id);
+        printf(" %.2f", stu_class[j].math);
+        printf(" %.2f", stu_class[j].computer);
+        printf(" %.2f", stu_class[j].avg);
+        printf("\n");
+    } 
+    sort(stu_class);
+    printf("\n");
+    for (j = 0; j < STU; j++)
+    {
+        printf("%d", j+1);
+        printf("%28s", stu_class[j].name);
+        printf(" %d", stu_class[j].stu_id);
+        printf(" %.2f", stu_class[j].math);
+        printf(" %.2f", stu_class[j].computer);
+        printf(" %.2f", stu_class[j].avg);
+        printf("\n");
+    }
+    printf("\n平均最高 %s 的 %.2f分", stu_class[0].name, stu_class[0].avg);
+    printf("\n平均為中位數 %s 的 %.2f分", stu_class[6].name, stu_class[6].avg);
+    printf("\n平均最低 %s 的 %.2f分", stu_class[12].name, stu_class[12].avg);
+}
+
+
+ 
+   
+
+
+void sort(STUDENT mystu[STU])
+{
+    STUDENT stu;
+    int hold,pass,i;
+    for (pass = 1; pass < STU; ++pass) {
+
+      
+        for (i = 0; i < STU - pass; ++i) {
+
+           
+            if (mystu[i].avg < mystu[i+1].avg) {
+                stu= mystu[i];
+                mystu[i] = mystu[i+1];
+                mystu[i+1] =stu;
+                
+            }
+        }
+    }
+
+}
+
