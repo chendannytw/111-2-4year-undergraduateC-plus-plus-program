@@ -1,0 +1,106 @@
+#include <stdio.h>
+#define SIZE 4
+#define STU 10
+//int binarySearch(int b[], int searchKey, int low, int high);
+// function main begins program execution
+struct student {
+    char name[10];
+    unsigned int stu_id;
+    float math;
+    float computer;
+    float avg;
+};
+//struct student stu,stu_class[10];
+typedef struct student  STUDENT;
+
+void sort(STUDENT MYSTU[]);
+void Prt(STUDENT MYSTU[]);
+
+int main(void)
+{
+    int key, result = 0, i, j;
+    // initialize a
+
+
+    STUDENT stu, stu_class[STU] = { {"Alice",2,98,72,0},
+                        {"Danny",3,76,32,0},
+                        {"Tom",6,98,67,0},
+                        {"Nina",7,89,32,0},
+                        {"May",8,98,55,0},
+                        {"Tim",9,89,32,0},
+                        {"Sindy",10,98,65,0},
+                        {"Bob",11,99,32,0},
+                        {"Steven",12,98,71,0},
+                        {"Ellen",13,76,91,0}};
+
+
+
+    puts("Name ID items in original order");
+    // output original array
+    for (j = 0; j < STU; j++)
+        stu_class[j].avg = (stu_class[j].math + stu_class[j].computer) / 2;
+
+    Prt(stu_class);
+
+
+            
+
+    sort(stu_class);
+    puts("\nData items in ascending order");
+    
+    Prt(stu_class);
+    printf("\n中位數成績:%s  %.2f\n", stu_class[(STU - 1) / 2].name, stu_class[(STU-1)/2].avg);
+
+}
+
+
+void sort(STUDENT MYSTU[STU])
+{
+    STUDENT tpm;
+    int hold,pass,i;
+    for (pass = 1; pass < STU; ++pass) {
+
+        // loop to control number of comparisons per pass
+        for (i = 0; i < STU - pass; ++i) {
+            if (MYSTU[i].avg < MYSTU[i + 1].avg)
+            {
+                STUDENT tpm = MYSTU[i];
+                MYSTU[i] = MYSTU[i + 1];
+                MYSTU[i + 1] = tpm;
+
+
+            /*
+            if (a[i][3] < a[i + 1][3]) {
+                ptr=name[i];
+                name[i]=name[i+1];
+                name[i+1]=ptr;
+                swap(&a[i][0], &a[i+1][0]);
+                swap(&a[i][1], &a[i+1][1]);
+                swap(&a[i][2], &a[i+1][2]);
+                swap(&a[i][3], &a[i+1][3]);
+            */
+            }
+        }
+    }
+
+}
+
+void Prt(STUDENT MYSTU[])
+{
+    for (int j = 0; j < STU; j++)
+    {
+        printf("%28s", MYSTU[j].name);
+        printf(" %d", MYSTU[j].stu_id);
+        printf(" %.2f", MYSTU[j].math);
+        printf(" %.2f", MYSTU[j].computer);
+        printf(" %.2f", MYSTU[j].avg);
+        printf("\n");
+    }
+}
+
+void swap(int *e1Ptr,int *e2Ptr)
+{int hold;
+hold=*e1Ptr;
+*e1Ptr=*e2Ptr;
+*e2Ptr=hold;
+}
