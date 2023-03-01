@@ -85,7 +85,7 @@ int main(void)
 
 void bubble(STUDENT Mystu[ID])
 {
-    struct student HOLD;
+    STUDENT HOLD;
     int pass, i;
     for (pass = 1; pass < ID; ++pass) 
     { 
