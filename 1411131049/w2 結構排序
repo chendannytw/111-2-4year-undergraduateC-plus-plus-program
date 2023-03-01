@@ -1,0 +1,83 @@
+#include <stdio.h>
+#define SIZE 4
+#define STU 13
+struct student{
+    char name[20];
+    unsigned int stu_id;
+    float math;
+    float computer;
+    float avg;
+	};  	
+typedef struct student STUDENT;
+void bubble(STUDENT b[STU]);
+int main(void)
+{
+    int key,result=0,i,j;
+    STUDENT stu, stu_class[STU]={{"Alice ",2,98,72,0},
+						{"Danny ",3,76,32,0},
+						{"Tom   ",6,98,67,0},
+						{"Nina  ",7,89,32,0},
+						{"May   ",8,98,55,0},
+						{"Tim   ",9,89,32,0},
+						{"Sindy ",10,98,65,0},
+						{"Bob   ",11,99,32,0},
+						{"Steven",12,98,71,0},
+						{"Ellen ",13,76,91,0},
+						{"Nicole",18,93,49,0},
+						{"Tan   ",19,67,82,0},
+						{"Jenny ",20,66,98,0}}; 
+
+
+
+    puts("Name    ID  math   com    avg");
+    for(j=0;j<STU;j++)	
+    	stu_class[j].avg=(stu_class[j].math+stu_class[j].computer)/2;
+       
+    for(j=0;j<STU;j++)
+    {	printf("%6s", stu_class[j].name);
+		printf(" %3d", stu_class[j].stu_id);
+		printf("  %.2f", stu_class[j].math);
+		printf("  %.2f", stu_class[j].computer);
+		printf("  %.2f", stu_class[j].avg);
+    	printf("\n");
+	}
+
+
+   bubble(stu_class);
+    puts("-----------------------------\nData items in ascending order");
+
+    for(j=0;j<STU;j++)
+    {	printf("%6s", stu_class[j].name);
+		printf(" %3d", stu_class[j].stu_id);
+		printf("  %.2f", stu_class[j].math);
+		printf("  %.2f", stu_class[j].computer);
+		printf("  %.2f", stu_class[j].avg);
+    	printf("\n");
+	}
+	printf("\n中位數:\n");
+	printf("%6s", stu_class[STU/2].name);
+	printf(" %3d", stu_class[STU/2].stu_id);
+	printf("  %.2f", stu_class[STU/2].math);
+	printf("  %.2f", stu_class[STU/2].computer);
+	printf("  %.2f", stu_class[STU/2].avg);
+    printf("\n");
+
+}
+
+
+void bubble(STUDENT b[STU])
+{STUDENT hold;
+    int pass,i;
+    for (pass = 1; pass < STU; ++pass) { 
+        for (i = 0; i < STU - pass; ++i) {
+        
+            if (b[i].avg< b[i + 1].avg) 
+			{
+                hold = b[i];
+                b [i]= b[i + 1];
+                b[i + 1]= hold;
+            }
+        }
+    }
+
+}
