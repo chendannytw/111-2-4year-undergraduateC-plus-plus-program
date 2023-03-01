@@ -62,6 +62,23 @@ int main(void)
 
     int mid = (0 + (ID - 1)) / 2;
     printf("\n  中位數: %8s%5d   %.2f\n", stu_class[mid].name, stu_class[mid].stu_id,stu_class[mid].avg);
+
+    printf("\n  最高：");
+    printf("%10s", stu_class[0].name);
+    printf("%5d", stu_class[0].stu_id);
+    printf("    %.2f", stu_class[0].math);
+    printf("    %.2f", stu_class[0].com);
+    printf("    %.2f", stu_class[0].avg);
+    printf("\n");
+
+    printf("\n  最低：");
+    printf("%10s", stu_class[9].name);
+    printf("%5d", stu_class[9].stu_id);
+    printf("    %.2f", stu_class[9].math);
+    printf("    %.2f", stu_class[9].com);
+    printf("    %.2f", stu_class[9].avg);
+    printf("\n");
+    puts("");
 }
 
 void bubble(STUDENT Mystu[ID])
