@@ -1,0 +1,66 @@
+#include <stdio.h>
+#define STU 13
+struct student{
+    	char name[20];
+    	unsigned int stu_id;
+    	float math;
+    	float computer;
+    	float avg;
+	};
+typedef struct student STUDENT;
+void sort(STUDENT s[STU]);
+void pri(STUDENT a[STU]);
+int main(void){
+    int i,j;  
+    STUDENT stu, stu_class[STU]={{"Alice ",2,98,72,0},
+						{"Danny ",3,76,32,0},
+						{"Tom   ",6,98,67,0},
+						{"Nina  ",7,89,32,0},
+						{"May   ",8,98,55,0},
+						{"Tim   ",9,89,32,0},
+						{"Sindy ",10,98,65,0},
+						{"Bob   ",11,99,32,0},
+						{"Steven",12,98,71,0},
+						{"Ellen ",13,76,91,0},
+						{"Nicole",18,93,49,0},
+						{"Tan   ",19,67,82,0},
+						{"Jenny ",20,66,98,0}}; 
+
+    puts("排序前");
+    for(j=0;j<STU;j++)	
+    	stu_class[j].avg=(stu_class[j].math+stu_class[j].computer)/2;
+    pri(stu_class);
+	sort(stu_class);  
+	printf("\n\n排序後\n");
+    pri(stu_class);
+	printf("\n中位數為：\n");
+	printf("%6s", stu_class[STU/2].name);
+	printf("   %2d", stu_class[STU/2].stu_id);
+	printf("   %.2f", stu_class[STU/2].math);
+	printf("   %.2f", stu_class[STU/2].computer);
+	printf("   %.2f", stu_class[STU/2].avg);
+}
+void sort(STUDENT s[STU]){
+	int i,j,pass;
+	STUDENT hold;
+	for(pass=1;pass<STU;pass++){
+		for(i=0;i<STU-pass;i++){
+			if(s[i].avg<s[i+1].avg){
+				hold=s[i];
+				s[i]=s[i+1];
+				s[i+1]=hold;
+			}
+		}
+	}
+}
+void pri(STUDENT a[STU]){
+	int j;
+	for(j=0;j<STU;j++){
+		printf("%6s", a[j].name);
+		printf("   %2d", a[j].stu_id);
+		printf("   %.2f",a[j].math);
+		printf("   %.2f",a[j].computer);
+		printf("   %.2f",a[j].avg);
+    	printf("\n");
+	}
+}
