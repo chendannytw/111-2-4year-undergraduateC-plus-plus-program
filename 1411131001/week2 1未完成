@@ -28,7 +28,7 @@ struct student{
 
 int main(void) {
 
-	struct student stu[5];
+	typedef struct student stu[5];
 
 	int i = 0;
 
