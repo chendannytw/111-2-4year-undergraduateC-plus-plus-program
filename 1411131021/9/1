@@ -7,26 +7,26 @@
 #include <stdio.h>
 #define SIZE 4
 #define STU 13
-    struct student{
-        char name[20];
-        unsigned int stu_id;
-        float math;
-        float computer;
-        float avg;
-    };
-    //struct student stu,stu_class[10];
-    typedef struct student  STUDENT;
+struct student {
+    char name[20];
+    unsigned int stu_id;
+    float math;
+    float computer;
+    float avg;
+};
+//struct student stu,stu_class[10];
+typedef struct student  STUDENT;
 //int binarySearch(int b[], int searchKey, int low, int high);
 //void sort(char** name, int a[][SIZE], int size);
 void bubble(STUDENT myStu[STU]);
 // function main begins program execution
 int main(void)
 {
-    int key, result = 0, i, j.q;
+    int key, result = 0, i, j,q;
     // initialize a
 
-  
-  
+
+
     STUDENT stu, stu_class[STU] = { {"Alice",2,98,72,0},
                         {"Danny",3,76,32,0},
                         {"Tom",6,98,67,0},
@@ -59,13 +59,13 @@ int main(void)
     }
 
 
-/*    printf("\n");
-    for (i = 0; i < SIZE; ++i) {
-        printf("%4d", a[1][i]);
-    }
-*/
-// bubble sort                                         
-// loop to control number of passes                    
+    /*    printf("\n");
+        for (i = 0; i < SIZE; ++i) {
+            printf("%4d", a[1][i]);
+        }
+    */
+    // bubble sort                                         
+    // loop to control number of passes                    
 
     bubble(stu_class);//呼叫排序副程式
     printf("\nData items in ascending order");
@@ -80,13 +80,13 @@ int main(void)
         printf("\n");
     }
     q = STU / 2;
-    printf(" %.2f", stu_class[j].);
+    printf("%s %.2f", stu_class[q].name, stu_class[q].avg );
 }
 
 void bubble(STUDENT myStu[STU])
 {
     STUDENT temp_stu;
-    int hold,pass,i;
+    int hold, pass, i;
     for (pass = 1; pass < STU; ++pass) {
 
         // loop to control number of comparisons per pass
@@ -95,19 +95,19 @@ void bubble(STUDENT myStu[STU])
             // compare adjacent elements and swap them if first
             // element is greater than second element
             if (myStu[i].avg < myStu[i + 1].avg) {
-                temp_stu= myStu[i];
-                myStu[i]= myStu[i+1];
-                myStu[i+1]= temp_stu;
+                temp_stu = myStu[i];
+                myStu[i] = myStu[i + 1];
+                myStu[i + 1] = temp_stu;
             }
         }
     }
 
 }
 
-void swap(int *e1Ptr,int *e2Ptr)
-{int hold;
-hold=*e1Ptr;
-*e1Ptr=*e2Ptr;
-*e2Ptr=hold;
+void swap(int* e1Ptr, int* e2Ptr)
+{
+    int hold;
+    hold = *e1Ptr;
+    *e1Ptr = *e2Ptr;
+    *e2Ptr = hold;
 }
-
