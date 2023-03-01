@@ -1,0 +1,110 @@
+題目 : 建立一個10*4陣列，將全班10人的學號，數學成績，計概成績放入陣列中(直接置於程式內)。
+建立一個指標陣列，指標分別指向這十位同學的姓名的字串變數，
+根據每個學生的平均成績，由大到小排序，印出美觀、大方的全班成績表(包含姓名、學號、成績、平均、名次)，
+並印出最高平均成績與最低平均成績的同學和分數。
+需使用排序、報表、中位數、取平均副程式，
+資料交換需使用副程式p.322的swap( )副程式完成。
+
+
+
+#include <stdlib.h>
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+//建議解
+
+#include <stdio.h>
+#define SIZE 4
+#define STU 13
+    struct student{
+    	char name[20];
+    	unsigned int stu_id;
+    	float math;
+    	float computer;
+    	float avg;
+	};
+    //struct student stu,stu_class[10];
+    typedef struct student  STUDENT;
+//int binarySearch(int b[], int searchKey, int low, int high);
+//void sort(char **name, int a[][SIZE], int size);
+void bubble(STUDENT myStu[STU]);
+// function main begins program execution
+int main(void)
+{
+    int key,result=0,i,j;
+    // initialize a
+    
+
+    STUDENT stu, stu_class[STU]={{"Alice",2,98,72,0},
+						{"Danny",3,76,32,0},
+						{"Tom",6,98,67,0},
+						{"Nina",7,89,32,0},
+						{"May",8,98,55,0},
+						{"Tim",9,89,32,0},
+						{"Sindy",10,98,65,0},
+						{"Bob",11,99,32,0},
+						{"Steven",12,98,71,0},
+						{"Ellen",13,76,91,0},
+						{"Nicole",18,93,49,0},
+						{"Tan",19,67,82,0},
+						{"Jenny",20,66,98,0}}; 
+
+
+
+    puts("Name ID items in original order");
+    // output original array
+    for(j=0;j<STU;j++)	
+    	stu_class[j].avg=(stu_class[j].math+stu_class[j].computer)/2;
+       
+    for(j=0;j<STU;j++)
+    {	printf("%28s", stu_class[j].name);
+		printf(" %d", stu_class[j].stu_id);
+		printf(" %.2f", stu_class[j].math);
+		printf(" %.2f", stu_class[j].computer);
+		printf(" %.2f", stu_class[j].avg);
+    	printf("\n");
+	}
+
+
+/*    printf("\n");
+    for (i = 0; i < SIZE; ++i) {
+        printf("%4d", a[1][i]);
+    }
+*/
+    // bubble sort                                         
+    // loop to control number of passes                    
+
+    bubble(stu_class);//呼叫排序副程式 
+    printf("\nData items in ascending order");
+
+    for(j=0;j<STU;j++)    //印出排序後的結構陣列內容 
+    {	printf("%28s", stu_class[j].name);
+		printf(" %d", stu_class[j].stu_id);
+		printf(" %.2f", stu_class[j].math);
+		printf(" %.2f", stu_class[j].computer);
+		printf(" %.2f", stu_class[j].avg);
+    	printf("\n");
+	}
+
+}
+
+
+void bubble(STUDENT myStu[STU])
+{STUDENT temp_stu;
+    int hold,pass,i;
+    for (pass = 1; pass < STU; ++pass) {
+
+        // loop to control number of comparisons per pass   
+        for (i = 0; i < STU - pass; ++i) {
+
+            // compare adjacent elements and swap them if first 
+            // element is greater than second element           
+            if (myStu[i].avg < myStu[i + 1].avg) {
+                temp_stu=myStu[i];
+                myStu[i]= myStu[i + 1];
+                 myStu[i + 1]=temp_stu;
+            }
+        }
+    }
+
+}
