@@ -61,8 +61,8 @@ int main(void)
         printf("\n");
     }
     printf("\n平均最高 %s 的 %.2f分", stu_class[0].name, stu_class[0].avg);
-    printf("\n平均為中位數 %s 的 %.2f分", stu_class[6].name, stu_class[6].avg);
-    printf("\n平均最低 %s 的 %.2f分", stu_class[12].name, stu_class[12].avg);
+    printf("\n平均為中位數 %s 的 %.2f分", stu_class[STU/2].name, stu_class[STU/2].avg);
+    printf("\n平均最低 %s 的 %.2f分", stu_class[STU-1].name, stu_class[STU-1].avg);
 }
 
 
