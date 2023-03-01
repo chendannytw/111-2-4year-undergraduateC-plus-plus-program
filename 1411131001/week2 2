@@ -85,7 +85,7 @@ int main(void)
         
     }
     printf("\n");
-    printf("中位數:%s %d %.2f %.2f %.2f", stu_class[6].name, stu_class[6].stu_id, stu_class[6].math, stu_class[6].computer, stu_class[6].avg);
+    printf("中位數:%s %d %.2f %.2f %.2f", stu_class[int (STU/2)].name, stu_class[int(STU / 2)].stu_id, stu_class[int(STU / 2)].math, stu_class[int(STU / 2)].computer, stu_class[int(STU / 2)].avg);
     printf("\n");
 }
 
