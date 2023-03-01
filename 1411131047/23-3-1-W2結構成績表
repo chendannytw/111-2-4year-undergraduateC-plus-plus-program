@@ -1,23 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <stdio.h>
 #define SIZE 4
 #define STU 13
 
 int main(void)
 {
-    int key,result=0,i,j;
-    
-    struct student{
-    	char name[20];
-    	unsigned int stu_id;
-    	int math;
-    	int computer;
-    	float avg;
+	int key, result = 0, i, j;
+
+	struct student {
+		char name[20];
+		unsigned int stu_id;
+		int math;
+		int computer;
+		float avg;
 	};
-    typedef struct student  STUDENT;
-    STUDENT stu_class[STU]={{"Alice",2,98,72,0},
+	typedef struct student  STUDENT;
+	STUDENT stu_class[STU] = { {"Alice",2,98,72,0},
 						{"Danny",3,76,32,0},
 						{"Tom",6,98,67,0},
 						{"Nina",7,89,32,0},
@@ -29,19 +28,20 @@ int main(void)
 						{"Ellen",13,76,91,0},
 						{"Nicole",18,93,49,0},
 						{"Tan",19,67,82,0},
-						{"Jenny",20,66,98,0}}; 
+						{"Jenny",20,66,98,0} };
 
 
-    puts("Student");
+	puts("Student");
 
-    for(j=0;j<STU;j++) stu_class[j].avg=(stu_class[j].math+stu_class[j].computer)/2.0;
-       
-    for(j=0;j<STU;j++)
-    {	printf("%-10s", stu_class[j].name);
-		printf(" %2d", stu_class[j].stu_id);
-		printf(" %3d", stu_class[j].math);
-		printf(" %3d", stu_class[j].computer);
-		printf(" %.2f", stu_class[j].avg);
-    	printf("\n");
+	for (j = 0; j < STU; j++) stu_class[j].avg = (stu_class[j].math + stu_class[j].computer) / 2.0;
+
+	for (j = 0; j < STU; j++)
+	{
+		printf_s("%-10s", stu_class[j].name);
+		printf_s(" %2d", stu_class[j].stu_id);
+		printf_s(" %3d", stu_class[j].math);
+		printf_s(" %3d", stu_class[j].computer);
+		printf_s(" %.2f", stu_class[j].avg);
+		printf_s("\n");
 	}
 }
