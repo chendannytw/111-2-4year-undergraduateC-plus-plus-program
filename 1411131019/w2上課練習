@@ -1,0 +1,69 @@
+int main(void)
+{
+    int key, result = 0, i, j;
+
+    STUDENT stu, stu_class[STU] = { {"Alice",2,98,72,0},
+                        {"Danny",3,76,32,0},
+                        {"Tom",6,98,67,0},
+                        {"Nina",7,89,32,0},
+                        {"May",8,98,55,0},
+                        {"Tim",9,89,32,0},
+                        {"Sindy",10,98,65,0},
+                        {"Bob",11,99,32,0},
+                        {"Steven",12,98,71,0},
+                        {"Ellen",13,76,91,0},
+                        {"Nicole",18,93,49,0},
+                        {"Tan",19,67,82,0},
+                        {"Jenny",20,66,98,0} };
+
+
+
+    puts("Name ID items in original order");
+
+    for (j = 0; j < STU; j++)
+        stu_class[j].avg = (stu_class[j].math + stu_class[j].computer) / 2;
+
+    for (j = 0; j < STU; j++)
+    {
+ 
+        printf("%8s", stu_class[j].name);
+        printf(" %5d", stu_class[j].stu_id);
+        printf(" %8.2f", stu_class[j].math);
+        printf(" %8.2f", stu_class[j].computer);
+        printf(" %8.2f", stu_class[j].avg);
+        printf("\n");
+    }
+
+    bubble(stu_class);
+
+    puts("");
+    puts("");
+
+    for (j = 0; j < STU; j++)
+    {
+        printf("%8s", stu_class[j].name);
+        printf(" %5d", stu_class[j].stu_id);
+        printf(" %8.2f", stu_class[j].math);
+        printf(" %8.2f", stu_class[j].computer);
+        printf(" %8.2f", stu_class[j].avg);
+        printf("\n");
+    }
+    
+    printf("\n中位數為：%s   %.2f ", stu_class[STU / 2].name,stu_class[STU / 2].avg);
+}
+
+void bubble(STUDENT mystu[STU])
+{
+    STUDENT tempstu;
+    int pass, i;
+    for (pass = 1; pass < STU; ++pass) {
+        for (i = 0; i < STU - pass; ++i) {
+            if (mystu[i].avg < mystu[i+1].avg) {
+                tempstu = mystu[i];
+                mystu[i] = mystu[i + 1];
+                mystu[i + 1] = tempstu;
+            }
+        }
+    }
+
+}
