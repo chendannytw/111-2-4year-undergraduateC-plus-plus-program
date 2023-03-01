@@ -1,0 +1,50 @@
+#include <stdio.h>
+#define SIZE 4
+#define STU 13
+//int binarySearch(int b[], int searchKey, int low, int high);
+void sort(char **name, int a[][SIZE], int size);
+// function main begins program execution
+int main(void)
+{
+    int key,result=0,i,j;
+    // initialize a
+    
+    struct student{
+    	char name[20];
+    	unsigned int stu_id;
+    	float math;
+    	float computer;
+    	float avg;
+	};
+    //struct student stu,stu_class[10];
+    typedef struct student  STUDENT;
+    STUDENT stu, stu_class[STU]={{"Alice",2,98,72,0},
+						{"Danny",3,76,32,0},
+						{"Tom",6,98,67,0},
+						{"Nina",7,89,32,0},
+						{"May",8,98,55,0},
+						{"Tim",9,89,32,0},
+						{"Sindy",10,98,65,0},
+						{"Bob",11,99,32,0},
+						{"Steven",12,98,71,0},
+						{"Ellen",13,76,91,0},
+						{"Nicole",18,93,49,0},
+						{"Tan",19,67,82,0},
+						{"Jenny",20,66,98,0}}; 
+
+
+
+    puts("Name ID items in original order");
+    // output original array
+    for(j=0;j<STU;j++)	
+    	stu_class[j].avg=(stu_class[j].math+stu_class[j].computer)/2;
+       
+    for(j=0;j<STU;j++)
+    {	printf("%28s", stu_class[j].name);
+		printf(" %d", stu_class[j].stu_id);
+		printf(" %.2f", stu_class[j].math);
+		printf(" %.2f", stu_class[j].computer);
+		printf(" %.2f", stu_class[j].avg);
+    	printf("\n");
+	}
+}
