@@ -11,6 +11,7 @@ struct student
 };
 
 typedef struct student  STUDENT;
+
 void bubble(STUDENT Mystu[ID]);
 
 int main(void)
@@ -46,6 +47,7 @@ int main(void)
     }
 
     bubble(stu_class);
+    
     puts("\nData items in ascending order\n");
     printf("%10s%5s%8s%8s%14s\n", "Name:", "ID", "MATH", "COM", "Averages");
     for (j = 0; j < ID; j++)
@@ -89,12 +91,12 @@ void bubble(STUDENT Mystu[ID])
     { 
         for (i = 0; i < ID - pass; ++i) 
         {       
-            if (Mystu[i].avg < Mystu[i+1].avg) {
+            if (Mystu[i].avg < Mystu[i+1].avg)
+            {
                 HOLD = Mystu[i];
                 Mystu[i] = Mystu[i+1];
                 Mystu[i + 1] = HOLD;
             }
         }
     }
-
 }
