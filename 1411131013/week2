@@ -24,69 +24,97 @@ int main() {
 
 quiz2
 
-struct stud {
-	char firstname[20];
-	char lastname[20];
-	unsigned int age;
-	int math;
-	int computer;
-	double average;
-};
-
-
-//錯誤
 #include <stdio.h>
-void deal(struct stud student[]);
-void swap (char *element1Ptr, char *element2Ptr);
-struct stud {
-	char firstname[20];
-	char lastname[20];
-	unsigned int age;
-	int math;
-	int computer;
-	double average;
-};
+#define SIZE 4
+#define STU 13
+//int binarySearch(int b[], int searchKey, int low, int high);
+//void sort(char **name, int a[][SIZE], int size);
+// function main begins program execution
+struct student{
+    	char name[20];
+    	unsigned int stu_id;
+    	float math;
+    	float computer;
+    	float avg;
+	};
+    //struct student stu,stu_class[10];
+    typedef struct student  STUDENT;
 
-int main() {
-	struct stud student[5];
-	int i=0;
-	for (i=0 ; i<5 ; ++i){
-		scanf("%s",student[i].firstname);
-		scanf("%s",student[i].lastname);
-		scanf("%u",&student[i].age);
-		scanf("%d",&student[i].math);
-		scanf("%d",&student[i].computer);
-		student[i].average = (student[i].math + student[i].computer)/2.0;
-		puts(" ");
+void bubble(STUDENT mystu[STU]);
+
+int main(void)
+{
+    int key,result=0,i,j,l;
+    // initialize a
+    
+    STUDENT stu, stu_class[STU]={{"Alice",2,98,72,0},
+						{"Danny",3,76,32,0},
+						{"Tom",6,98,67,0},
+						{"Nina",7,89,32,0},
+						{"May",8,98,55,0},
+						{"Tim",9,89,32,0},
+						{"Sindy",10,98,65,0},
+						{"Bob",11,99,32,0},
+						{"Steven",12,98,71,0},
+						{"Ellen",13,76,91,0},
+						{"Nicole",18,93,49,0},
+						{"Tan",19,67,82,0},
+						{"Jenny",20,66,98,0}}; 
+
+
+
+    puts("Name ID items in original order");
+    
+    for(j=0;j<STU;j++)	
+    	stu_class[j].avg=(stu_class[j].math+stu_class[j].computer)/2;
+       
+    for(j=0;j<STU;j++)
+    {	printf("%28s", stu_class[j].name);
+		printf(" %d", stu_class[j].stu_id);
+		printf(" %.2f", stu_class[j].math);
+		printf(" %.2f", stu_class[j].computer);
+		printf(" %.2f", stu_class[j].avg);
+    	printf("\n");
+	}
+
+/*    printf("\n");
+    for (i = 0; i < SIZE; ++i) {
+        printf("%4d", a[1][i]);
+    }
+*/
+    // bubble sort                                         
+    // loop to control number of passes                    
+    bubble(stu_class);
+    puts("\nData items in ascending order");
+
+    for(j=0;j<STU;j++)
+    {	printf("%28s", stu_class[j].name);
+		printf(" %d", stu_class[j].stu_id);
+		printf(" %.2f", stu_class[j].math);
+		printf(" %.2f", stu_class[j].computer);
+		printf(" %.2f", stu_class[j].avg);
+    	printf("\n");
 	}
 	
-	deal(student);
-	
-	for (i=0 ; i<5 ; ++i){
-	    printf("%s" "%s" "%u" "%d" "%d" "%.2lf\n",student[i].firstname,student[i].lastname,
-		student[i].age,student[i].math,student[i].computer,student[i].average);
-	}
+	l=(STU-1)/2;
+	printf("中位數的成績的同學%s,平均分數為%.2f",stu_class[l].name,stu_class[l].avg);
+
 }
 
-void deal(struct stud student[]){
-	int pass,i;
-	for ( pass = 1 ; pass<5 ;++pass){
-	  for ( i = 0 ; i < 4 ;++i){
-	  	if (student[i].average > student[i+1].average){
-	  		swap(&student[i].firstname,&student[i+1].firstname);
-	  		swap(&student[i].lastname,&student[i+1].lastname);
-	  		swap(&student[i].age,&student[i+1].age);
-	  		swap(&student[i].math,&student[i+1].math);
-	  		swap(&student[i].computer,&student[i+1].computer);
-		}
-	  }
-	}
+void bubble(STUDENT mystu[STU])
+{STUDENT temp_stu;
+    int hold,pass,i;
+    for (pass = 1; pass < STU; ++pass) {
+        // loop to control number of comparisons per pass   
+        for (i = 0; i < STU - pass; ++i) {
+            // compare adjacent elements and swap them if first 
+            // element is greater than second element           
+            if (mystu[i].avg < mystu[i+1].avg) {
+                temp_stu = mystu[i];
+                mystu[i] = mystu[i+1];
+                mystu[i+1] = temp_stu;
+            }
+        }
+    }
 }
 
-
-void swap (char *element1Ptr, char *element2Ptr)
-	{
-		int hold = *element1Ptr;
-		*element1Ptr = *element2Ptr;
-		*element2Ptr = hold;
-	}
