@@ -58,7 +58,7 @@ void bubble(ST myStu[stu]) {
 
             // compare adjacent elements and swap them if first 
             // element is greater than second element           
-            if (myStu[i].average < myStu[i + 1].average) {
+            if (myStu[i].average > myStu[i + 1].average) {
                 temp = myStu[i];
                 myStu[i] = myStu[i + 1];
                 myStu[i + 1] = temp;
