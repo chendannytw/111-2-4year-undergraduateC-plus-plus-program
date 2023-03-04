@@ -1,0 +1,2 @@
+寫一個主程式及位元位移的副程式，使用三個參數:Value(被旋轉的變數值)、左旋或右旋的設定、bits(旋轉的位元數)，最後印出value位移前與位移後的二進位值。
+e.g. shift(int value,int leftORight,int shiftBits)
