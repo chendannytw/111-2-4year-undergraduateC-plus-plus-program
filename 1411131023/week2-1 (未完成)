@@ -12,7 +12,7 @@ struct student
 #include <stdio.h>
 #include <stdlib.h>
 #define stu 5
-void bubble(ST myStu[stu]);
+
 struct student
 {
     char name[20];
@@ -22,6 +22,8 @@ struct student
     double average;
 };
 typedef struct student ST;
+void bubble(ST myStu[stu]);
+
 int main()
 {
     int i, j;
