@@ -1,0 +1,50 @@
+quiz 1
+
+#include <stdio.h>
+
+void displayBits(unsigned int value,int dir,int num);
+
+int main(void) {
+	unsigned int x=0;
+	
+	printf("%s", "Enter a nonnegative int: ");
+	scanf("%u",&x);
+	displayBits(x,1,1);
+}
+
+
+void displayBits(unsigned int value,int dir,int num)
+{
+	unsigned int displayMask = 1<<31;
+	
+	printf("%10u = ",value);
+	
+	unsigned int c,temp;
+	temp = value;
+	for( c=1 ; c<=32 ; ++c){
+		putchar(temp & displayMask ? '1' : '0');
+		temp <<= 1;
+		
+		if(c % 8 == 0){
+			putchar(' ');
+		}
+	}
+	printf("\n");
+	
+	if(dir==0)
+		value = value << num;
+		else
+		value = value >> num;
+	
+
+	for( c=1 ; c<=32 ; ++c){
+		putchar(value & displayMask ? '1' : '0');
+		value <<= 1;
+		
+		if(c % 8 == 0){
+			putchar(' ');
+		}
+	}
+	
+	putchar('\n');
+}
