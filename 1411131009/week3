@@ -1,0 +1,75 @@
+// week3.cpp : 此檔案包含 'main' 函式。程式會於該處開始執行及結束執行。
+//
+
+#include <stdio.h>
+#define SIZE 10
+
+//結構定義!!!(不是結構宣告，而是對結構本身做定義)
+//說明結構內部細部內容，不占空間!
+struct card {
+    char name[20];
+    unsigned int ID;
+    int Name;
+    int math;
+    int computer;
+    float avg;
+    } ;
+typedef struct card Student;
+
+
+void bubbleSort(Student student [SIZE]);
+
+int main(void)
+{
+    //結構宣告(對於結構變數做宣告)
+    //宣告一個變數(aCard)，占空間!
+    Student  aCard[SIZE] = { {"Danny",12,89,99,0.0},  //結構變數給初值{一個大括一筆資料}
+                        {"Janny",10,779,98,0.0},
+                        {"May",10,99,98,0.0},
+                        {"John",10,70,98,0.0},
+                        {"Bill",10,65,98,0.0},
+                        {"Jerry",10,90,98,0.0},
+                        {"Tommy",10,100,98,0.0},
+                        {"Jimmy",10,45,98,0.0},
+                        {"Candy",10,87,98,0.0},
+                        {"Bob",10,86,98,0.0} };
+                        
+    int i = 0;
+
+    printf("The student list is below:\n");
+    for (i = 0; i < SIZE; i++)
+        printf("%s %u %d %d %f \n", aCard[i].Name, aCard[i].ID, aCard[i].math, aCard[i].computer, aCard[i].avg = (aCard[i].math + aCard[i].computer) / 2);
+    bubbleSort(aCard); //呼叫排序副程式aCard，把aCard位置傳過去(52行的 bubbleSort)
+
+    printf("\n");
+    for (i = 0; i < SIZE; i++)
+        printf("%s %u %d %d %f \n", aCard[i].Name, aCard[i].ID, aCard[i].math, aCard[i].computer, aCard[i].avg);
+    
+}
+
+
+//副程式
+void bubbleSort(Student student[SIZE]) {//aCard傳過來變student
+
+    Student temp;//宣告結構變數Student暫存資料
+    int pass, i;
+    for (pass = 1; pass < SIZE; ++pass) {
+        for (i = 0; i < SIZE - 1; ++i) {
+            if (student[i].avg < student[i + 1].avg) {
+                temp = student[i];
+                student[i] = student[i + 1];
+                student[i + 1] = temp;
+            }
+        }
+    }
+}
+
+    
+
+    
+//   1. 使用 [方案總管] 視窗，新增/管理檔案
+//   2. 使用 [Team Explorer] 視窗，連線到原始檔控制
+//   3. 使用 [輸出] 視窗，參閱組建輸出與其他訊息
+//   4. 使用 [錯誤清單] 視窗，檢視錯誤
+//   5. 前往 [專案] > [新增項目]，建立新的程式碼檔案，或是前往 [專案] > [新增現有項目]，將現有程式碼檔案新增至專案
+//   6. 之後要再次開啟此專案時，請前往 [檔案] > [開啟] > [專案]，然後選取 .sln 檔案
