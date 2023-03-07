@@ -6,15 +6,14 @@
 
 //結構定義!!!(不是結構宣告，而是對結構本身做定義)
 //說明結構內部細部內容，不占空間!
-struct card {
+typedef struct card {
     char name[20];
     unsigned int ID;
-    int Name;
     int math;
     int computer;
     float avg;
-    } ;
-typedef struct card Student;
+    } Student;
+//typedef struct card Student;
 
 
 void bubbleSort(Student student [SIZE]);
@@ -38,12 +37,12 @@ int main(void)
 
     printf("The student list is below:\n");
     for (i = 0; i < SIZE; i++)
-        printf("%s %u %d %d %.2f \n", aCard[i].Name, aCard[i].ID, aCard[i].math, aCard[i].computer, aCard[i].avg = (aCard[i].math + aCard[i].computer) / 2);
+        printf("%s %u %d %d %.2f \n", aCard[i].name, aCard[i].ID, aCard[i].math, aCard[i].computer, aCard[i].avg = (aCard[i].math + aCard[i].computer) / 2);
     bubbleSort(aCard); //呼叫排序副程式aCard，把aCard位置傳過去(52行的 bubbleSort)
 
     printf("\n");
     for (i = 0; i < SIZE; i++)
-        printf("%s %u %d %d %.2f \n", aCard[i].Name, aCard[i].ID, aCard[i].math, aCard[i].computer, aCard[i].avg);
+        printf("%s %u %d %d %.2f \n", aCard[i].name, aCard[i].ID, aCard[i].math, aCard[i].computer, aCard[i].avg);
     
 }
 
