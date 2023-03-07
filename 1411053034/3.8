@@ -1,0 +1,37 @@
+#include <stdio.h>
+
+void displayBits (unsigned int value,int dir,int num); // prototype
+
+int main(void) { 
+	unsigned int x = 0;
+	int n=3; 
+	printf("%s", "Enter a nonnegative int: ");
+	scanf("%u", &x); 
+	displayBits(x,1,n); 
+}
+void displayBits (unsigned int value,int dir,int num) {  
+	unsigned int displayMask = 1 << 31; 
+	unsigned int c;
+	printf("%10u = ", value);
+	
+	for(c=1; c <= 32; ++c) {
+		putchar (value & displayMask? '1': '0'); 
+		value <<= 1; // shift value left by 1
+		if (c % 8 == 0) { // output space after 8 bits
+		printf(" ");
+		}
+	}
+	if(dir==0)
+		value=value<<num;
+	else
+		value=value>>num;
+	printf("\n");
+	for(c=1; c <= 32; ++c) {
+		putchar (value & displayMask? '1': '0'); 
+		value <<= 1; // shift value left by 1
+		if (c % 8 == 0) { // output space after 8 bits
+		printf(" ");
+		}
+	}
+	putchar('\n');
+}
