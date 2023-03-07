@@ -38,12 +38,12 @@ int main(void)
 
     printf("The student list is below:\n");
     for (i = 0; i < SIZE; i++)
-        printf("%s %u %d %d %f \n", aCard[i].Name, aCard[i].ID, aCard[i].math, aCard[i].computer, aCard[i].avg = (aCard[i].math + aCard[i].computer) / 2);
+        printf("%s %u %d %d %.2f \n", aCard[i].Name, aCard[i].ID, aCard[i].math, aCard[i].computer, aCard[i].avg = (aCard[i].math + aCard[i].computer) / 2);
     bubbleSort(aCard); //呼叫排序副程式aCard，把aCard位置傳過去(52行的 bubbleSort)
 
     printf("\n");
     for (i = 0; i < SIZE; i++)
-        printf("%s %u %d %d %f \n", aCard[i].Name, aCard[i].ID, aCard[i].math, aCard[i].computer, aCard[i].avg);
+        printf("%s %u %d %d %.2f \n", aCard[i].Name, aCard[i].ID, aCard[i].math, aCard[i].computer, aCard[i].avg);
     
 }
 
