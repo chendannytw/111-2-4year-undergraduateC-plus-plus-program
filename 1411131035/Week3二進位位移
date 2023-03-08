@@ -1,0 +1,49 @@
+#include <stdio.h>
+
+void TestBits(int value, int LR, int Vol);
+void displayBits(unsigned int value);
+int main(void)
+{
+    unsigned int value, LR, Vol;
+    puts("輸入數值");
+    scanf_s("%d",&value);
+    puts("輸入方向");
+    scanf_s("%d",&LR);
+    puts("輸入位移量");
+    scanf_s("%d",&Vol);
+    puts("位移前The result of combining the following");
+    displayBits(value);
+    displayBits(Vol);
+
+    puts("\n\n位移後using the bitwise AND operator & is");
+    TestBits(value,LR,Vol);
+}
+
+void TestBits(int value, int LR,int Vol)
+{
+    if (LR == 0)
+        displayBits(value << Vol);
+    else
+        displayBits(value >> Vol);
+    
+}
+
+void displayBits(unsigned int value)
+{
+    // declare displayMask and left shift 31 bits
+    unsigned int c, displayMask = 1 << 31;
+
+    printf("%10u = ", value);
+
+    // loop through bits
+    for (c = 1; c <= 32; ++c) {
+        putchar(value & displayMask ? '1' : '0');
+        value <<= 1; // shift value left by 1
+
+        if (c % 8 == 0) { // output a space after 8 bits
+            putchar(' ');
+        }
+    }
+
+    putchar('\n');
+}
