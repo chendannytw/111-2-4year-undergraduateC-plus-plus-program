@@ -1,0 +1,113 @@
+#include <標準庫.h>
+
+/* 使用控制台暫停器或添加您自己的 getch、系統（“暫停”）或輸入循環運行此程序 */
+
+//建議解釋
+
+#include <stdio.h>
+#define 大小 4
+#定義STU 13
+結構學生{
+    字符名稱[20]；
+    無符號整數 stud_id；
+    浮動數學；
+    浮動計算機；
+    浮動平均值；
+};
+//構造學生stu,stu_class[10];
+typedef 結構學生學生；
+//int binarySearch(int b[], int searchKey, int low, int high);
+//void sort(char** name, int a[][SIZE], int size);
+void bubble(STUDENT myStu[STU]);
+// 函數 main 開始執行程序
+int 主要（無效）
+{
+    int key, result = 0, i, j, q;
+    // 初始化一個
+
+
+
+    學生 stu, stu_class[STU] = { {"Alice",2,98,72,0},
+                        {“丹尼”，3,76,32,0}，
+                        {“湯姆”，6,98,67,0}，
+                        {“尼娜”，7,89,32,0}，
+                        {“五月”,8,98,55,0},
+                        {“蒂姆”，9,89,32,0}，
+                        {“辛迪”，10,98,65,0}，
+                        {“鮑勃”，11,99,32,0}，
+                        {“史蒂文”，12,98,71,0}，
+                        {“艾倫”，13,76,91,0}，
+                        {“妮可”，18,93,49,0}，
+                        {“譚”，19,67,82,0}，
+                        {“珍妮”，20,66,98,0} };
+
+
+
+    puts("在原始訂單中命名 ID 項目");
+    // 輸出原始數組
+    對於（j = 0；j < STU；j++）
+        stu_class[j].avg = (stu_class[j].math + stu_class[j].computer) / 2;
+
+    對於（j = 0；j < STU；j++）
+    {
+        printf("%28s", stu_class[j].name);
+        printf(" %d", stu_class[j].stu_id);
+        printf(" %.2f", stu_class[j].math);
+        printf(" %.2f", stu_class[j].computer);
+        printf(" %.2f", stu_class[j].avg);
+        printf("\n");
+    }
+
+
+    /* printf("\n");
+        對於 (i = 0; i < SIZE; ++i) {
+            printf("%4d", a[1][i]);
+        }
+    */
+    //冒泡排序                                         
+    // 循環控制遍數                    
+
+    bubble(stu_class);//呼喚排序副程序
+    printf("\n數據項升序排列");
+
+    for (j = 0; j < STU; j++)//打印順序後的結構列表內容
+    {
+        printf("%28s", stu_class[j].name);
+        printf(" %d", stu_class[j].stu_id);
+        printf(" %.2f", stu_class[j].math);
+        printf(" %.2f", stu_class[j].computer);
+        printf(" %.2f", stu_class[j].avg);
+        printf("\n");
+    }
+    q = STU / 2;
+    printf("%s %.2f", stu_class[q].name, stu_class[q].avg );
+}
+
+void bubble(STUDENT myStu[STU])
+{
+    學生 temp_stu；
+    int hold, pass, i;
+    for (pass = 1; pass < STU; ++pass) {
+
+        // 循環控制每次傳遞的比較次數
+        for (i = 0; i < STU - pass; ++i) {
+
+            // 比較相鄰元素，如果先交換它們
+            // 元素大於第二個元素
+            如果 (myStu[i].avg < myStu[i + 1].avg) {
+                temp_stu = myStu[i];
+                myStu[i] = myStu[i + 1];
+                myStu[i + 1] = temp_stu;
+            }
+        }
+    }
+
+}
+
+void swap(int* e1Ptr, int* e2Ptr)
+{
+    保持;
+    hold = *e1Ptr;
+    *e1Ptr = *e2Ptr;
+    *e2Ptr = 保持；
+}
