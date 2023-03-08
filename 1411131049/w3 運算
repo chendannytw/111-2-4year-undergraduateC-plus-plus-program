@@ -1,0 +1,45 @@
+#include <stdio.h>
+
+void displayBits(unsigned int value); 
+void m1(unsigned int value,unsigned int move,unsigned int bits);
+int main(void)
+{ 
+   unsigned int value = 0;
+   unsigned int move = 0;
+   unsigned int bits = 0;
+   printf("輸入一個數:");
+   scanf("%u",&value);
+   printf("輸入左移(1)或右移(0):");
+   scanf("%u",&move);
+   printf("輸入位移量:");
+   scanf("%u",&bits);
+   displayBits(value);  
+   m1(value,move,bits);
+
+} 
+
+void m1(unsigned int value,unsigned int move,unsigned int bits)
+{
+	if(move==0)
+		displayBits(value>>bits);
+	else
+		displayBits(value<<bits);
+}
+
+void displayBits(unsigned int value)
+{ 
+   unsigned int c,displayMask = 1 << 31;
+
+   printf("%10u = ", value);
+
+   for (c = 1; c <= 32; ++c) { 
+      putchar(value & displayMask ? '1' : '0');
+      value <<= 1; // shift value left by 1
+
+      if (c % 8 == 0) { 
+         putchar(' ');
+      } 
+   } 
+
+   putchar('\n');
+} 
