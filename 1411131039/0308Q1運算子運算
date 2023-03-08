@@ -1,0 +1,38 @@
+#include <stdio.h>
+void displayBits(unsigned int value);
+void bit(unsigned int value,int dir,int bits); 
+
+int main(void)
+{ 
+  	unsigned int x = 0;
+	int n=0; 
+	int dir;
+	printf("%s", "Enter a nonnegative int: ");
+	scanf("%u", &x);
+	printf("要移動的位元數：");
+	scanf("%d",&n); 
+	printf("左移=0，右移=1：");
+	scanf("%d",&dir); 
+	printf("\n原先結果：");
+	displayBits(x);
+	printf("\n位移結果：");
+	bit(x,dir,n);		
+} 
+
+void displayBits(unsigned int value){ 
+   unsigned int c,displayMask = 1 << 31;
+   printf("%u = ", value);
+   for (c = 1; c <= 32; ++c) { 
+      putchar(value & displayMask ? '1' : '0');
+      value <<= 1; 
+      if (c % 8 == 0) 
+         putchar(' ');
+   } 
+   putchar('\n');
+}
+void bit(unsigned int value,int dir,int bits){
+	if(dir==0)
+		displayBits(value<<bits);		
+	else
+		displayBits(value>>bits);	
+}
