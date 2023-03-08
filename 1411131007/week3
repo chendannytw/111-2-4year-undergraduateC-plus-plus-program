@@ -1,0 +1,43 @@
+#include <stdio.h>
+
+void displayBits(unsigned int value);
+void shiftbits(number1, mask, dir);
+int main(void)
+{ 
+    unsigned int number1 = 65535;
+    unsigned int mask = 1, dir = 0;
+    puts("輸入一個值：");
+    scanf("%d", &number1);
+    puts("輸入位移值：");
+    scanf("%d", &mask);
+    puts("右移：0    左移：1");
+    scanf("%d", &dir);
+    displayBits(number1);
+    displayBits(mask);
+    shiftbits(number1, mask, dir);
+} 
+
+void shiftbits(number1, mask, dir)
+{
+	if(dir == 0)
+	    displayBits(number1 >> mask);
+	else
+	    displayBits(number1 << mask);
+}
+
+void displayBits(unsigned int value)
+{ 
+
+   unsigned int c,displayMask = 1 << 31;
+   printf("%10u = ", value);
+
+   for (c = 1; c <= 32; ++c) { 
+      putchar(value & displayMask ? '1' : '0');
+      value <<= 1;
+
+      if (c % 8 == 0) {
+         putchar(' ');
+      } 
+   } 
+   putchar('\n');
+} 
