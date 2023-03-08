@@ -25,6 +25,7 @@ void shiftBits(int number1,int mask,int dir)
     else
         displayBits(number1 << mask);
 }
+//左右移的副程式
 // display bits of an unsigned int value
 void displayBits(unsigned int value)
 {
@@ -42,6 +43,7 @@ void displayBits(unsigned int value)
             putchar(' ');
         }
     }
+    //轉換成二進位數的副程式
 
     putchar('\n');
 }
