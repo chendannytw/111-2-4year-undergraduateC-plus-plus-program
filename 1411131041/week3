@@ -1,0 +1,50 @@
+#include <stdio.h>
+
+void bitsshifting(unsigned int value);
+
+int main(void)
+{
+    unsigned int value;
+    unsigned int bits;
+    int x;
+    puts("變數");
+    scanf_s("%d", &value);
+    puts("位移數量");
+    scanf_s("%d", &bits);
+    puts("左移輸入1 右移輸入0");
+    scanf_s("%d", &x);
+    puts("位移前");
+    bitsshifting(value );
+    puts("位移後");
+    if (x==1)
+    {
+        bitsshifting(value << bits);
+    }
+    else if(x==0)
+    {
+        bitsshifting(value >> bits);
+        
+    }
+   
+   
+
+  
+}
+
+void bitsshifting(unsigned int value)
+{
+    unsigned int c, displayMask = 1 << 31;
+
+    printf("%10u = ", value);
+
+    for (c = 1; c <= 32; ++c) {
+        putchar(value & displayMask ? '1' : '0');
+        value <<= 1;
+
+        if (c % 8 == 0) { 
+            putchar(' ');
+        }
+    }
+
+    putchar('\n');
+}
