@@ -1,3 +1,5 @@
+題目：寫一個主程式及位元位移(bits shifting)副程式，使用三個參數：value(被位移的變數)、左移或右移的設定、bits(位移的位元數量)；最後印出value位移前與位移後的二進位值。
+
 #include <stdio.h>
 
 void displayBits(unsigned int value);
