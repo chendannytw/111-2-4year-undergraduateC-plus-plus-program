@@ -1,0 +1,47 @@
+
+#include <stdio.h>
+
+void displayBits(unsigned int value);
+void shiftbits(int number1, int mask, int div);
+
+int main(void)
+{
+    // demonstrate bitwise AND (&)
+    unsigned int number1 = 65535;
+    unsigned int mask = 1, div = 0;
+    puts("input number:");
+    scanf_s("%d", & number1);
+    puts("number of shifts:");
+    scanf_s("%d", &mask);
+    puts("right:0 left:1");
+    scanf_s("%d", &div);
+    displayBits(number1);
+    displayBits( mask);
+    shiftbits (number1, mask, div);
+}
+    
+// display bits of an unsigned int value
+void shiftbits(int number1,int  mask,int  div)
+{
+    if (div == 0)
+        displayBits(number1 >> mask);
+    else
+        displayBits(number1 << mask);
+}
+void displayBits(unsigned int value)
+{
+
+  unsigned int c, displayMask = 1 << 31;
+  printf("%10u=", value);
+    // loop through bits
+    for (c = 1; c <= 32; ++c) {
+        putchar(value & displayMask ? '1' : '0');
+        value <<= 1; // shift value left by 1
+
+        if (c % 8 == 0) { // output a space after 8 bits
+            putchar(' ');
+        }
+    }
+
+    putchar('\n');
+}
