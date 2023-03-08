@@ -48,3 +48,55 @@ void displayBits(unsigned int value,int dir,int num)
 	
 	putchar('\n');
 }
+
+寫一個主程式及位元位移(bits shifting)副程式，使用三個參數：value(被位移的變數)、左移或右移的設定、bits(位移的位元數量)；最後印出value位移前與位移後的二進位值。
+quiz 2
+
+#include <stdio.h>
+
+void displayBits(unsigned int value); // prototype
+void shiftBits(int ,int ,int );
+
+int main(void)
+{ 
+   // demonstrate bitwise AND (&)
+   unsigned int number1 = 65535;
+   unsigned int mask = 1,dir=0;
+   puts("input number: ");
+   scanf("%d",&number1);
+   puts("number of shifts ");
+   scanf("%d",&mask);
+   puts("right:0 left:otherwise ");
+   scanf("%d",&dir);
+   displayBits(number1);
+   displayBits(mask);
+   shiftBits(number1,mask,dir);
+   
+} 
+
+void shiftBits(number1,mask,dir){
+	if(dir==0)
+		displayBits(number1>>mask);
+		else
+		displayBits(number1<<mask);
+}
+
+void displayBits(unsigned int value)
+{ 
+   // declare displayMask and left shift 31 bits
+   unsigned int c,displayMask = 1 << 31;
+
+   printf("%10u = ", value);
+
+   // loop through bits
+   for (c = 1; c <= 32; ++c) { 
+      putchar(value & displayMask ? '1' : '0');
+      value <<= 1; // shift value left by 1
+
+      if (c % 8 == 0) { // output a space after 8 bits
+         putchar(' ');
+      } 
+   } 
+
+   putchar('\n');
+} 
