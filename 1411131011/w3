@@ -1,0 +1,53 @@
+
+// Fig. 10.9: fig10_09.c
+// Using the bitwise AND, bitwise inclusive OR, bitwise
+// exclusive OR and bitwise complement operators
+#include <stdio.h>
+
+void displayBits(unsigned int value); // prototype
+void shiftbits(int, int, int);
+
+int main(void)
+{
+    // demonstrate bitwise AND (&)
+    unsigned int n1 = 9;
+    unsigned int bits =1, dir = 0;
+
+    puts("input n1:");
+    scanf_s ("%d", &n1);
+    puts("number of shifts:");
+    scanf_s ("%d", &bits); 
+    puts("right:0 left:other");
+    scanf_s("%d", &dir);
+
+    displayBits(n1);
+    shiftbits(n1, bits, dir);
+}
+
+void shiftbits(int n1, int  bits, int  dir)
+{
+    if(dir==0)
+        displayBits(n1 >> bits);
+    else
+        displayBits(n1 << bits);
+}
+
+// display bits of an unsigned int value
+void displayBits(unsigned int value)
+{
+    // declare displayMask and left shift 31 bits
+    unsigned int c, displayMask = 1 << 31;
+
+    printf("%10u = ", value);
+
+    // loop through bits
+    for (c = 1; c <= 32; ++c) {
+        putchar(value & displayMask ? '1' : '0');
+        value <<= 1; // shift value left by 1
+
+        if (c % 8 == 0) { // output a space after 8 bits
+            putchar(' ');
+        }
+    }
+    putchar('\n');
+}
