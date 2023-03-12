@@ -1,0 +1,72 @@
+#include <stdio.h>
+
+void blank(FILE *cfPtr);
+void write(FILE *cfPtr);
+void read(FILE *cfPtr);
+struct clientData{
+	unsigned int StuNum;
+	char Name[20];
+	float average;
+}stuData;
+
+int i;
+
+int main(void) {
+	FILE *cfPtr = NULL;
+	blank(cfPtr);
+	write(cfPtr);
+	read(cfPtr);
+}
+
+void blank(FILE *cfPtr){
+	if((cfPtr = fopen("accounts.txt","wb"))==NULL){
+		puts("File could not be opened.");
+	}
+	else{
+		stuData blankstudent = {0,"",0.0};
+		
+		for(i=0 ; i<=100 ; i++){
+			fwrite(&blankstudent,sizeof(stuData),1,cfPtr);
+		}
+	}
+	fclose(cfPtr);
+}
+void write(FILE *cfPtr){
+	if((cfPtr = fopen("accounts.txt","rb+"))==NULL){
+		puts("File could not be opened.");
+	}
+	else{
+		stuData student = {0,"",0.0};
+		
+		printf("%s","Enter studentNum(1 to 100, 0 to end input) : ");
+		scanf("%d", &student.StuNum);
+		
+		while(student.StuNum != 0){
+			printf("%s","\nEnter name , average : ");
+			fscanf(stdin,"%19s%f",student.Name,&student.average);
+			fseek(cfPtr,(student.StuNum-1)*sizeof(stuData),1,cfPtr);
+			printf("%s","\nEnter student number : ");
+			scanf("%d",&student.StuNum);
+		}
+	}
+	fclose(cfPtr);
+}
+void read(FILE *cfPtr){
+	if((cfPtr = fopen("accounts.txt","rb"))==NULL){
+		puts("File could not be opened.");
+	}
+	else{
+		printf("%-6s%-16s%10s\n","Num","Name","average");
+		
+		while(!feof(cfPtr)){
+			stuData student = {0,"",0.0};
+			
+			int result = fread(&student,sizeof(stuData),1,cfPer);
+			
+			if(resulf !=0 && student.StuNum !=0 ){
+				printf("%-6d%-19s%10.2f\n",student.StuNum,student.Name,student.average);
+			}
+		}
+	fclose(cfPtr);
+	}
+}
