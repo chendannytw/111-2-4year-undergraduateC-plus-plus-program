@@ -3,7 +3,8 @@
 void blank(FILE *cfPtr);
 void write(FILE *cfPtr);
 void read(FILE *cfPtr);
-struct clientData{
+
+typedef struct{
 	unsigned int StuNum;
 	char Name[20];
 	float average;
@@ -44,7 +45,8 @@ void write(FILE *cfPtr){
 		while(student.StuNum != 0){
 			printf("%s","\nEnter name , average : ");
 			fscanf(stdin,"%19s%f",student.Name,&student.average);
-			fseek(cfPtr,(student.StuNum-1)*sizeof(stuData),1,cfPtr);
+			fseek(cfPtr,(student.StuNum-1)*sizeof(stuData),SEEK_SET);
+			fwrite(&student,sizeof(stuData),1,cfPtr);
 			printf("%s","\nEnter student number : ");
 			scanf("%d",&student.StuNum);
 		}
@@ -61,9 +63,9 @@ void read(FILE *cfPtr){
 		while(!feof(cfPtr)){
 			stuData student = {0,"",0.0};
 			
-			int result = fread(&student,sizeof(stuData),1,cfPer);
+			int result = fread(&student,sizeof(stuData),1,cfPtr);
 			
-			if(resulf !=0 && student.StuNum !=0 ){
+			if(result !=0 && student.StuNum !=0 ){
 				printf("%-6d%-19s%10.2f\n",student.StuNum,student.Name,student.average);
 			}
 		}
