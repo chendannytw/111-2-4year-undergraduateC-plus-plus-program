@@ -1,0 +1,49 @@
+#include<stdio.h>
+#define SIZE 4
+#define STU 13
+
+int main(void)
+{
+	int key,result=0,i,j;
+	
+	struct student{
+		   char name [20];
+		   unsigned int stu_id;
+		   float math;
+		   float computer;
+		   float acc;
+		   float english;
+		   float avg;
+	};
+//	struct student stu,stu+class[10];
+	typedef struct student STUDENT;
+    STUDENT stu,stu_class[STU] = {{"Alice",11,98,72,98,72,0},
+			    	{"Danny",12,76,32,76,32,0},
+					{"Tom",13,98,67,98,67,0},
+					{"Nina",14,89,32,89,32,0},
+					{"May",15,98,55,98,55,0},
+					{"Sindy",16,89,32,89,32,0},
+					{"Steven",17,98,65,98,65,0},
+					{"Ellen",18,99,32,99,32,0},
+					{"Nicole",19,98,71,98,71,0},
+					{"Tan",20,76,91,76,91,0},
+					{"Jenny",21,93,49,93,49,0},
+					{"Bob",22,67,82,67,82,0},
+					{"Tim",23,66,98,66,98,0}}; 
+
+    puts("     Name ID items in original order :");
+    printf("\n");
+    for(j=0;j<STU;j++)	
+        stu_class[j].avg=(stu_class[j].math+stu_class[j].computer+stu_class[j].acc+stu_class[j].english)/4;
+    
+    for(j=0;j<STU;j++)
+    {	printf("%10s",stu_class[j].name);
+		printf("  %d",stu_class[j].stu_id);
+        printf("  %.1f",stu_class[j].math);
+		printf("  %.1f",stu_class[j].computer);
+		printf("  %.1f",stu_class[j].acc);
+		printf("  %.1f",stu_class[j].english);
+		printf("  %.2f",stu_class[j].avg);
+    	printf("\n");
+	}
+}
