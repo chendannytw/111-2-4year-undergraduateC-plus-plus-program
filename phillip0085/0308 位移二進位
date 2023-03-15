@@ -47,8 +47,8 @@ void displayBits(unsigned int value)
         putchar(value & displayMask ? '1' : '0');
         value <<= 1; // shift value left by 1
 
-        if (c % 8 == 0) { // output a space after 8 bits
-            putchar(' ');
+        if (c % 8 == 0) { 
+            putchar(' ');// output a space after 8 bits
         }
     }
 
