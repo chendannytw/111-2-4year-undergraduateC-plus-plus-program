@@ -1,0 +1,32 @@
+// Creating a random-access file sequentially
+#include <stdio.h>
+
+// clientData structure definition            
+struct clientData {                              
+   unsigned int acctNum; // account number  4bytes 
+   char lastName[15]; // account last name  15bytes  
+   char firstName[10]; // account first name   10bytes
+   double balance; // account balance        8bytes
+}; 
+typedef struct clientData CLIENT;
+
+int main(void)
+{ 
+   FILE *cfPtr; // accounts.dat file pointer  1.建立(宣告)檔案指標 
+   unsigned int i ;
+   // fopen opens the file; exits if file cannot be opened
+   if ((cfPtr = fopen("accounts.dat", "wb")) == NULL) {  //2.開啟檔案(利用fopen()函數) 
+      puts("File could not be opened.");					// "w"=write(寫入)模式, "b"=binary(隨機存取檔) 
+   } 
+   else { 
+      // create clientData with default information       
+      CLIENT blankClient = {0, "", "", 0.0}; 
+   
+      // output 100 blank records to file                              
+      for (i = 1; i <= 100; ++i) {                                   
+         fwrite(&blankClient, sizeof(struct clientData), 1, cfPtr);  //3.存取檔案 fwrite()將一筆(結構的)資料寫入檔案 
+      }             // 每一筆紀錄佔37bytes,  檔案一共佔100x37=3700bytes ~4K bytes                                    
+
+      fclose (cfPtr); // fclose closes the file      4.關閉檔案 
+   } 
+} 
