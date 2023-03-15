@@ -1,0 +1,15 @@
+建立一個結構，成員定義如下:
+
+typedef struct
+
+{        unsigned int StuNum;
+          char Name[20];
+          int math, computer;
+          double average;
+
+} stuData;
+
+建立一個程式，存取隨機檔，功能如下:
+1. 建立內容有100筆空白資料的隨機檔案(只需修改p.608的程式)
+2. 程式寫入學生資料至檔案，直到輸入學號是0為止(p.610的程式)
+3. 鍵盤輸入學號(stuNum)，利用fseek函數，移動檔案指標，將檔案內容全部印出。(p.613的程式)(或是將檔案內容全部印出也可以。)
