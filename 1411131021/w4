@@ -1,0 +1,106 @@
+// Writing data randomly to a random-access file
+#include <stdio.h>
+
+// clientData structure definition  
+struct stuData{
+        unsigned int StuNum;
+        char Name[20];
+        int math, computer;
+        double average;
+};
+
+typedef struct stuData CLIENT;
+
+int main(void)
+{
+    FILE* cfPtr; // accounts.dat file pointer  1.建立(宣告)檔案指標
+    unsigned int i;
+    // fopen opens the file; exits if file cannot be opened
+    if ((cfPtr = fopen("accounts.dat", "wb+")) == NULL) {   //2.開啟檔案(利用fopen()函數) 
+        puts("File could not be opened.");					//// "r"=read(讀取)模式, "b"=binary(隨機存取檔) "+"修改檔案內容 
+    }
+    else {
+        
+        // create clientData with default information
+        CLIENT client = { 0, "", 0,0,0.0 }, blankClient = { 0, "", 0,0,0.0 };
+
+
+
+        for (int i = 1; i <= 100; ++i) {
+            fwrite(&blankClient, sizeof(struct stuData), 1, cfPtr);  //3.存取檔案 fwrite()將一筆(結構的)資料寫入檔案 
+        }             // 每一筆紀錄佔37bytes,  檔案一共佔100x37=3700bytes ~4K bytes  
+     // require user to specify account number
+
+
+
+
+
+        printf("%s", "Enter account number"
+            " (1 to 100, 0 to end input): ");
+        scanf("%d", &client.StuNum);
+
+        // user enters information, which is copied into file
+        while (client.StuNum != 0) {
+            printf("%s", "\Enter name, average : ");
+            fscanf(stdin, "%14s%9s%lf", client.Name,&client.average);
+            fseek(cfPtr, (client.StuNum - 1) * sizeof(struct stuData), SEEK_SET);//移動檔案指標到目的地的記憶體位址上方   
+            fwrite(&client, sizeof(stuData), 1, cfPtr);//3.存取檔案 fwrite()將一筆(結構的)資料寫入檔案// 每一筆紀錄佔37bytes
+            printf("%s", "\Enter studant number : ");
+            scanf("%d", &client.StuNum);
+        }
+
+
+        fclose(cfPtr); // fclose closes the file     4.關閉檔案  
+    }
+
+
+
+
+
+
+
+    // fopen opens the file; exits if file cannot be opened
+    if ((cfPtr = fopen("StuNum.dat", "rb")) == NULL) {
+        puts("File could not be opened.");
+    }
+    else {
+        printf("%-6s%-16s%-11s%10s\n", "Acct", "Last Name",
+            "First Name", "Balance");
+
+        // read all records from file (until eof)
+        while (!feof(cfPtr)) {
+            // create clientData with default information
+            struct stuData client = { 0, "", 0,0,0.0 };
+
+            int result = fread(&client, sizeof(struct stuData), 1, cfPtr);
+
+            // display record
+            if (client.StuNum != 0) {   //印出讀取該筆(結構)資料的結果 
+                printf("%-6d%-16s%-11s%10.2f\n",
+                    client.StuNum, client.Name,
+                    client., client.average);
+                    
+            }
+        }
+
+        fclose(cfPtr); // fclose closes the file
+    }
+
+
+
+
+
+
+}
+
+
+// 執行程式: Ctrl + F5 或 [偵錯] > [啟動但不偵錯] 功能表
+// 偵錯程式: F5 或 [偵錯] > [啟動偵錯] 功能表
+
+// 開始使用的提示: 
+//   1. 使用 [方案總管] 視窗，新增/管理檔案
+//   2. 使用 [Team Explorer] 視窗，連線到原始檔控制
+//   3. 使用 [輸出] 視窗，參閱組建輸出與其他訊息
+//   4. 使用 [錯誤清單] 視窗，檢視錯誤
+//   5. 前往 [專案] > [新增項目]，建立新的程式碼檔案，或是前往 [專案] > [新增現有項目]，將現有程式碼檔案新增至專案
+//   6. 之後要再次開啟此專案時，請前往 [檔案] > [開啟] > [專案]，然後選取 .sln 檔案
