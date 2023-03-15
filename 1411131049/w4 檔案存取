@@ -1,0 +1,59 @@
+#include <stdio.h>
+              
+struct clientData {                              
+	unsigned int StuNum;
+    char Name[20];
+    int math, computer;
+    double average;
+};             
+typedef struct clientData CLIENT;
+int main(void) 
+{ 
+   FILE *cfPtr;
+	unsigned int i;
+
+   if ((cfPtr = fopen("accounts.dat", "rb+")) == NULL) { 
+      puts("File could not be opened.");					
+   } 
+   else { 
+      CLIENT client = {0, "", 0, 0, 0.0}, blankClient={0, "", 0,0, 0.0};
+      
+	  for (i = 1; i <= 100; ++i) {                                   
+         fwrite(&blankClient, sizeof(CLIENT), 1,cfPtr); 
+      }
+      printf("%s", "Enter student number"
+         " (1 to 100, 0 to end input): ");
+      scanf("%d", &client.StuNum);
+      while (client.StuNum != 0) { 
+         printf("%s", "Enter name,Enter math score,Enter computer score:");
+         fscanf(stdin, "%14s%d%d", client.Name, &client.math,&client.computer);
+         client.average=(float)(client.math+client.computer)/2;
+         fseek(cfPtr, (client.StuNum - 1) * 
+            sizeof(struct clientData), SEEK_SET);            
+         fwrite(&client, sizeof(struct clientData), 1, cfPtr);
+         printf("%s", "Enter student number: ");
+         scanf("%d", &client.StuNum);
+      } 
+      fclose(cfPtr); 
+   } 
+   if ((cfPtr = fopen("accounts.dat", "rb")) == NULL) {
+      puts("File could not be opened.");
+   } 
+   else { 
+      printf("%-10s%-10s%-8s%-12s%-10s%\n", "num", "Name",
+         "math","computer", "average");
+
+      while (!feof(cfPtr)) { 
+
+         struct clientData client = {0, "", 0,0, 0.0};
+
+         int result = fread(&client, sizeof(struct clientData), 1, cfPtr);
+
+         if (client.StuNum != 0) {
+            printf("%-10d%-10s%-8d%-7d%10.2f\n", client.StuNum, client.Name, client.math,client.computer, client.average);
+         } 
+      } 
+
+      fclose(cfPtr);
+   } 
+} 
