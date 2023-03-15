@@ -1,3 +1,4 @@
+// Writing data randomly to a random-access file
 #include <stdio.h>
 
 // clientData structure definition               
@@ -29,25 +30,25 @@ int main(void)
       
       printf("%s", "Enter account number"
          " (1 to 100, 0 to end input): ");
-      scanf("%d", &STUDENT.StuNum);
+      scanf("%d", &Stu.StuNum);
 
       // user enters information, which is copied into file
-      while (STUDENT.StuNum != 0) { 
+      while (Stu.StuNum != 0) { 
          // user enters last name, first name and balance
          printf("%s", "Enter lastname, firstname, balance: ");
         
          // set record lastName, firstName and balance value
-         fscanf(stdin, "%14s%9s%lf", STUDENT.Name,STUDENT.math,STUDENT.computer, &STUDENT.balance);
+         fscanf(stdin, "%14s%9s%lf", Stu.Name,Stu.math,Stu.computer, &Stu.average);
 
          // seek position in file to user-specified record   
-         fseek(cfPtr, (STUDENT.StuNum - 1) *sizeof(struct StuData), SEEK_SET);               //移動檔案指標到目的地的記憶體位址上方            
+         fseek(cfPtr, (Stu.StuNum - 1) *sizeof(struct StuData), SEEK_SET);               //移動檔案指標到目的地的記憶體位址上方            
 
          // write user-specified information in file              
-         fwrite(&STUDENT, sizeof(struct StuData), 1, cfPtr);//3.存取檔案 fwrite()將一筆(結構的)資料寫入檔案
+         fwrite(&Stu, sizeof(struct StuData), 1, cfPtr);//3.存取檔案 fwrite()將一筆(結構的)資料寫入檔案
 																		 // 每一筆紀錄佔37bytes
          // enable user to input another account number
          printf("%s", "Enter account number: ");
-         scanf("%d", &STUDENT.StuNum);
+         scanf("%d", &Stu.StuNum);
       } 
       
     
@@ -70,7 +71,7 @@ int main(void)
          int result = fread(&Stu, sizeof(struct StuData), 1, cfPtr);
 
          // display record
-         if (STUDENT.StuNum != 0) {   //印出讀取該筆(結構)資料的結果 
+         if (Stu.StuNum != 0) {   //印出讀取該筆(結構)資料的結果 
             printf("%-6d%-16s%-11s%10.2f\n", 
                Stu.StuNum, Stu.Name, 
                Stu.math,Stu.computer, Stu.average);
