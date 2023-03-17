@@ -1,0 +1,105 @@
+#include <stdio.h>
+
+void blank(FILE *cfPtr);
+void write(FILE *cfPtr);
+void read(FILE *cfPtr);
+
+typedef struct{
+	unsigned int StuNum;  //4Byte
+	char Name[20];    //20Byte
+	int math, computer;  //8Byte
+  double average;  //4Byte
+}stuData;
+
+void bubble(stuData *studArr, int num);
+
+int main(void){
+	FILE *cfPtr;
+	blank(cfPtr);  //空白檔案 
+	write(cfPtr);  //寫入 
+	read(cfPtr);   //讀取 
+}
+
+void blank(FILE *cfPtr){  //建立檔案指標 
+	int i;
+	if((cfPtr = fopen("accounts1.dat" , "wb")) == NULL){  //開啟檔案【"r"=read(讀取)模式, "b"=binary(隨機存取檔)】 
+		puts("File could not be opened.");
+	}
+	else{
+		stuData blankstudent = {0, "", 0, 0, 0.0};  //宣告記憶體變數（結構變數：blankstudent） 
+		for(i = 1; i <= 100; i++){
+			fwrite(&blankstudent, sizeof(stuData), 1, cfPtr);//存取檔案：取得blankstudent記憶體位址，大小為36Byte
+		}                              //1筆資料 ←     →檔案指標 
+	}
+	fclose(cfPtr);  //關閉檔案 
+}
+
+void write(FILE *cfPtr){
+	if((cfPtr = fopen("accounts1.dat" , "rb+")) == NULL){  //開啟檔案 
+		puts("File could not be opened.");
+	}
+	else{
+		stuData student = {0, "", 0, 0, 0.0};  //建立student結構 
+		printf("%s", "Enter studentNum(1 to 100, 0 to end input): ");  //存取檔案【"+"修改檔案內容】 
+		scanf("%d", &student.StuNum);
+		
+		while (student.StuNum != 0) { 
+　　　　　　printf("%s", "Enter name, math, computer: ");
+　　　　　　fscanf(stdin, "%19s%3d%3d", student.Name, &student.math, &student.computer);  //stdin：標準輸入 
+　　　　　　student.average = (double)(student.math + student.computer) / 2;
+　　　　　　fseek(cfPtr, (student.StuNum - 1) * sizeof(stuData), SEEK_SET);  //從檔案開始處移動指標【"SEEK_SET"檔案開始處】            
+　　　　　　fwrite(&student, sizeof(stuData), 1, cfPtr);
+         	
+　　　　　　printf("%s", "\nEnter studentNum: ");
+　　　　　　scanf("%d", &student.StuNum);
+		}
+	}
+	fclose(cfPtr);  //關閉檔案 
+}
+
+void read(FILE *cfPtr){
+	stuData student = {0, "", 0, 0, 0.0};
+	stuData stuArr[100];
+	int i = 0, j;	
+	if((cfPtr = fopen("accounts1.dat" , "rb")) == NULL){  //開啟檔案  
+　　　puts("File could not be opened.");
+	}
+	else{ 
+　　　printf("%-6s%-16s%-10s%-10s%10s\n", "Num", "Name", "math", "computer", "average");
+　　　while (!feof(cfPtr)){  //feof：檔案結尾符號 
+        	
+　　　int result = fread(&student, sizeof(stuData), 1, cfPtr);
+　　　if (result != 0 &&student.StuNum != 0){ 
+　　　　　printf("%-6d%-19s%-12d%-12d%-10.2f\n", student.StuNum, student.Name, student.math, student.computer, student.average);
+　　　　　stuArr[i].StuNum = student.StuNum;
+　　　　　strcpy(stuArr[i].Name, student.Name);
+　　　　　stuArr[i].math = student.math;
+　　　　　stuArr[i].computer = student.computer;
+　　　　　stuArr[i].average = student.average;
+　　　　　i++;
+         } 
+      } 
+      fclose(cfPtr); 
+    } 
+    printf("\n");
+    for(j = 0; j < i; ++j)
+　　　　printf("%-6d%-19s%-12d%-12d%-10.2f\n", stuArr[j].StuNum, stuArr[j].Name, stuArr[j].math, stuArr[j].computer, stuArr[j].average);
+    printf("\n");
+    bubble(stuArr, i);
+    for(j = 0; j < i; ++j)
+　　　　printf("%-6d%-19s%-12d%-12d%-10.2f\n", stuArr[j].StuNum, stuArr[j].Name, stuArr[j].math, stuArr[j].computer, stuArr[j].average);
+}
+
+void bubble(stuData *studArr, int num){
+	int pass, i, j;
+	for(pass = 1; pass < num; ++pass){
+		for(i = 0; i < num - 1; ++i){
+			if(studArr[i].average < studArr[i + 1].average){
+				stuData temp;
+				temp = studArr[i];
+				studArr[i] = studArr[i + 1];
+				studArr[i + 1] = temp;
+			}
+		}
+	}
+}
