@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 
          
@@ -75,8 +74,8 @@ int main(void)
       puts("File could not be opened.");
    } 
    else { 
-      printf("%-6s%-16s%-11s%10s\n", "Acct", "Last Name",
-         "First Name", "Balance");
+      printf("%-6s%-12s%-8s%8s%15s\n", "id", "name",
+         "math", "computer","average");
 
       
       while (!feof(cfPtr)) { 
@@ -87,7 +86,7 @@ int main(void)
 
         
          if (client.id != 0) {   
-            printf("%-6d%-16s%-11d%-11d%10.2f\n", 
+            printf("%-6d%-12s%-10d%-10d%12.2f\n", 
                client.id, client.name, 
                client.math, client.computer,client.avg);
          } 
@@ -102,4 +101,3 @@ int main(void)
    
    
 } 
-
