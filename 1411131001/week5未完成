@@ -1,0 +1,183 @@
+/*建立一個結構，成員定義如下:
+
+typedef struct
+
+{
+    unsigned int StuNum;
+    char Name[20];
+    int math, computer;
+    double average;
+
+} stuData;
+
+建立一個程式，存取隨機檔，功能如下:
+1. 建立內容有100筆空白資料的隨機檔案(只需修改p.608的程式)
+2. 程式寫入學生資料至檔案，直到輸入學號是0為止(p.610的程式)
+3. 鍵盤輸入學號(stuNum)，利用fseek函數，移動檔案指標，將檔案內容全部印出。(p.613的程式)(或是將檔案內容全部印出也可以。)*/
+/*題目二:乘上題
+建立一個結構，成員定義如下:
+typedef struct student{
+     char name[20];
+     int math;
+     int computer;
+     double average;
+}
+建立一個結構陣列，請使用自行寫入10筆資料至該結構陣列中，將結構內容根據總成績由大到小排序並且印出排序前排序後的結果。需有排序副程式、報表列印副程式。*/
+// Writing data randomly to a random-access file
+
+
+#include <stdio.h>
+#include <string.h>
+
+// clientData structure definition               
+struct stuData {
+    unsigned int StuNum;
+    char Name[20];
+    int math, computer;
+    double average;
+};
+
+typedef struct stuData stu;
+
+
+void bubble(stu *studArr,int num);
+int main(void)
+{    
+    FILE* cfPtr; // accounts.dat file pointer  1.建立(宣告)檔案指標
+    
+    unsigned int i;
+    // fopen opens the file; exits if file cannot be opened
+    if ((cfPtr = fopen("accounts.dat", "wb")) == NULL) {   //2.開啟檔案(利用fopen()函數) 
+        puts("File could not be opened.");					//// "r"=read(讀取)模式, "b"=binary(隨機存取檔) "+"修改檔案內容 
+    }
+    // fopen opens the file; exits if file cannot be opened
+   if ((cfPtr = fopen("accounts.dat", "rb+")) == NULL) {   //2.開啟檔案(利用fopen()函數) 
+      puts("File could not be opened.");					//// "r"=read(讀取)模式, "b"=binary(隨機存取檔) "+"修改檔案內容 
+   } 
+    else {
+
+        // create clientData with default information
+        stu client = { 0, "",0,0, 0.0 }, blankClient = { 0, "", 0,0, 0.0 };
+
+
+
+        for (i = 1; i <= 100; ++i) {
+            fwrite(&blankClient, sizeof(struct stuData), 1, cfPtr);  //3.存取檔案 fwrite()將一筆(結構的)資料寫入檔案 
+        }             // 每一筆紀錄佔37bytes,  檔案一共佔100x37=3700bytes ~4K bytes  
+        // require user to specify account number
+
+
+
+
+
+        printf("%s", "Enter account stunumber"
+            " (1 to 100, 0 to end input): ");
+        scanf("%d", &client.StuNum);
+
+        // user enters information, which is copied into file
+        while (client.StuNum != 0) {
+            // user enters last name, first name and balance
+            printf("%s", "Enter Name, math, computer: ");
+
+            // set record lastName, firstName and balance value
+           fscanf(stdin, "%14s%9d%9d", client.Name,
+               &client.math,&client.computer);
+               client.average=(client.math+client.computer)/2;
+
+            // seek position in file to user-specified record   
+            fseek(cfPtr, (client.StuNum - 1) *               //移動檔案指標到目的地的記憶體位址上方   
+                sizeof(struct stuData), SEEK_SET);
+
+            // write user-specified information in file              
+            fwrite(&client, sizeof(struct stuData), 1, cfPtr);//3.存取檔案 fwrite()將一筆(結構的)資料寫入檔案
+                                                                            // 每一筆紀錄佔37bytes
+            // enable user to input another account number
+            printf("%s", "Enter account stunumber: ");
+            scanf("%d", &client.StuNum);
+        }
+
+
+        fclose(cfPtr); // fclose closes the file     4.關閉檔案  
+    }
+
+
+
+
+    // fopen opens the file; exits if file cannot be opened
+    if ((cfPtr = fopen("accounts.dat", "rb")) == NULL) {
+        puts("File could not be opened.");
+    }
+    else {
+        //printf("%-6s%-16s%-5s%-7s%10s\n", "Acct", "Name","Math","Computer", "Average");
+
+        // read all records from file (until eof)
+        while (!feof(cfPtr)) {
+            // create clientData with default information
+            struct stuData client = { 0, "",0,0, 0.0 };
+
+            int result = fread(&client, sizeof(struct stuData), 1, cfPtr);
+
+            // display record
+            if (client.StuNum != 0) {   //印出讀取該筆(結構)資料的結果 
+                //printf("%-6d%-16s%-11d%-8d%10.2f\n",client.StuNum, client.Name,client.math,client.computer, client.average);
+            }
+        }
+
+        fclose(cfPtr); // fclose closes the file
+    }
+    read(cfPtr);
+}
+
+
+
+void read(FILE *cfPtr){
+     stu strArr[100];   //新增結構陣列
+     int i=0,j;
+if((cfPtr = fopen("accounts.dat","rb"))==NULL){  //開啟檔案
+   puts("File could not be opened.");
+}
+else{
+     printf("%-6s%-16s%-5s%-7s%10s\n", "Acct", "Name", "Math","Computer", "Average");
+     while(!feof(cfPtr)){
+          stu client = { 0, "",0,0, 0.0};
+          int result = fread(&client,sizeof(stu),1,cfPtr);
+
+     if(result != 0 && client.StuNum != 0){
+        printf("%-6d%-16s%-11d%-8d%10.2f\n",client.StuNum, client.Name,client.math,client.computer, client.average);
+
+        strArr[i].StuNum=client.StuNum;
+        strcpy(strArr[i].Name,client.Name);
+        strArr[i].math=client.math;
+        strArr[i].computer=client.computer;
+        strArr[i].average=client.average;
+        i++;
+		
+}
+}
+fclose(cfPtr);
+}
+printf("\n");
+
+for(j=0;j<1;++j)
+     printf("%-6d%-16s%-11d%-8d%10.2f\n",strArr[j].StuNum,strArr[j].Name,strArr[j].math,strArr[j].computer,strArr[j].average);
+ printf("\n");
+bubble(strArr,i);
+printf("%-6d%-16s%-11d%-8d%10.2f\n",strArr[j].StuNum,strArr[j].Name,strArr[j].math,strArr[j].computer,strArr[j].average);
+}
+
+
+void bubble(stu *studArr,int num){
+    int pass,i;
+    for(pass =1;pass < num; ++pass){
+
+        for(i = 0;i <num -1;++i){
+           if(studArr[i].average < studArr[i+1].average){
+              stu temp;     //結構變數
+              temp=studArr[i];
+              studArr[i]=studArr[i+1];
+              studArr[i+1]=temp;
+}
+}
+}
+}
+
