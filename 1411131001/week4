@@ -34,7 +34,7 @@ int main(void)
     unsigned int i;
     // fopen opens the file; exits if file cannot be opened
     if ((cfPtr = fopen("accounts.dat", "wb")) == NULL) {   //2.開啟檔案(利用fopen()函數) 
-        puts("File could not be opened.");					//// "r"=read(讀取)模式, "b"=binary(隨機存取檔) "+"修改檔案內容 
+        puts("File could not be opened.");					//// "w"=write(寫入)模式, "b"=binary(隨機存取檔) 
     }
     // fopen opens the file; exits if file cannot be opened
    if ((cfPtr = fopen("accounts.dat", "rb+")) == NULL) {   //2.開啟檔案(利用fopen()函數) 
