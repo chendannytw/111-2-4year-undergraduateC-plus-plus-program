@@ -41,6 +41,7 @@ typedef struct stuData stu;
 
 
 void bubble(stu *studArr,int num);
+
 int main(void)
 {    
     FILE* cfPtr; // accounts.dat file pointer  1.建立(宣告)檔案指標
@@ -137,7 +138,7 @@ if((cfPtr = fopen("accounts.dat","rb"))==NULL){  //開啟檔案
    puts("File could not be opened.");
 }
 else{
-     printf("%-6s%-16s%-5s%-7s%10s\n", "Acct", "Name", "Math","Computer", "Average");
+     printf("%-6s%-16s%-5s%-9s%10s\n", "Acct", "Name", "Math   ","Computer", "Average");
      while(!feof(cfPtr)){
           stu client = { 0, "",0,0, 0.0};
           int result = fread(&client,sizeof(stu),1,cfPtr);
@@ -157,12 +158,12 @@ else{
 fclose(cfPtr);
 }
 printf("\n");
-
-for(j=0;j<1;++j)
-     printf("%-6d%-16s%-11d%-8d%10.2f\n",strArr[j].StuNum,strArr[j].Name,strArr[j].math,strArr[j].computer,strArr[j].average);
- printf("\n");
-bubble(strArr,i);
-printf("%-6d%-16s%-11d%-8d%10.2f\n",strArr[j].StuNum,strArr[j].Name,strArr[j].math,strArr[j].computer,strArr[j].average);
+bubble(strArr,i);   //放在迴圈外面才會成功排序 
+for(j=0;j<i;++j)
+    printf("%-6d%-16s%-11d%-8d%10.2f\n",strArr[j].StuNum,strArr[j].Name,strArr[j].math,strArr[j].computer,strArr[j].average);
+    printf("\n");
+    //bubble(strArr,i);
+    //printf("%-6d%-16s%-11d%-8d%10.2f\n",strArr[j].StuNum,strArr[j].Name,strArr[j].math,strArr[j].computer,strArr[j].average);
 }
 
 
@@ -176,8 +177,9 @@ void bubble(stu *studArr,int num){
               temp=studArr[i];
               studArr[i]=studArr[i+1];
               studArr[i+1]=temp;
+              }
 }
 }
 }
-}
+
 
