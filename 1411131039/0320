@@ -1,0 +1,93 @@
+#include <stdio.h>
+#include <string.h>
+struct Data { int stunum;
+			  char name[20];
+			  int math;
+			  int computer; 
+			  double average;
+			  };
+typedef struct Data studata; 
+void blank(FILE *cfptr);
+void write(FILE *cfptr);
+void read(FILE *cfptr); 
+void bobb(studata stu[100],int i);
+int main(void) {
+	FILE *cfptr;
+	blank(cfptr);
+	write(cfptr);
+	read(cfptr);  
+}
+
+void blank(FILE *cfptr){
+	int i;
+	if ((cfptr = fopen("accounts.txt","wb")) == NULL)
+		puts("File could not be opened.");
+	else {
+		studata blankstudent = {0,"",0,0, 0.0};
+		for (i = 1; i <= 100; ++i) 
+			fwrite(&blankstudent, sizeof(studata),1,cfptr);
+			fclose (cfptr);	 
+	}
+	
+}
+
+void write(FILE *cfptr){
+	if ((cfptr = fopen("accounts.txt", "rb+")) == NULL) 
+		puts("File could not be opened.");
+	else{
+		studata student = {0,"",0,0, 0.0};
+		printf("%s", "Enter studemtNum(1 to 100, 0 to end input):");
+		scanf("%d", &student.stunum);
+		while (student.stunum != 0) { 
+			printf("%s", "\nEnter name,math score,computer score,average: ");
+			fscanf(stdin, "%19s %d %d", student.name,&student.math,&student.computer);
+			student.average=(float)(student.math+student.computer)/2;
+			fseek(cfptr, (student.stunum - 1) * sizeof(studata), SEEK_SET);
+			fwrite(&student,sizeof(studata),1,cfptr); 
+			printf("%s", "\nEnter student number: ");
+			scanf("%d", &student.stunum);
+		}
+	}
+	fclose(cfptr); 
+}
+void read(FILE *cfptr){
+	int i=0;
+	if ((cfptr = fopen("accounts.txt","rb")) == NULL)  
+		puts("File could not be opened.");
+	else {
+		printf("%-6s%-6s%-6s%10s%10s%\n","Num", "Name","math","computer","average");
+		while(!feof(cfptr)){
+			studata student= {0,"",0,0, 0.0};
+			studata *stu;
+			int result=fread(&student,sizeof(studata),1,cfptr);
+			if(result!=0 && student.stunum !=0)
+				printf("%-7d%-6s%-10d%-6d% 8.2f%\n",student.stunum,student.name,student.math,student.computer,student.average);
+				stu[i].stunum=student.stunum;
+				strcpy(stu[i].name,student.name);
+				stu[i].math=student.math;
+				stu[i].computer=student.computer;
+				stu[i].average=student.average;
+				i++;
+		}
+	}
+	fclose(cfptr);
+	bobb(stu,i);
+	printf("\n%-6s%-6s%-6s%10s%10s%\n","Num", "Name","math","computer","average");
+	int x;
+	for(x=0,x<=i,x++)
+		printf("%-7d%-6s%-10d%-6d% 8.2f%\n",stu[x].stunum,stu[x].name,stu[x].math,stu[x].computer,stu[x].average);		
+}
+void bobb(studata stu[100],int size){
+	int pass,j,i;
+	for(pass=1;pass<=size;pass++){
+		for(j=0;j<size-pass;j++){
+			if(stu[j]<stu[j+1]){
+				studata temp;
+				temp=stu[j];
+				stu[j]=stu[j+1];
+				stu[j+1]=temp;
+			}
+		}
+	}
+	
+}
