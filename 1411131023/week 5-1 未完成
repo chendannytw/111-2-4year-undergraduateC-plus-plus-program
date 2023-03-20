@@ -1,0 +1,85 @@
+#include <stdio.h>
+struct clientData {
+    unsigned int StuNum;
+    char Name[20];
+    int math, computer;
+    double average;
+};
+typedef struct clientData CLIENT;
+void blank(FILE* cfPtr);
+void write(FILE* cfPtr);
+void read(FILE* cfPtr);
+void bobb(CLIENT stu[100], int size);
+int main(void)
+{
+    FILE* cfPtr;
+    void blank(FILE * bcfPtr);
+    void write(FILE * wcfPtr);
+    void read(FILE * rcfPtr);
+    
+}
+void blank(FILE* bcfPtr) {
+    FILE* cfPtr;
+    if ((cfPtr = fopen("account.dat", "wb")) == NULL) {
+        puts("File could not be opened");
+    }
+    else {
+        CLIENT blankSTU = { 0,"",0,0,0.0 };
+        for (unsigned int i = 0; i <= 100; i++) {
+            fwrite(&blankSTU, sizeof(CLIENT), 1, cfPtr);
+        }
+        fclose(cfPtr);
+    }
+}
+void write(FILE* wcfPtr) {
+    FILE* cfPtr;
+    if ((cfPtr = fopen("account.dat", "rb+")) == NULL) {
+        puts("File could not be opened");
+    }
+    else {
+        CLIENT STU = { 0,"",0,0,0.0 };
+        printf("Enter account number:");
+        scanf_s("d", &STU.StuNum);
+        while (STU.StuNum != 0) {
+            printf("%s", "\nEnter name,math,computer and average:");
+            fscanf_s(stdin, " % 14s % d % d % lf", STU.Name, &STU.math, &STU.computer, &STU.average);
+            fseek(cfPtr, (STU.StuNum - 1) * sizeof(CLIENT), SEEK_SET);
+            fwrite(&STU, sizeof(CLIENT), 1, cfPtr);
+            printf("%s", "Enter account number:");
+            scanf_s("%d", &STU.StuNum);
+        }
+        fclose(cfPtr);
+    }
+}
+void read(FILE* rcfPtr) {
+    FILE* cfPtr;
+    if ((cfPtr = fopen("account.dat", "rb")) == NULL) {
+        puts("File could not be opened");
+    }
+    else {
+        printf("%-6s%-16s%-11s%-11s%10s\n","Stunum","Name","math","computer","average");
+        while (!feof(cfPtr) ){
+            CLIENT STU = { 0,"",0,0,0.0 };
+            int result = fread(&STU, sizeof(CLIENT), 1, cfPtr);
+            if (result != 0 && STU.StuNum != 0) {
+                printf("%d % 14s % d % d % lf", STU.StuNum, STU.Name, &STU.math, &STU.computer, &STU.average);
+            }
+        
+        }
+        fclose(cfPtr);
+    }
+}
+void bobb(CLIENT stu[100], int size) {
+    int pass, j, i;
+    for (pass = 1; pass <= size; pass++) {
+        for (j = 0; j < size - pass; j++) {
+            if (stu[j] < stu[j + 1]) {
+                CLIENT temp;
+                temp = stu[j];
+                stu[j] = stu[j + 1];
+                stu[j + 1] = temp;
+            }
+        }
+    }
+
+}
