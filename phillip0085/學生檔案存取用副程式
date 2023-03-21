@@ -121,7 +121,7 @@ void read(FILE *cfPtr){
          int result = fread(&client, sizeof(struct studata), 1, cfPtr);
 
          // display record
-         if (result client.StuNum != 0) {   //印出讀取該筆(結構)資料的結果 
+         if (result!=0 && client.StuNum != 0) {   //印出讀取該筆(結構)資料的結果 
             printf("%-6d%-16s%-11d%-11d%10.2f\n", 
                client.StuNum, client.Name, 
                client.math,client.computer, client.average);
