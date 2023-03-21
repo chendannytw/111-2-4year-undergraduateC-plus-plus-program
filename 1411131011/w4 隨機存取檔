@@ -1,87 +1,84 @@
-// Writing data randomly to a random-access file
 #include <stdio.h>
 
-// clientData structure definition               
-struct stuData {                              
-   unsigned int StuNum; // stu number
-   char Name[20]; // stu Name    
-   int math; // stu math
-   int computer; // stu computer 
-   double average; // stu average 
-};           
- 
-typedef struct stuData STUDENT;
+struct stuData {           // stuData structure definition             
+   unsigned int StuNum;    // stu number     4bytes
+   char Name[20];          // stu Name      20bytes
+   int math;               // stu math       4bytes
+   int computer;           // stu computer   4bytes
+   double average;         // stu average    8bytes       
+};
 
-int main(void) 
+typedef struct stuData STUDENT;  //將struct stuData型態重新命名為STUDENT
+
+int main(void)
 { 
-   FILE *cfPtr; // accounts.dat file pointer  1.建立(宣告)檔案指標
-	unsigned int i;
-   // fopen opens the file; exits if file cannot be opened
-     if ((cfPtr = fopen("student.dat", "wb")) == NULL) {  //2.開啟檔案(利用fopen()函數) 
-        puts("File could not be opened.");					// "w"=write(寫入)模式, "b"=binary(隨機存取檔) 
-    }
-   if ((cfPtr = fopen("student.dat", "rb+")) == NULL) {   //2.開啟檔案(利用fopen()函數) 
-      puts("File could not be opened.");					//// "r"=read(讀取)模式, "b"=binary(隨機存取檔) "+"修改檔案內容 
+   FILE *cfPtr;                  //student.dat file pointer 1.建立(宣告)檔案指標
+   unsigned int i; 
+  
+   if ((cfPtr = fopen("student.dat", "wb")) == NULL) {    //2.開啟檔案(利用fopen()函數)   "r"=read(讀取)模式, "b"=binary(隨機存取檔)
+      puts("File could not be opened.");                  
+   } 
+   if ((cfPtr = fopen("student.dat", "rb+")) == NULL) {   //2.開啟檔案(利用fopen()函數)   "r"=read(讀取)模式, "b"=binary(隨機存取檔) "+"修改檔案內容 
+      puts("File could not be opened.");				  	 
    } 
    
    else { 
-	  // create clientData with default information
-      STUDENT student = {0, "", 0, 0, 0.0}, blankstudent={0, "", 0, 0, 0.0};
-      
-      
+	  // create stuData with default information
+      STUDENT student = {0, "", 0, 0, 0.0}, blankStudent={0, "", 0, 0, 0.0};   //建立結構變數student、blankStudent
+
+
 	  for (i = 1; i <= 100; ++i) {                                   
-         fwrite(&blankstudent, sizeof(struct stuData), 1, cfPtr);  //3.存取檔案 fwrite()將一筆(結構的)資料寫入檔案 
-      }             // 每一筆紀錄佔37bytes,  檔案一共佔100x37=3700bytes ~4K bytes  
-      // require user to specify account number
+         fwrite(&blankStudent, sizeof(struct stuData), 1, cfPtr);  //3.存取檔案 fwrite()將一筆(結構的)資料寫入檔案 
+      }                                                            //每一筆紀錄佔40bytes,檔案一共佔100x40=4000bytes 
+                                                                   //將空白資料blankStudent寫入(fwrite)檔案指標cfptr裡面
       
-      
-      printf("%s", "Enter student number"
-         " (1 to 100, 0 to end input): ");
+      printf("%s", "Enter stu number"
+         " (1 to 100, 0 to end input): ");                         //要求輸入指定學生號碼
       scanf("%d", &student.StuNum);
 
       // user enters information, which is copied into file
       while (student.StuNum != 0) { 
          // user enters last name, first name and balance
-         printf("%s", "Enter student name, math, computer: ");
-        
+         printf("%s", "Enter Name, math, computer: ");
+
          // set record lastName, firstName and balance value
-         fscanf(stdin, "%14s%9s%lf", student.Name, 
-            student.math, student.computer, &student.average);
+         fscanf(stdin, "%14s%9d%9d", student.Name,                 //由鍵盤輸入 (stdin) 
+            &student.math, &student.computer, &student.average);
 
          // seek position in file to user-specified record   
-         fseek(cfPtr, (student.StuNum - 1) *               //移動檔案指標到目的地的記憶體位址上方   
+         fseek(cfPtr, (student.StuNum - 1) *                       //移動檔案指標到目的地的記憶體位址上方   
             sizeof(struct stuData), SEEK_SET);         
 
          // write user-specified information in file              
-         fwrite(&student, sizeof(struct stuData), 1, cfPtr);//3.存取檔案 fwrite()將一筆(結構的)資料寫入檔案
-																		 // 每一筆紀錄佔37bytes
+         fwrite(&student, sizeof(struct stuData), 1, cfPtr);       //3.存取檔案 fwrite()將一筆(結構的)資料寫入檔案
+								   // 每一筆紀錄佔40bytes
          // enable user to input another account number
-         printf("%s", "Enter student number: ");
+         printf("%s", "Enter stu number: ");
          scanf("%d", &student.StuNum);
       } 
-      fclose(cfPtr); // fclose closes the file     4.關閉檔案  
+      fclose(cfPtr);                                               //4.關閉檔案  
    } 
-   
+
 
    // fopen opens the file; exits if file cannot be opened
    if ((cfPtr = fopen("student.dat", "rb")) == NULL) {
       puts("File could not be opened.");
    } 
    else { 
-      printf("%-6s%-16s%-11s%10s%10s\n", "StuNum", "Name",
+      printf("%-6s%-12s%-11s%10s%12.2s\n", "StuNum", "Name",
          "Math", "Computer", "Average");
 
       // read all records from file (until eof)
       while (!feof(cfPtr)) { 
          // create clientData with default information
-         struct stuData student = {0, "", 0, 0, 0.0};
+         struct stuData student = {0, "", 0, 0, 0.0};            
 
          int result = fread(&student, sizeof(struct stuData), 1, cfPtr);
 
-        student.average=(student.math+ student.computer)/2.0;
+        student.average=(student.math + student.computer)/2.0;
          // display record
          if (student.StuNum != 0) {   //印出讀取該筆(結構)資料的結果 
-            printf("%-6d%-16s%-11s%10d%10.2f\n", 
+            printf("%-6d%-12s%-11d%10d%12.2f\n", 
                student.StuNum, student.Name, 
                student.math, student.computer, student.average);
          } 
