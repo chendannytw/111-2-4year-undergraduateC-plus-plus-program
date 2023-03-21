@@ -40,7 +40,7 @@ void write(FILE *cfptr){
 		scanf("%d", &student.stunum);
 		while (student.stunum != 0) { 
 			printf("%s", "\nEnter name,math score,computer score,average: ");
-			fscanf(stdin, "%19s %d %d", student.name,&student.math,&student.computer);
+			fscanf(stdin,"%19s%d%d",student.name,&student.math,&student.computer);
 			student.average=(float)(student.math+student.computer)/2;
 			fseek(cfptr, (student.stunum - 1) * sizeof(studata), SEEK_SET);
 			fwrite(&student,sizeof(studata),1,cfptr); 
@@ -51,6 +51,7 @@ void write(FILE *cfptr){
 	fclose(cfptr); 
 }
 void read(FILE *cfptr){
+	studata stu[100];
 	int i=0;
 	if ((cfptr = fopen("accounts.txt","rb")) == NULL)  
 		puts("File could not be opened.");
@@ -58,30 +59,26 @@ void read(FILE *cfptr){
 		printf("%-6s%-6s%-6s%10s%10s%\n","Num", "Name","math","computer","average");
 		while(!feof(cfptr)){
 			studata student= {0,"",0,0, 0.0};
-			studata *stu;
 			int result=fread(&student,sizeof(studata),1,cfptr);
-			if(result!=0 && student.stunum !=0)
-				printf("%-7d%-6s%-10d%-6d% 8.2f%\n",student.stunum,student.name,student.math,student.computer,student.average);
-				stu[i].stunum=student.stunum;
-				strcpy(stu[i].name,student.name);
-				stu[i].math=student.math;
-				stu[i].computer=student.computer;
-				stu[i].average=student.average;
+			if(result!=0 && student.stunum !=0){
+				stu[i]=student;
+				printf("%-7d%-6s%-10d%-6d% 8.2f%\n",stu[i].stunum,stu[i].name,stu[i].math,stu[i].computer,stu[i].average);
 				i++;
+			}				
 		}
 	}
 	fclose(cfptr);
-	bobb(stu,i);
-	printf("\n%-6s%-6s%-6s%10s%10s%\n","Num", "Name","math","computer","average");
 	int x;
-	for(x=0,x<=i,x++)
-		printf("%-7d%-6s%-10d%-6d% 8.2f%\n",stu[x].stunum,stu[x].name,stu[x].math,stu[x].computer,stu[x].average);		
+	bobb(stu,i);
+	printf("\n%-6s%-6s%-6s%10s%10s%\n","Num", "Name","math","computer","average");	
+	for(x=0;x<i;x++)
+		printf("%-7d%-6s%-10d%-6d% 8.2f%\n",stu[x].stunum,stu[x].name,stu[x].math,stu[x].computer,stu[x].average);				
 }
 void bobb(studata stu[100],int size){
-	int pass,j,i;
-	for(pass=1;pass<=size;pass++){
+	int pass,j;
+	for(pass=1;pass<size;pass++){
 		for(j=0;j<size-pass;j++){
-			if(stu[j]<stu[j+1]){
+			if(stu[j].average<stu[j+1].average){
 				studata temp;
 				temp=stu[j];
 				stu[j]=stu[j+1];
@@ -89,5 +86,4 @@ void bobb(studata stu[100],int size){
 			}
 		}
 	}
-	
 }
