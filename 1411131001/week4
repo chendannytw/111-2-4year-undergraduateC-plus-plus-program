@@ -2,7 +2,7 @@
 
 /*建立一個結構，成員定義如下:
 
-typedef struct
+typedef struct                     
 
 {
     unsigned int StuNum;
@@ -19,7 +19,7 @@ typedef struct
 #include <stdio.h>
 
 // clientData structure definition               
-struct stuData {
+struct stuData {                                 //定義結構
     unsigned int StuNum;
     char Name[20];
     int math, computer;
