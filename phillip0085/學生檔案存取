@@ -16,6 +16,7 @@ typedef struct studata CLIENT;
 
 int main(void) 
 { 
+
    FILE *cfPtr; // 宣告檔案指標
    
 	unsigned int i;
@@ -24,11 +25,11 @@ int main(void)
    } 
    else { 
       // create clientData with default information       
-      CLIENT stuClient = {0, "", 0, 0,0.0}; 
+      CLIENT stuClient = {0, "", 0, 0,0.0}; //宣告結構變數stuClient
    
       // output 100 blank records to file                              
       for (i = 1; i <= 100; ++i) {                                   
-         fwrite(&stuClient, sizeof(struct studata), 1, cfPtr);  //3.存取檔案 
+         fwrite(&stuClient, sizeof(struct studata), 1, cfPtr);  //3.存取檔案 &stuClient:取得stuClient
       }             // 每一筆紀錄佔37bytes,  檔案一共佔100x37=3700bytes ~4K bytes                                    
 
       fclose (cfPtr); // fclose closes the file      4.關閉檔案 
