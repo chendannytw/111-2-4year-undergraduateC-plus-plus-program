@@ -116,3 +116,106 @@ int main(void)
    
    
 } 
+---------------------------------------------
+#include <stdio.h>
+void blank(FILE *cfPtr);
+void write(FILE *cfPtr);
+void read(FILE *cfPtr);	
+
+        
+struct studata {                              
+   unsigned int StuNum;
+          char Name[20];
+          int math, computer;
+          double average;
+};             
+
+int main(void) 
+{ 
+   	FILE *cfPtr=NULL; 
+	blank(cfPtr);
+	write(cfPtr);
+	read(cfPtr);
+   
+   
+} 
+
+void blank(FILE *cfPtr){
+int i;
+	  if ((cfPtr = fopen("accounts.dat", "wb")) == NULL) {  
+      puts("File could not be opened.");				
+   } 
+   else { 
+     
+      studata blankstudent = {0, "", 0, 0,0.0}; 
+   
+                                
+      for (i = 1; i <= 100; ++i) {                                   
+         fwrite(&blankstudent, sizeof(struct studata), 1, cfPtr); 
+      }                                    
+
+      fclose(cfPtr); 
+}
+} 
+void write(FILE *cfPtr)
+{
+	
+   if ((cfPtr = fopen("accounts.dat", "rb+")) == NULL) {   
+      puts("File could not be opened.");					
+   } 
+   else { 
+      
+	
+      studata  student={0, "", 0,0, 0.0};
+      printf("%s", "Enter student number"
+         " (1 to 100, 0 to end input): ");
+      scanf("%d", &student.StuNum);
+      
+      
+	 while (student.StuNum != 0) {                                   
+         printf("%s", "Name, MATH, COMPUTER: ");
+        
+        
+         fscanf(stdin, "%14s%9d%9d", student.Name, 
+            &student.math,&student.computer);
+        student.average=(student.math+student.computer)/2;
+
+       
+         fseek(cfPtr, (student.StuNum - 1) *               
+            sizeof(struct studata), SEEK_SET);         
+      
+         fwrite(&student, sizeof(struct studata), 1, cfPtr);
+       
+         printf("%s", "Enter student number: ");
+         scanf("%d", &student.StuNum); 
+      }          
+      
+      fclose(cfPtr); 
+   } 
+ 
+} 
+void read(FILE *cfPtr){
+	if ((cfPtr = fopen("accounts.dat", "rb")) == NULL) {
+      puts("File could not be opened.");
+   } 
+   else { 
+      printf("%-6s%-16s%-11s%10s%10s\n", "number", " Name",
+         "math", "computer","avg");
+
+     
+      while (!feof(cfPtr)) { 
+      
+          studata student = {0, "", 0,0, 0.0};
+
+         int result = fread(&student, sizeof(struct studata), 1, cfPtr);
+
+       
+         if (student.StuNum != 0) {   
+            printf("%-6d%-16s%-11d%-11d%10.2f\n", 
+               student.StuNum, student.Name, 
+               student.math,student.computer, student.average);
+         } 
+      }
+      fclose(cfPtr); 
+   } 
+}
