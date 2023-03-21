@@ -69,3 +69,11 @@ int main(void)
     }
 
 }
+/*
+ana 100 50
+2
+leo 66 77
+3
+wang 55 60
+0
+*/
