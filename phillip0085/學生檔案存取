@@ -66,7 +66,7 @@ int main(void)
          fscanf(stdin, "%14s%9d%9d", client.Name, 
             &client.math,&client.computer);
             
-        client.average=(client.math+client.computer)/2;
+        client.average=(double)(client.math+client.computer)/2;
 
          // seek position in file to user-specified record   
          fseek(cfPtr, (client.StuNum - 1) *               //移動檔案指標到目的地的記憶體位址上方   
