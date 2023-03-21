@@ -53,7 +53,7 @@ int main(void)
         puts("File could not be opened.");
     }
     else {
-        printf("%-6s%-16s%-11s%10s\n", "Acct", "Name"," Math, computer", "average:");
+        printf("%-6s%-6s%-4s %-8s%11s\n", "Acct", "Name","Math","computer", "average:");
       
         while (!feof(cfPtr)) {
             
@@ -61,7 +61,7 @@ int main(void)
 
             int result = fread(&stuData, sizeof(struct clientData), 1, cfPtr);
             if (stuData.StuNum != 0) { 
-                printf("%-6d%-16s%-4d%-4d%10.2f\n",stuData.StuNum, stuData.Name,stuData.math,stuData.computer, stuData.average);
+                printf("%-6d%-6s%4d%9d%10.2f\n",stuData.StuNum, stuData.Name,stuData.math,stuData.computer, stuData.average);
             }
         }
 
