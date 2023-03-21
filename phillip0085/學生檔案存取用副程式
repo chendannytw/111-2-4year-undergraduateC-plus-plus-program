@@ -1,7 +1,7 @@
 #include <stdio.h>
-void blank(FILE *cfPtr);
-void write(FILE *cfPtr);
-void read(FILE *cfPtr);
+void blank(FILE *cfPtr);//建立空白檔案
+void write(FILE *cfPtr);//寫入資料
+void read(FILE *cfPtr);//讀出
 
 
 
