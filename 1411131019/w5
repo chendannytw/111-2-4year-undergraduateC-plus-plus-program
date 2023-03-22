@@ -1,1 +1,121 @@
+#include <stdio.h>
+#include <string.h>
+         
+struct clientData {     			//定義一個結構名為clientData                         
+   unsigned int id; 				//成員有學號、姓名、數學、計概、平均 
+   char name[15];   
+   int math,computer; 
+   double avg;    
+};             
+ 
+typedef struct clientData CLIENT;  //將struct clientData型態重新命名為CLIENT 
+void bubble(CLIENT *stu,int num);
+int main(void) 
+{ 
+   FILE *cfPtr;   	   		       //建立檔案指標cfPtr 
+	unsigned int i;
+   
+   if ((cfPtr = fopen("accounts.dat", "wb")) == NULL) {    //開檔：fopen("檔案名稱", )
+      puts("File could not be opened.");				   //若檔案打不開則顯示提示訊息 
+   } 
+   else { 
+      
+	  
+      CLIENT client = {0, "",0,0,0.0}, blankClient={0, "",0,0,0.0};		//建立結構變數client、blankclient 
+      
+      
+      
+	  for (i = 1; i <= 100; ++i) {                                     //將空白資料(blankclient寫入(fwrite)檔案指標cfptr裡面 
+         fwrite(&blankClient, sizeof(struct clientData), 1, cfPtr);  
+      }             
+     
+      
+      
+      
+      
+      
+      printf("%s", "Enter id"							//輸入學號 
+         " (1 to 100, 0 to end input): ");
+      scanf("%d", &client.id);
+
+      
+      while (client.id != 0) { 							//若輸入的學號不為0 
+       
+         printf("%s", "Enter name, math, computer: ");	
+         fscanf(stdin, "%14s%9d%9d", client.name, 		//由鍵盤輸入(stdin)姓名、數學、計概成績 
+            &client.math, &client.computer);
+		client.avg=(client.math+client.computer)/2;		//計算平均值 
+         
+         fseek(cfPtr, (client.id - 1) * sizeof(struct clientData), SEEK_SET);         //SEEK_SET：從頭開始找 
+
+                    
+         fwrite(&client, sizeof(struct clientData), 1, cfPtr);						  //將結構變數client的內容寫入(fwrite)指標變數cfptr 
+																		
+        
+         printf("%s", "Enter id: "); 		//再次輸入學號 繼續跑while迴圈 
+         scanf("%d", &client.id);
+      } 
+      
+    
+      fclose(cfPtr); 						//關閉檔案 
+   } 
+   
+   
+   CLIENT stu[100];
+	int j;
+   if ((cfPtr = fopen("accounts.dat", "rb")) == NULL) {							//開檔
+      puts("File could not be opened.");
+   } 
+   else { 
+      printf("%-6s%-12s%-8s%8s%15s\n", "id", "name",
+         "math", "computer","average");
+
+      
+      while (!feof(cfPtr)) { 													//feof：end of file ->檔案結尾 
+         																		//若cfptr還沒結尾 
+         CLIENT client = {0, "",0,0,0.0};
+
+         int result = fread(&client, sizeof(struct clientData), 1, cfPtr);		//讀取(fread)cfptr的檔案到result 
+
+        
+         if (client.id != 0&&result!=0) {   												//若學號不等於0 
+            printf("%-6d%-12s%-10d%-10d%12.2f\n", 								//則列印出檔案內容 
+               client.id, client.name, 
+               client.math, client.computer,client.avg);
+               stu[i].id=client.id;
+            	strcpy(stu[i].name,client.name);
+               stu[i].math=client.math;
+               stu[i].computer=client.computer;
+               stu[i].avg=client.avg;
+               i++;
+         } 
+      } 
+      fclose(cfPtr); 
+   } 
+   bubble(stu,i);
+   for(j=0;j<i;++j)
+    printf("%-6d%-16s%-11d%-8d%10.2f\n",stu[j].id,stu[j].name,stu[j].math,stu[j].computer,stu[j].avg);
+    printf("\n");
+}
+
+
+void bubble(CLIENT *stu,int num)
+{
+    int pass, i, j;
+    for (pass = 1; pass < num; ++pass) {
+
+        // loop to control number of comparisons per pass ??
+        for (i = 0; i < num - 1; ++i) {
+            // compare adjacent elements and swap them if first?
+        // element is greater than second element ? ? ? ? ??
+            if (stu[i].avg < stu[i + 1].avg) {
+                CLIENT temp;
+                temp=stu[i];
+                stu[i]=stu[i+1];
+                stu[i+1]=temp;
+
+            }
+        }
+    }
+}
 
