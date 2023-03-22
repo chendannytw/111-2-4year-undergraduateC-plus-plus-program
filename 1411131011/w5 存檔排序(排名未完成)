@@ -1,0 +1,125 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#include <string.h>
+
+void blank(FILE *cfPtr); //空白 
+void write(FILE *cfPtr); //寫入 
+void read(FILE *cfPtr);  //讀取 
+
+
+typedef struct{
+    unsigned int StuNum;
+    char Name[20];
+    int math; 
+	int computer;
+    float average;
+    int rank;
+}stuData;
+
+
+void bubble(stuData *studAvg,int num);
+
+int main(void){
+    FILE *cfPtr;            // 建立檔案指標 
+    blank(cfPtr);
+    write(cfPtr);
+    read(cfPtr);
+}
+
+void blank(FILE *cfPtr){
+    int i;
+    if((cfPtr = fopen("accounts1.dat","wb"))==NULL){     //開啟檔案 
+        puts("File could not be opened.");
+    }
+    else{
+        stuData blankstudent = {0,"",0,0,0.0};
+
+        for(i = 1 ; i <= 10 ; i++){
+            fwrite(&blankstudent, sizeof(stuData),1,cfPtr);   //存取檔案
+        }
+    }
+    fclose(cfPtr);                                            //關閉檔案 
+}
+
+void write(FILE *cfPtr){
+    if((cfPtr = fopen("accounts1.dat","rb+")) == NULL){      //開啟檔案 
+        puts("File could not be opened.");
+    }
+    else{
+        stuData student = {0,"",0,0,0.0};
+
+        printf("%s","Enter studentNum(1 to 100, 0 to end input) : ");   //存取檔案
+
+        scanf("%d",&student.StuNum);
+
+        while(student.StuNum != 0 ){
+            printf("%s","\nEnter name ,math, computer : ");
+            fscanf(stdin,"%19s%3d%3d",student.Name,&student.math,&student.computer);           
+            student.average=(double)(student.math+student.computer)/2;
+            fseek(cfPtr,(student.StuNum-1)*sizeof(stuData),SEEK_SET);
+            fwrite(&student,sizeof(stuData),1,cfPtr);                    
+            printf("%s","\nEnter student number : ");
+            scanf("%d",&student.StuNum);
+        }
+        fclose(cfPtr);                                                //關閉檔案 
+    }                        
+}
+
+void read(FILE *cfPtr){
+    
+    stuData stuAvg[10];  //************************新增結構陣列 
+    int i=0,j;
+    if((cfPtr = fopen("accounts1.dat","rb")) == NULL){                  //開啟檔案
+        puts("File could not be opened.");
+    }
+    else{
+        printf("%-6s%-10s%-10s%-10s%-10s\n","Num","Name","math","computer","average");
+
+        while(!feof(cfPtr)){
+            stuData student = {0,"",0,0,0.0};
+
+            int result = fread(&student,sizeof(stuData),1,cfPtr);
+
+            if(result != 0 && student.StuNum != 0 ){
+                printf("%-6d%-10s%-10d%-10d%-10.2f\n",student.StuNum,student.Name,student.math,student.computer,student.average);
+                stuAvg[i].StuNum=student.StuNum;
+                strcpy(stuAvg[i].Name,student.Name);
+                stuAvg[i].math=student.math;
+                stuAvg[i].computer=student.computer;
+                stuAvg[i].average=student.average;
+                i++;
+            }
+        }
+        fclose(cfPtr);
+    }
+     printf("\n");
+    
+    for(j=0;j<i;++j)
+        printf("%-6d%-10s%-10d%-10d%-10.2f\n",stuAvg[j].StuNum,stuAvg[j].Name,stuAvg[j].math,stuAvg[j].computer,stuAvg[j].average);
+    printf("\n");
+    bubble(stuAvg,i);
+    
+    //排序完成後，將名次放入結構陣列每一個學生的名次欄中
+    for(j=0;j<i;++j)
+        printf("%-6d%-10s%-10d%-10d%-10.2f\n",stuAvg[j].StuNum,stuAvg[j].Name,stuAvg[j].math,stuAvg[j].computer,stuAvg[j].average);
+}
+
+void bubble(stuData *studAvg,int num)
+{
+    int pass, i, j;
+    for (pass = 1; pass < num; ++pass) {
+
+        // loop to control number of comparisons per pass ??
+        for (i = 0; i < num - 1; ++i) {
+            // compare adjacent elements and swap them if first?
+        // element is greater than second element ? ? ? ? ??
+            if (studAvg[i].average < studAvg[i + 1].average) {
+                stuData temp;
+                temp=studAvg[i];
+                studAvg[i]=studAvg[i+1];
+                studAvg[i+1]=temp;
+            }
+        }
+    }
+}
