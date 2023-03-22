@@ -9,10 +9,13 @@ typedef struct student {
           int computer;
 
           double average; /*平均成績
+          int rank;   /*名次
 
 }STU;
 
-建立一個結構陣列，請使用自行寫入10筆資料至該結構陣列中，將結構內容根據總成績由大到小排序並且印出排序前與排序後的結果。需有排序副程式、報表列印副程式。
+建立一個結構陣列，請使用自行寫入10筆資料至該結構陣列中，
+將結構內容根據總成績由大到小排序並且印出排序前與排序後的結果，將名次放入每一位學生的名次欄位之中。
+需有排序副程式、報表列印副程式。
 
 
 
@@ -116,6 +119,8 @@ void read(FILE *cfPtr){
         printf("%-6d%-19s%-3d%-3d%-10.2f\n",stuArr[j].StuNum,stuArr[j].Name,stuArr[j].math,stuArr[j].computer,stuArr[j].average);
     printf("\n");
     bubble(stuArr,i);
+    
+    //排序完成後，將名次放入結構陣列每一個學生的名次欄中
     for(j=0;j<i;++j)
         printf("%-6d%-19s%-3d%-3d%-10.2f\n",stuArr[j].StuNum,stuArr[j].Name,stuArr[j].math,stuArr[j].computer,stuArr[j].average);
     
