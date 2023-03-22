@@ -77,15 +77,15 @@ void read(FILE *cfPtr){
         puts("File could not be opened.");
     }
     else{
-        printf("%-6s%-16s%-10s%-10s%-10s%-10s\n","Num","Name","math","computer","average","rank");
+        printf("%-6s%-12s%-10s%-12s%-10s%-10s\n","Num","Name","math","computer","average","rank");
 
         while(!feof(cfPtr)){
-            stuData student = {0,"",0,0,0.0};
+            stuData student = {0,"",0,0,0.0,0};
 
             int result = fread(&student,sizeof(stuData),1,cfPtr);
 
             if(result != 0 && student.StuNum != 0 ){
-                printf("%-6d%-19s%-3d%-3d%-10.2f\n",student.StuNum,student.Name,student.math,student.computer,student.average);
+                printf("%-6d%-12s%-10d%-12d%-10.2f\n",student.StuNum,student.Name,student.math,student.computer,student.average);
                 stuArr[i].StuNum=student.StuNum;
                 strcpy(stuArr[i].Name,student.Name);
                 stuArr[i].math=student.math;
@@ -99,16 +99,16 @@ void read(FILE *cfPtr){
      printf("\n");
     
     for(j=0;j<i;++j)
-        printf("%-6d%-19s%-3d%-3d%-10.2f\n",stuArr[j].StuNum,stuArr[j].Name,stuArr[j].math,stuArr[j].computer,stuArr[j].average);
+        printf("%-6d%-12s%-10d%-12d%-10.2f\n",stuArr[j].StuNum,stuArr[j].Name,stuArr[j].math,stuArr[j].computer,stuArr[j].average);
     printf("\n");
     bubble(stuArr,i);
     
     //排序完成後，將名次放入結構陣列每一個學生的名次欄中
     for(j=0;j<i;++j){
-    	stuArr[j].rank=j+1;
-	}
+    			stuArr[j].rank=j+1;
+		}
     for(j=0;j<i;++j)
-        printf("%-6d%-19s%-3d%-3d%-10.2f%-5d\n",stuArr[j].StuNum,stuArr[j].Name,stuArr[j].math,stuArr[j].computer,stuArr[j].average,stuArr[j].rank);
+        printf("%-6d%-12s%-10d%-12d%-10.2f%-5d\n",stuArr[j].StuNum,stuArr[j].Name,stuArr[j].math,stuArr[j].computer,stuArr[j].average,stuArr[j].rank);
     
 }
 
@@ -119,8 +119,8 @@ void bubble(stuData *studArr,int num)
 
         // loop to control number of comparisons per pass ??
         for (i = 0; i < num - 1; ++i) {
-            // compare adjacent elements and swap them if first?
-        // element is greater than second element ? ? ? ? ??
+            // compare adjacent elements and swap them if first
+        // element is greater than second element 
             if (studArr[i].average < studArr[i + 1].average) {
                 stuData temp;
                 temp=studArr[i];
