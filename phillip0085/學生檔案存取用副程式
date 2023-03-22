@@ -75,7 +75,7 @@ void write(FILE *cfPtr){
       // user enters information, which is copied into file
       while (client.StuNum != 0) { 
          // user enters last name, first name and balance
-         printf("%s", "Name, MATH, COMPUTER: ");
+         printf("%s", "Name, Math, Computer: ");
         
          // set record lastName, firstName and balance value
          fscanf(stdin, "%14s%9d%9d", client.Name, 
@@ -110,7 +110,7 @@ void read(FILE *cfPtr){
       puts("File could not be opened.");
    } 
    else { 
-      printf("%-6s%-16s%-11s%10s%10s\n", "StuNum", " Name",
+      printf("%-6s%-16s%-11s%8s%11s\n", "StuNum", " Name",
          "math", "computer","avg");
 
       // read all records from file (until eof)
