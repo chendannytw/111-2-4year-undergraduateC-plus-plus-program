@@ -76,12 +76,12 @@ int main(void)
         scanf("%d", &client.StuNum);
 
         // user enters information, which is copied into file
-        while (client.StuNum != 0) {
+        while (client.StuNum != 0) {                               
             // user enters last name, first name and balance
-            printf("%s", "Enter Name, math, computer: ");
+            printf("%s", "Enter Name, math, computer: ");               //當學號不等於0會印出  
 
             // set record lastName, firstName and balance value
-           fscanf(stdin, "%14s%9d%9d", client.Name,
+           fscanf(stdin, "%14s%9d%9d", client.Name,                     //輸入名字、數學、電腦  
                &client.math,&client.computer);
                client.average=(client.math+client.computer)/2;
 
@@ -105,18 +105,18 @@ int main(void)
 
 
     // fopen opens the file; exits if file cannot be opened
-    if ((cfPtr = fopen("accounts.dat", "rb")) == NULL) {
+    if ((cfPtr = fopen("accounts.dat", "rb")) == NULL) {         //// "r"=read(讀取)模式, "b"=binary(隨機存取檔)  
         puts("File could not be opened.");
     }
     else {
         //printf("%-6s%-16s%-5s%-7s%10s\n", "Acct", "Name","Math","Computer", "Average");
 
         // read all records from file (until eof)
-        while (!feof(cfPtr)) {
+        while (!feof(cfPtr)) {                                    //feof：end of file ->檔案結尾，當檔案還沒結尾  
             // create clientData with default information
             struct stuData client = { 0, "",0,0, 0.0 };
 
-            int result = fread(&client, sizeof(struct stuData), 1, cfPtr);
+            int result = fread(&client, sizeof(struct stuData), 1, cfPtr);       //讀取(fread)cfptr的檔案到result  
 
             // display record
             if (client.StuNum != 0) {   //印出讀取該筆(結構)資料的結果 
@@ -134,16 +134,16 @@ int main(void)
 void read(FILE *cfPtr){
      stu strArr[100];   //新增結構陣列
      int i=0,j;
-if((cfPtr = fopen("accounts.dat","rb"))==NULL){  //開啟檔案
+if((cfPtr = fopen("accounts.dat","rb"))==NULL){     //開啟檔案，"r"=read(讀取)模式, "b"=binary(隨機存取檔)  
    puts("File could not be opened.");
 }
 else{
      printf("%-6s%-16s%-5s%-9s%10s\n", "Acct", "Name", "Math   ","Computer", "Average");
      while(!feof(cfPtr)){
-          stu client = { 0, "",0,0, 0.0};
-          int result = fread(&client,sizeof(stu),1,cfPtr);
+          stu client = { 0, "",0,0, 0.0};                        //建立空的結構變數 
+          int result = fread(&client,sizeof(stu),1,cfPtr);       //讀取(fread)cfptr的檔案到result 
 
-     if(result != 0 && client.StuNum != 0){
+     if(result != 0 && client.StuNum != 0){                      //如果result和學號都不為零則 
         printf("%-6d%-16s%-11d%-8d%10.2f\n",client.StuNum, client.Name,client.math,client.computer, client.average);
 
         strArr[i].StuNum=client.StuNum;
@@ -179,5 +179,3 @@ void bubble(stu *studArr,int num){
 }
 }
 }
-
-
