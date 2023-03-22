@@ -1,5 +1,4 @@
 
-#include <stdio.h>
 
 // clientData structure definition               
 struct studata {                              
@@ -60,7 +59,7 @@ int main(void)
       // user enters information, which is copied into file
       while (client.StuNum != 0) { 
          // user enters last name, first name and balance
-         printf("%s", "Name, MATH, COMPUTER: ");
+         printf("%s", "Name, Math, Computer: ");
         
          // set record lastName, firstName and balance value
          fscanf(stdin, "%14s%9d%9d", client.Name, 
@@ -95,8 +94,9 @@ int main(void)
       puts("File could not be opened.");
    } 
    else { 
-      printf("%-6s%-16s%-11s%10s%10s\n", "StuNum", " Name",
-         "math", "computer","avg");
+   	printf("\n");
+      printf("%-6s%-16s%-11s%8s%11s\n", "StuNum", " Name",
+         "Math", "Computer","Avg");
 
       // read all records from file (until eof)
       while (!feof(cfPtr)) { 
@@ -107,7 +107,8 @@ int main(void)
 
          // display record
          if (result!=0 && client.StuNum != 0) {   //印出讀取該筆(結構)資料的結果 
-            printf("%-6d%-16s%-11d%-11d%10.2f\n", 
+ 
+			printf("%-6d%-16s%-11d%-11d%10.2f\n", 
                client.StuNum, client.Name, 
                client.math,client.computer, client.average);
          } 
