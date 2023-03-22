@@ -1,0 +1,15 @@
+建立一個結構，成員定義如下:
+
+typedef struct student {
+
+          char name[20];
+
+          int math;
+
+          int computer;
+
+          double average; /*平均成績
+
+}STU;
+
+建立一個結構陣列，請使用自行寫入10筆資料至該結構陣列中，將結構內容根據總成績由大到小排序並且印出排序前與排序後的結果。需有排序副程式、報表列印副程式。
