@@ -61,8 +61,8 @@ void read(FILE *cfptr){
 			studata student= {0,"",0,0, 0.0};
 			int result=fread(&student,sizeof(studata),1,cfptr);
 			if(result!=0 && student.stunum !=0){
+				printf("%-7d%-6s%-10d%-6d% 8.2f%\n",student.stunum,student.name,student.math,student.computer,student.average);
 				stu[i]=student;
-				printf("%-7d%-6s%-10d%-6d% 8.2f%\n",stu[i].stunum,stu[i].name,stu[i].math,stu[i].computer,stu[i].average);
 				i++;
 			}				
 		}
@@ -70,9 +70,9 @@ void read(FILE *cfptr){
 	fclose(cfptr);
 	int x;
 	bobb(stu,i);
-	printf("\n%-6s%-6s%-6s%10s%10s%\n","Num", "Name","math","computer","average");	
+	printf("\n%-6s%-6s%-6s%10s%10s%6s%\n","Num", "Name","math","computer","average","rank");	
 	for(x=0;x<i;x++)
-		printf("%-7d%-6s%-10d%-6d% 8.2f%\n",stu[x].stunum,stu[x].name,stu[x].math,stu[x].computer,stu[x].average);				
+		printf("%-7d%-6s%-10d%-6d% 8.2f%6d%\n",stu[x].stunum,stu[x].name,stu[x].math,stu[x].computer,stu[x].average,x+1);				
 }
 void bobb(studata stu[100],int size){
 	int pass,j;
