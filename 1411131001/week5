@@ -58,7 +58,7 @@ int main(void)
     else {
 
         // create clientData with default information
-        stu client = { 0, "",0,0, 0.0 }, blankClient = { 0, "", 0,0, 0.0 };         //宣告一個結構stu的結構
+        stu client = { 0, "",0,0, 0.0 }, blankClient = { 0, "", 0,0, 0.0 };         //建立空的結構變數
 
 
 
