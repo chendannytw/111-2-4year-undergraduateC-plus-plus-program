@@ -1,0 +1,137 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct student
+{
+    unsigned int StuNum;
+    char Name[20];
+    int math, com;
+    double average;
+    int rank;
+};
+
+typedef struct student StuData;
+
+void blank(FILE* cfPtr);
+void write(FILE* cfPtr);
+void read(FILE* cfPtr);
+
+void bubble(StuData *studArr,int num);
+
+int main(void)
+{
+    FILE* cfPtr;
+    blank(cfPtr);
+    write(cfPtr);
+    read(cfPtr);
+}
+
+void blank(FILE* cfPtr)
+{
+    if ((cfPtr = fopen("accounts.dat","wb")) == NULL)
+    {
+        puts("File could not be opened.");
+    }
+    else
+    {
+        StuData blankStu = { 0,"",0,0,0.0 };
+        for (unsigned int i = 1; i <= 100; i++)
+        {
+            fwrite(&blankStu, sizeof(StuData), 1, cfPtr);
+        }
+        fclose(cfPtr);
+    }
+}
+
+void write(FILE* cfPtr)
+{
+    if ((cfPtr = fopen("accounts.dat", "rb+")) == NULL)
+    {
+        puts("File could not be opened.");
+    }
+    else
+    {
+        StuData student = { 0,"",0,0,0.0 };
+        printf("%s", "Enter student number""(1 to 100, 0 to end input): ");
+        scanf("%d", &student.StuNum);
+
+        while (student.StuNum != 0)
+        {
+           printf("%s", "Enter name, math, com: ");
+            fscanf(stdin, "%14s%d%d", student.Name, &student.math, &student.com);
+            student.average = (double) (student.math + student.com) / 2;
+            fseek(cfPtr, (student.StuNum - 1) * sizeof(StuData), SEEK_SET);
+            fwrite(&student, sizeof(StuData), 1, cfPtr);
+            printf("%s", "\nEnter student number: ");
+            scanf("%d", &student.StuNum);
+        }
+        fclose(cfPtr);
+    }
+}
+
+void read(FILE* cfPtr)
+{
+	StuData stuArr[100];
+	int i=0, j;
+    if ((cfPtr = fopen("accounts.dat", "rb")) == NULL)
+    {
+        puts("File could not be opened.");
+    }
+    else
+    {
+        printf("%-6s%-8s%-12s%-12s%-6s%8s\n", "Num", "Name", "Math", "Com", "Average","Rank");
+
+        while (!feof(cfPtr))
+        {
+            StuData student = { 0,"",0,0,0.0 };
+
+            int result = fread(&student, sizeof(StuData), 1, cfPtr);
+
+            if (result != 0 && student.StuNum != 0)
+            {
+                printf("%-6u%-8s%-12d%-12d%-10.2f\n", student.StuNum, student.Name, student.math, student.com, student.average);
+                stuArr[i].StuNum=student.StuNum;
+                strcpy(stuArr[i].Name,student.Name);
+                stuArr[i].math=student.math;
+                stuArr[i].com=student.com;
+                stuArr[i].average=student.average;
+                i++;
+            }
+        }
+        fclose(cfPtr);
+    }
+     printf("\n");
+    
+    for(j=0;j<i;++j)
+    {
+    	printf("%-6u%-8s%-12d%-12d%-10.2f\n",stuArr[j].StuNum,stuArr[j].Name,stuArr[j].math,stuArr[j].com,stuArr[j].average);
+	}
+    printf("\n");
+    bubble(stuArr,i);
+    
+    for(j=0;j<i;++j)
+    {
+    	stuArr[j].rank=j+1;
+    	printf("%-6u%-8s%-12d%-12d%-10.2f%3d\n",stuArr[j].StuNum,stuArr[j].Name,stuArr[j].math,stuArr[j].com,stuArr[j].average,stuArr[j].rank);
+	}
+}
+
+void bubble(StuData *studArr,int num)
+{
+    int pass, i, j;
+    for (pass = 1; pass < num; ++pass) 
+	{
+        for (i = 0; i < num - 1; ++i) 
+		{
+            if (studArr[i].average < studArr[i + 1].average) 
+			{
+                StuData temp;
+                temp=studArr[i];
+                studArr[i]=studArr[i+1];
+                studArr[i+1]=temp;
+
+            }
+        }
+    }
+}
