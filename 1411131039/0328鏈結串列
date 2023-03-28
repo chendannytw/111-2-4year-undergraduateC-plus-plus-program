@@ -1,0 +1,78 @@
+#include <stdio.h>
+#include <stdlib.h> 
+
+struct Listnode{
+	char data;
+	struct Listnode *nextptr;
+};
+typedef struct Listnode listnode;
+typedef listnode *listnodeptr;
+void insert(listnodeptr *sptr,char value);
+char delete(listnodeptr *sptr,char value);
+int isEmpty(listnodeptr sptr);
+void printlist(listnodeptr currentptr);
+void instructions(void);
+
+int main(void){
+	listnodeptr startptr=NULL;
+	char item='\0';
+	instructions();
+	printf("%s","?");
+	int choice=0;
+	scanf("%d",&choice);
+	while(choice !=3){
+		switch(choice){
+			case 1:
+				printf("Enter a character:");
+				scnaf("\n%c",&item);
+				insert(&startptr,item);
+				printflist(startptr);
+			case 2:
+				if(!isEmpty(startptr)){
+					printf("Enter character to be deleted:");
+					scanf("\n%c",&item);
+					if(delete(%startptr,item)){
+						printf("%c deleted.\n",item);
+					}
+					else
+						printf("%c not found.\n\n",item);					
+				}
+				else
+					puts("List is empty.\n");
+				break;
+			default:
+				puts("Invalid choice.\n");
+				instructions();
+				break; 
+		}
+		printf("%s","?");
+		scanf("%d",&choice);
+	}
+	puts("End of run.");
+}
+void instructions(void){
+	puts("Enter your choice:\n 1 to insert an element into the list.\n 2 to delete an element from the list.\n 3 to End.");
+}
+void insert(listnodeptr *sptr, char value) {
+	listnodeptr newPtr = malloc(sizeof(listnode)); 
+	if (newPtr != NULL) { 
+		newPtr->data = value; 
+		newPtr->nextptr = NULL; 
+		listnodeptr previousPtr = NULL; 
+		listnodeptr currentPtr = *sPtr;
+		while (currentPtr != NULL && value> currentPtr->data) {
+			previousPtr = currentPtr; 
+			currentPtr = currentPtr->nextptr;
+		}
+		if (previousPtr == NULL) {
+			newPtr->nextPtr = *sptr; 
+			*sPtr = newptr;
+		}
+		else {
+			previousPtr->nextptr = newPtr;
+			newPtr->nextptr = currentPtr;
+		}
+	}
+	else 
+		printf("%c not inserted. No memory available.\n", value);
+}
