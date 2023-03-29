@@ -167,8 +167,6 @@ int isEmpty(ListNodePtr sPtr)
    return sPtr == NULL;
 } 
 
-
-
 // print the list
 void printList(ListNodePtr currentPtr)
 { 
@@ -184,7 +182,6 @@ void printList(ListNodePtr currentPtr)
          printf("%c --> ", currentPtr->data);
          currentPtr = currentPtr->nextPtr;   
       } 
-
       puts("NULL\n");
    } 
 } 
