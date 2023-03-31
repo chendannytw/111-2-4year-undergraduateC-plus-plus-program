@@ -190,3 +190,99 @@ void printList(ListNodePtr currentPtr)
       puts("NULL\n");
    } 
 } 
+
+
+
+
+簡化版：
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>                   
+struct listNode {   
+   int id;                                   
+   char name[20];
+   struct listNode *nextPtr;
+}; 
+
+typedef struct listNode ListNode;
+typedef ListNode *ListNodePtr;
+
+void insert(ListNodePtr *sPtr,int id, char name[20]);
+void printList(ListNodePtr currentPtr);
+
+int main(void)
+{ 
+   ListNodePtr startPtr = NULL; 
+   char name[20]; 
+   int id=100;
+   
+while(id!='0')
+{
+	printf("%s", "Enter id、name: ");
+    scanf("\n%d%s", &id,&name);
+    insert(&startPtr,id,name);
+    printList(startPtr);
+}
+
+    
+
+
+   puts("End of run.");
+} 
+
+void insert(ListNodePtr *sPtr,int id, char name[20])
+{ 
+   ListNodePtr newPtr = malloc(sizeof(ListNode)); 
+
+   if (newPtr != NULL) { 
+      newPtr->id = id;
+	  strcpy(newPtr->name,name); 
+      newPtr->nextPtr = NULL;
+
+      ListNodePtr previousPtr = NULL;
+      ListNodePtr currentPtr = *sPtr;
+     
+      while (currentPtr != NULL && name > currentPtr->name) {
+         previousPtr = currentPtr;                
+         currentPtr = currentPtr->nextPtr; 
+      }                                          
+
+      if (previousPtr == NULL) { 
+         newPtr->nextPtr = *sPtr;
+         *sPtr = newPtr;
+      } 
+      else {
+         previousPtr->nextPtr = newPtr;
+         newPtr->nextPtr = currentPtr;
+      } 
+   } 
+   else {
+      printf("%c not inserted. No memory available.\n", name);
+   } 
+} 
+
+
+int isEmpty(ListNodePtr sPtr)
+{ 
+   return sPtr == NULL;
+} 
+
+ 
+void printList(ListNodePtr currentPtr)
+{ 
+   
+   if (isEmpty(currentPtr)) {
+      puts("List is empty.\n");
+   } 
+   else { 
+      puts("The list is:");
+
+      while (currentPtr != NULL) { 
+         printf("%d   %s -> ", currentPtr->id,currentPtr->name);
+         currentPtr = currentPtr->nextPtr;   
+      } 
+
+      puts("NULL\n");
+   } 
+} 
