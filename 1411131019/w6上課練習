@@ -196,9 +196,11 @@ void printList(ListNodePtr currentPtr)
 
 簡化版：
 
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>                   
+#include <string.h> 
+                  
 struct listNode {   
    int id;                                   
    char name[20];
@@ -225,9 +227,6 @@ while(id!='0')
     printList(startPtr);
 }
 
-    
-
-
    puts("End of run.");
 } 
 
@@ -243,7 +242,7 @@ void insert(ListNodePtr *sPtr,int id, char name[20])
       ListNodePtr previousPtr = NULL;
       ListNodePtr currentPtr = *sPtr;
      
-      while (currentPtr != NULL && name > currentPtr->name) {
+      while (currentPtr != NULL && id > currentPtr->id) {
          previousPtr = currentPtr;                
          currentPtr = currentPtr->nextPtr; 
       }                                          
