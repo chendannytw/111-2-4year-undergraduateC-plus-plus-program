@@ -1,0 +1,81 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct listNode {
+	int ID;
+	int math;
+	int com;
+	struct listNode *nextPtr;
+}; 
+
+typedef struct listNode ListNode;
+typedef ListNode *ListNodePtr;
+
+void insert(ListNodePtr *sPtr, int id, int math, int computer);
+void printList(ListNodePtr currentPtr);
+
+int main(void) {
+	ListNodePtr startPtr = NULL;
+	int item, math, computer;
+	while(item!='0') {
+		printf("%s", "請輸入學號:");
+		scanf("\n%d", &item);
+		printf("%s", "請輸入數學成績:");
+		scanf("\n%d", &math);
+		printf("%s", "請輸入計概成績:");
+		scanf("\n%d", &computer);
+		insert(&startPtr, item, math, computer);
+		printList(startPtr);
+	}
+	puts("End of run.");
+}
+
+void insert(ListNodePtr *sPtr, int id, int math, int computer) {
+	ListNodePtr newPtr = malloc(sizeof(ListNode));
+	
+	if (newPtr != NULL) {
+		newPtr->ID = id;
+	    newPtr->math = math;
+	    newPtr->com = computer;
+		newPtr->nextPtr = NULL;
+		
+		ListNodePtr previousPtr = NULL;
+		ListNodePtr currentPtr = *sPtr;
+		
+		while (currentPtr != NULL && id > currentPtr->ID) {
+			previousPtr = currentPtr;
+			currentPtr = currentPtr->nextPtr;
+		}
+		
+		if (previousPtr == NULL) {
+			newPtr->nextPtr = *sPtr;
+			*sPtr = newPtr;
+		}
+		else {
+			previousPtr->nextPtr = newPtr;
+			newPtr->nextPtr = currentPtr;
+		}
+	}
+    else {
+    	printf("%c not inserted. No memory available.\n", id);
+	}
+}
+
+int isEmpty(ListNodePtr sPtr) {
+	return sPtr == NULL;
+}
+
+void printfList(ListNodePtr currentPtr) {
+	if (isEmpty(currentPtr)) {
+		puts("List is empty.\n");
+	}
+	else {
+		puts("The list is:");
+		
+		while (currentPtr != NULL) {
+			printf("%d %d %d --> ", currentPtr->ID, currentPtr->math, currentPtr->com);
+			currentPtr = currentPtr->nextPtr;
+		}
+		puts("NULL\n");
+	}
+}
