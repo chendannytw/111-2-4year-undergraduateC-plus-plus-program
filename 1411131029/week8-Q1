@@ -23,7 +23,7 @@ int main(void)
 	    scanf("\n%d", &item);
 	    printf("%s", "輸入數學成績: ");
 	    scanf("\n%d", &math);
-	    printf("%s", "輸入計概成績: ");
+	    printf("%s", "輸入電腦成績: ");
 	    scanf("\n%d", &computer);
 	    insert(&startPtr, item, math, computer); 
 	    printList(startPtr);
