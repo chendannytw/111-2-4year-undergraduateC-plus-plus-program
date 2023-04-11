@@ -1,0 +1,136 @@
+#include <stdio.h>
+#include <stdlib.h> 
+
+struct Listnode{
+	int stunum;
+	int math;
+	int computer; 
+	struct Data *nextptr;
+};
+typedef struct Listnode listnode;
+typedef listnode *listnodeptr;
+void insert(listnodeptr *sptr,int value,int math,int computer);
+int delete(listnodeptr *sptr,int value);
+int isEmpty(listnodeptr sptr);
+void printlist(listnodeptr currentptr);
+void instructions(void);
+
+int main(void){
+	listnodeptr startptr=NULL;
+	int item,math,computer;
+	instructions();
+	printf("%s","?");
+	int choice=0;
+	scanf("%d",&choice);
+	while(choice !=3){
+		switch(choice){
+			case 1:
+				printf("Enter a ID:");
+				scanf("\n%d",&item);
+				printf("Enter a math:");
+				scanf("\n%d",&math);
+				printf("Enter a computer:");
+				scanf("\n%d",&computer);
+				insert(&startptr,item,math,computer);
+				printlist(startptr);
+				break;
+			case 2:
+				if(!isEmpty(startptr)){
+					printf("Enter character to be deleted:");
+					scanf("\n%d",&item);
+					if(item==delete(&startptr,item)){
+						printf("%d deleted.\n",item);
+					}
+					else
+						printf("%d not found.\n\n",item);					
+				}
+				else
+					puts("List is empty.\n");
+				break;
+			default:
+				puts("Invalid choice.\n");
+				instructions();
+				break; 
+		}
+		printf("%s","?");
+		scanf("%d",&choice);
+	}
+	puts("End of run.");
+}
+void instructions(void){
+	puts("Enter your choice:\n 1 to insert an element into the list.\n 2 to delete an element from the list.\n 3 to End.");
+}
+void insert(listnodeptr *sptr, int value,int math,int computer) {
+	listnodeptr newPtr = malloc(sizeof(listnode)); 
+	if (newPtr != NULL) { 
+		newPtr->stunum = value; 
+		newPtr->math = math; 
+		newPtr->computer =computer; 
+		newPtr->nextptr = NULL; 
+		listnodeptr previousPtr = NULL; 
+		listnodeptr currentPtr = *sptr;
+		while (currentPtr != NULL && value> currentPtr->stunum) {
+			previousPtr = currentPtr; 
+			currentPtr = currentPtr->nextptr;
+		}
+		if (previousPtr == NULL) {
+			newPtr->nextptr = *sptr; 
+			*sptr = newPtr;
+		}
+		else {
+			previousPtr->nextptr = newPtr;
+			newPtr->nextptr = currentPtr;
+		}
+	}
+	else 
+		printf("%c not inserted. No memory available.\n", value);
+}
+
+int delete(listnodeptr *sPtr, int value){ 
+   
+   if (value == (*sPtr)->stunum) { 
+      listnodeptr tempPtr = *sPtr;
+      *sPtr = (*sPtr)->nextptr; 
+      free(tempPtr); 
+      return value;
+   } 
+   else { 
+      listnodeptr previousPtr = *sPtr;
+      listnodeptr currentPtr = (*sPtr)->nextptr;
+
+      
+      while (currentPtr != NULL && currentPtr->stunum != value) { 
+         previousPtr = currentPtr; 
+         currentPtr = currentPtr->nextptr; 
+      } 
+
+      if (currentPtr != NULL) { 
+         listnodeptr tempPtr = currentPtr;
+         previousPtr->nextptr = currentPtr->nextptr;
+         free(tempPtr);
+         return value;
+     }
+      else 
+      	return 0;
+    } 
+
+
+} 
+
+int isEmpty(listnodeptr sPtr){ 
+   return sPtr == NULL;
+} 
+
+void printlist(listnodeptr currentPtr){ 
+   if (isEmpty(currentPtr)) {
+      puts("List is empty.\n");
+   } 
+   else { 
+      puts("The list is:");
+      while (currentPtr != NULL) { 
+         printf("%d %d %d --> ", currentPtr->stunum,currentPtr->math,currentPtr->computer);
+         currentPtr = currentPtr->nextptr;   
+      } 
+      puts("NULL\n");
+   } 
+} 
