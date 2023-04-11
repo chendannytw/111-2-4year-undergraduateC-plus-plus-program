@@ -130,7 +130,7 @@ char delete(ListNodePtr *sPtr, char value)
    if (value == (*sPtr)->ID) { 
       ListNodePtr tempPtr = *sPtr; // hold onto node being removed
       *sPtr = (*sPtr)->nextPtr; // de-thread the node
-      free(tempPtr); // free the de-threaded node
+      free(tempPtr); // free the de-threaded node/*釋放tempPtr指向的節點*/
       return value;
    } 
    else { 
