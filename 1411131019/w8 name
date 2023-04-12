@@ -20,7 +20,7 @@ void insert(ListNodePtr *sPtr,int id,char name[20],int math,int computer,float a
 char delete(ListNodePtr *sPtr, int value);
 //int isEmpty(ListNodePtr sPtr);
 void printList(ListNodePtr currentPtr);
-//void instructions(void);
+void instructions();
 
 int main(void)
 { 
