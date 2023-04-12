@@ -1,1 +1,3 @@
-題目: 請修改課本pp.655-661程式碼，加入學生學號、數學、電腦、平均成績等欄位，輸入資料後放入鏈結串列中並印出結果，並且能夠選擇刪除某一筆資料。
+題目: 請根據以下超連結修改課本pp.655-661程式碼，加入學生學號、數學、電腦、平均成績等欄位，輸入資料後放入鏈結串列中並印出結果，並且能夠選擇刪除某一筆資料。
+
+https://github.com/chendannytw/111-2-4year-undergraduateC-plus-plus-program/blob/e3d4c4df77bcd1ba24b1870098f269819f090223/week/week7/textbook%20program
