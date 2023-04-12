@@ -49,8 +49,8 @@ int main(void)
             scanf("\n%d", &math);
              printf("%s", "請輸入電腦: ");
             scanf("\n%d", &com);
-            avg=(math+com)/2;
-            printf("%s %d\n", "平均成績: ",avg);
+            avg=(float)(math+com)/2;
+            
             insert(&startPtr,ID,math,com,avg); // insert item in list
             printList(startPtr);
             break;
