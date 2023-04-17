@@ -21,7 +21,7 @@ void printList(ListNodePtr currentPtr);
 int main(void)
 { 
    ListNodePtr startPtr = NULL; // initially there are no nodes
-   int item,math,com; // char entered by user
+   int item,math,com,a; // char entered by user
 
    //instructions(); // display the menu
   /* printf("%s", "? ");
@@ -68,9 +68,11 @@ int main(void)
       scanf("%u", &choice);
    } 
 */
-
-while(item!='0')
+	printf("%s","another num=run or 2=stop\n");
+	scanf("\n%d", &a);
+while(a!=2)
 {
+	
 	printf("%s", "Enter ID: ");
     scanf("\n%d", &item);
     printf("%s", "Enter math: ");
@@ -79,8 +81,9 @@ while(item!='0')
     scanf("\n%d", &com);
     insert(&startPtr, item,math,com); // insert item in list
     printList(startPtr);
-}
-
+	printf("%s","1=run or 2=stop\n");
+	scanf("\n%d", &a);
+}	
     
 
 
