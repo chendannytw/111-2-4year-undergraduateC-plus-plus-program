@@ -1,4 +1,4 @@
-/*題目: 請根據以下超連結修改課本pp.655-661程式碼，加入姓名、學生學號、數學、電腦、平均成績等欄位，輸入資料後放入鏈結串列中並印出結果，並且能夠選擇刪除某一筆資料。*/
+/*題目: 請根據以下超連結修改課本pp.655-661程式碼，加入學生學號、數學、電腦、平均成績等欄位，輸入資料後放入鏈結串列中並印出結果，並且能夠選擇刪除某一筆資料。*/
 
 // Fig. 12.3: fig12_03.c
 // Inserting and deleting nodes in a list
@@ -99,7 +99,7 @@ void insert(ListNodePtr *sPtr, char name[], int id,int math,int computer,int avg
 
    if (newPtr != NULL) { // is space available/*新節點配置成功 */
       strcpy(newPtr->name, name);
-      newPtr->ID = id; // place value in node
+	  newPtr->ID = id; // place value in node
       newPtr->math = math;
       newPtr->com = computer;
       newPtr->avg = avg;
@@ -133,21 +133,21 @@ void insert(ListNodePtr *sPtr, char name[], int id,int math,int computer,int avg
 
 // delete a list element
 
-char delete(ListNodePtr *sPtr, int value)
+char delete(ListNodePtr *sPtr, int id)
 { 
    // delete first node if a match is found
-   if (value == (*sPtr)->ID) { 
+   if (id == (*sPtr)->ID) { 
       ListNodePtr tempPtr = *sPtr; // hold onto node being removed
       *sPtr = (*sPtr)->nextPtr; // de-thread the node
       free(tempPtr); // free the de-threaded node/*釋放tempPtr指向的節點*/
-      return value;
+      return id;
    } 
    else { 
       ListNodePtr previousPtr = *sPtr;
       ListNodePtr currentPtr = (*sPtr)->nextPtr;
 
       // loop to find the correct location in the list
-      while (currentPtr != NULL && currentPtr->ID != value) { 
+      while (currentPtr != NULL && currentPtr->ID != id) { 
          previousPtr = currentPtr; // walk to ...  
          currentPtr = currentPtr->nextPtr; // ... next node  
       } 
@@ -157,7 +157,7 @@ char delete(ListNodePtr *sPtr, int value)
          ListNodePtr tempPtr = currentPtr;
          previousPtr->nextPtr = currentPtr->nextPtr;
          free(tempPtr);
-         return value;
+         return id;
       } 
    } 
 
