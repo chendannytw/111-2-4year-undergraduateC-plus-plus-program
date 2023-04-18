@@ -98,8 +98,8 @@ void insert(ListNodePtr *sPtr, char name[], int id,int math,int computer,int avg
    ListNodePtr newPtr = malloc(sizeof(ListNode)); // create node
 
    if (newPtr != NULL) { // is space available/*新節點配置成功 */
-      newPtr->name[50], name;
-	  newPtr->ID = id; // place value in node
+      strcpy(newPtr->name, name);
+      newPtr->ID = id; // place value in node
       newPtr->math = math;
       newPtr->com = computer;
       newPtr->avg = avg;
