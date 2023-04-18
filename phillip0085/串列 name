@@ -35,7 +35,7 @@ int main(void)
 
       switch (choice) { 
          case 1:
-            printf("%s", "Enter id: ");
+            printf("%s", "Enter ID: ");
             scanf("\n%d", &id);
             printf("%s", "Enter name: ");
             scanf("\n%s", &name);
@@ -50,7 +50,7 @@ int main(void)
          case 2: // delete an element
             // if list is not empty
             if (!isEmpty(startPtr)) { 
-               printf("%s", "Enter id to be deleted: ");
+               printf("%s", "Enter ID to be deleted: ");
                scanf("\n%d", &id);
 
                // if character is found, remove it
@@ -106,7 +106,7 @@ void insert(ListNodePtr *sPtr, int id,char name[20],float math,float com,float a
       ListNodePtr currentPtr = *sPtr;
 
       // loop to find the correct location in the list       
-      while (currentPtr != NULL && id > currentPtr->id) {
+      while (currentPtr != NULL && id < currentPtr->id) {
          previousPtr = currentPtr; // walk to ...               
          currentPtr = currentPtr->nextPtr; // ... next node 
       }                                          
@@ -176,7 +176,7 @@ void printList(ListNodePtr currentPtr)
 
       // while not the end of the list
       while (currentPtr != NULL) { 
-         printf("%d %s %.1f %.1f %.1f -> ", currentPtr->id,currentPtr->name,currentPtr->math,currentPtr->com,currentPtr->avg);
+         printf("%d %s %.1f %.1f %.2f -> ", currentPtr->id,currentPtr->name,currentPtr->math,currentPtr->com,currentPtr->avg);
          currentPtr = currentPtr->nextPtr;   
       } 
 
