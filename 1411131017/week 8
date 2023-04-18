@@ -128,21 +128,21 @@ void insert(ListNodePtr *sPtr, int id,int math,int computer,int avg)
 
 // delete a list element
 
-char delete(ListNodePtr *sPtr, char value)
+char delete(ListNodePtr *sPtr, int id)
 { 
    // delete first node if a match is found
-   if (value == (*sPtr)->ID) { 
+   if (id == (*sPtr)->ID) { 
       ListNodePtr tempPtr = *sPtr; // hold onto node being removed
       *sPtr = (*sPtr)->nextPtr; // de-thread the node
       free(tempPtr); // free the de-threaded node/*釋放tempPtr指向的節點*/
-      return value;
+      return id;
    } 
    else { 
       ListNodePtr previousPtr = *sPtr;
       ListNodePtr currentPtr = (*sPtr)->nextPtr;
 
       // loop to find the correct location in the list
-      while (currentPtr != NULL && currentPtr->ID != value) { 
+      while (currentPtr != NULL && currentPtr->ID != id) { 
          previousPtr = currentPtr; // walk to ...  
          currentPtr = currentPtr->nextPtr; // ... next node  
       } 
@@ -152,7 +152,7 @@ char delete(ListNodePtr *sPtr, char value)
          ListNodePtr tempPtr = currentPtr;
          previousPtr->nextPtr = currentPtr->nextPtr;
          free(tempPtr);
-         return value;
+         return id;
       } 
    } 
 
