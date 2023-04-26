@@ -11,7 +11,7 @@ typedef struct{
     unsigned int StuNum;
     char Name[20];
     int math; 
-	int computer;
+    int computer;
     float average;
     int rank;
 }stuData;
