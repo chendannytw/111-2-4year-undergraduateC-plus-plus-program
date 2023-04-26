@@ -1,0 +1,164 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct listNode {
+   unsigned int StuNum;
+   char name[20];
+   int math, com;
+   struct listNode *nextPtr;
+};
+
+typedef struct listNode ListNode;
+typedef ListNode *ListNodePtr;
+
+void instructions(void);
+void insert(ListNodePtr *sPtr, unsigned int StuNum, char name[], int math, int com);
+void printList(ListNodePtr currentPtr);
+char delete(ListNodePtr *sPtr, char value);
+int isEmpty(ListNodePtr sPtr );
+
+
+
+int main(void)
+{
+	instructions();
+    ListNodePtr startPtr = NULL;
+    unsigned int StuNum;
+   char name[20];
+   int math, com;
+    printf("%s","?");
+    unsigned int choice;
+    scanf("%u", &choice);
+    while (choice != 3) {
+        switch (choice) {
+            case 1:
+            	printf("%s", "輸入學號: ");
+				scanf("\n%d", &StuNum);
+                printf("%s", "輸入姓名: ");
+                scanf("%s", name); 
+				printf("%s", "輸入數學成績: ");
+				scanf("\n%d", &math);
+				printf("%s", "輸入電腦成績: ");
+				scanf("\n%d", &com);
+                
+                insert(&startPtr, StuNum, name, math, com);
+                printList(startPtr);
+                break;
+            case 2:
+                if (!isEmpty(startPtr)) {
+                    printf("%s", "Enter StuNum to be deleted: ");
+                    scanf("\n%d", &StuNum);
+                    if (delete(&startPtr, StuNum)) {
+                        printf("%d deleted.\n",StuNum);
+                        printList(startPtr);
+                    }
+                    else {
+                        printf("%d not found.\n\n",StuNum);
+                    }
+                }
+                else {
+                    puts("List is empty.\n");
+                }
+                break;
+            default:
+                puts("Invalid choice.\n");
+                instructions();
+                break;
+        }
+        printf("%s","?");
+		scanf("%u", &choice);
+    }
+    puts("End of run.");
+}
+
+void instructions(void)
+{
+    puts("Enter your choice:\n"
+         "   1 to insert an element into the list.\n"
+         "   2 to delete an element from the list.\n"
+         "   3 to end.");
+}
+
+void insert(ListNodePtr *sPtr, unsigned int StuNum, char name[], int math, int com)
+{
+    ListNodePtr newPtr = malloc(sizeof(ListNode));
+
+    if (newPtr != NULL) {
+        newPtr->StuNum = StuNum;
+        strcpy(newPtr->name, name);
+        newPtr->math = math;
+        newPtr->com = com;
+        newPtr->nextPtr = NULL;
+
+        ListNodePtr previousPtr = NULL;
+        ListNodePtr currentPtr = *sPtr;
+
+        while (currentPtr != NULL && StuNum > currentPtr->StuNum) {
+            previousPtr = currentPtr;
+            currentPtr = currentPtr->nextPtr;
+        }
+
+        if (previousPtr == NULL) {
+            newPtr->nextPtr = *sPtr;
+            *sPtr = newPtr;
+        }
+        else {
+            previousPtr->nextPtr = newPtr;
+            newPtr->nextPtr = currentPtr;
+        }
+    }
+    else {
+        printf("%d not inserted. No memory available.\n", StuNum);
+    }
+}
+
+char delete(ListNodePtr *sPtr, char value)
+{ 
+   if (value == (*sPtr)->StuNum) { 
+      ListNodePtr tempPtr = *sPtr;
+      *sPtr = (*sPtr)->nextPtr;
+      free(tempPtr);
+      return value;
+   } 
+   else { 
+      ListNodePtr previousPtr = *sPtr;
+      ListNodePtr currentPtr = (*sPtr)->nextPtr;
+
+      while (currentPtr != NULL && currentPtr->StuNum != value) { 
+         previousPtr = currentPtr; 
+         currentPtr = currentPtr->nextPtr;  
+      } 
+
+      if (currentPtr != NULL) { 
+         ListNodePtr tempPtr = currentPtr;
+         previousPtr->nextPtr = currentPtr->nextPtr;
+         free(tempPtr);
+         return value;
+      } 
+   } 
+   return '\0';
+} 
+
+
+int isEmpty(ListNodePtr sPtr)
+{ 
+   return sPtr == NULL;
+} 
+
+
+
+void printList(ListNodePtr currentPtr)
+{ 
+   if (isEmpty(currentPtr)) {
+      puts("List is empty.\n");
+   } 
+   else { 
+      puts("The list is:");
+      while (currentPtr != NULL) { 
+         printf("%d %s %d %d --> ", currentPtr->StuNum, currentPtr->name, currentPtr->math, currentPtr->com);
+         currentPtr = currentPtr->nextPtr;   
+      } 
+      puts("NULL\n");
+   } 
+}
