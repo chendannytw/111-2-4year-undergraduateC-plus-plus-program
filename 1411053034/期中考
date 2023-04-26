@@ -1,0 +1,183 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h> 
+// self-referential structure                       
+struct stuData {                                      
+   int  StuNum; // each listNode contains a character 
+   char name[20];
+   int math,com;
+   struct stuData *nextPtr; // pointer to next node
+}; 
+
+typedef struct stuData StuData; // synonym for struct listNode
+typedef StuData *StuDataPtr; // synonym for ListNode*
+
+// prototypes
+void insert(StuDataPtr *sPtr, int StuNum,char name[20],int math,int com);
+char delete(StuDataPtr *sPtr, int StuNum);
+int isEmpty(StuDataPtr sPtr);
+void printList(StuDataPtr currentPtr);
+void instructions(void);
+
+int main(void)
+{ 
+   StuDataPtr startPtr = NULL; // initially there are no nodes
+   int StuNum; // char entered by user
+   char name[20];
+   int math,com;
+   instructions(); // display the menu
+   printf("%s", "? ");
+   unsigned int choice; // user's choice
+   scanf("%u", &choice);
+
+   // loop while user does not choose 3
+   while (choice != 3) { 
+
+      switch (choice) { 
+         case 1:
+            printf("%s", "Enter StuNum: ");
+            scanf("\n%d", &StuNum);
+            printf("%s", "Enter name: ");
+            scanf("\n%s", &name);
+            printf("%s", "Enter math: ");
+            scanf("\n%d", &math);
+            printf("%s", "Enter com: ");
+            scanf("\n%d", &com);
+            insert(&startPtr, StuNum,name,math,com); // insert item in list
+            printList(startPtr);
+            break;
+         case 2: // delete an element
+            // if list is not empty
+            if (!isEmpty(startPtr)) { 
+               printf("%s", "Enter StuNum to be deleted: ");
+               scanf("\n%d", &StuNum);
+
+               // if character is found, remove it
+               if (delete(&startPtr, StuNum)) { // remove item
+                  printf("%d deleted.\n", StuNum);
+                  printList(startPtr);
+               } 
+               else {
+                  printf("%d not found.\n\n", StuNum);
+               } 
+            } 
+            else {
+               puts("List is empty.\n");
+            } 
+
+            break;
+         default:
+            puts("Invalid choice.\n");
+            instructions();
+            break;
+      } // end switch
+
+      printf("%s", "? ");
+      scanf("%u", &choice);
+   } 
+
+   puts("End of run.");
+} 
+
+// display program instructions to user
+void instructions(void)
+{ 
+   puts("Enter your choice:\n"
+      "   1 to insert an element into the list.\n"
+      "   2 to delete an element from the list.\n"
+      "   3 to end.");
+} 
+
+// insert a new value into the list in sorted order
+void insert(StuDataPtr *sPtr, int StuNum,char name[20],int math,int com)
+{ 
+   StuDataPtr newPtr = malloc(sizeof(StuData)); // create node
+
+   if (newPtr != NULL) { // is space available
+      newPtr->StuNum = StuNum; // place value in node
+      strcpy(newPtr->name,name);
+      newPtr->math = math;
+      newPtr->com = com;
+      newPtr->nextPtr = NULL; // node does not link to another node
+
+      StuDataPtr previousPtr = NULL;
+      StuDataPtr currentPtr = *sPtr;
+
+      // loop to find the correct location in the list       
+      while (currentPtr != NULL && StuNum > currentPtr->StuNum) {
+         previousPtr = currentPtr; // walk to ...               
+         currentPtr = currentPtr->nextPtr; // ... next node 
+      }                                          
+
+      // insert new node at beginning of list
+      if (previousPtr == NULL) { 
+         newPtr->nextPtr = *sPtr;
+         *sPtr = newPtr;
+      } 
+      else { // insert new node between previousPtr and currentPtr
+         previousPtr->nextPtr = newPtr;
+         newPtr->nextPtr = currentPtr;
+      } 
+   } 
+   else {
+      printf("%d not inserted. No memory available.\n", StuNum);
+   } 
+} 
+
+// delete a list element
+char delete(StuDataPtr *sPtr, int StuNum)
+{ 
+   // delete first node if a match is found
+   if (StuNum == (*sPtr)->StuNum) { 
+      StuDataPtr tempPtr = *sPtr; // hold onto node being removed
+      *sPtr = (*sPtr)->nextPtr; // de-thread the node
+      free(tempPtr); // free the de-threaded node
+      return StuNum;
+   } 
+   else { 
+      StuDataPtr previousPtr = *sPtr;
+      StuDataPtr currentPtr = (*sPtr)->nextPtr;
+
+      // loop to find the correct location in the list
+      while (currentPtr != NULL && currentPtr->StuNum != StuNum) { 
+         previousPtr = currentPtr; // walk to ...  
+         currentPtr = currentPtr->nextPtr; // ... next node  
+      } 
+
+      // delete node at currentPtr
+      if (currentPtr != NULL) { 
+         StuDataPtr tempPtr = currentPtr;
+         previousPtr->nextPtr = currentPtr->nextPtr;
+         free(tempPtr);
+         return StuNum;
+      } 
+   } 
+
+   return '\0';
+} 
+
+// return 1 if the list is empty, 0 otherwise
+int isEmpty(StuDataPtr sPtr)
+{ 
+   return sPtr == NULL;
+} 
+
+// print the list
+void printList(StuDataPtr currentPtr)
+{ 
+   // if list is empty
+   if (isEmpty(currentPtr)) {
+      puts("List is empty.\n");
+   } 
+   else { 
+      puts("The list is:");
+
+      // while not the end of the list
+      while (currentPtr != NULL) { 
+         printf("%d %s %d %d -> ", currentPtr->StuNum,currentPtr->name,currentPtr->math,currentPtr->com);
+         currentPtr = currentPtr->nextPtr;   
+      } 
+
+      puts("NULL\n");
+   } 
+} 
