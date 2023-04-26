@@ -128,8 +128,3 @@ void bubble(stuData *studArr,int num)
         }
     }
 }
-
-void bubble(stuData *studArr,int num)
-{
-	
-}
