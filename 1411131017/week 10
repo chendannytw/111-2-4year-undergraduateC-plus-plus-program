@@ -1,4 +1,14 @@
-/*題目: 請根據以下超連結修改課本pp.655-661程式碼，加入學生學號、數學、電腦、平均成績等欄位，輸入資料後放入鏈結串列中並印出結果，並且能夠選擇刪除某一筆資料。*/
+1.	請修改電腦桌面的C語言程式碼(midtest.c)滿足以下條件:
+struct stuData {
+unsigned int StuNum;
+char name[20];
+int math, computer;
+struct stuData *nextStu
+} ;
+(a)	建立一個鏈結串列(linked list)，修改其結構如上，輸入學生資料，插入(insert)鏈結串列中，能將鏈結串列內的資料根據學號由小到大印出(可參考舊版p.515、新版p.658)。(50分)
+(b)	由鍵盤輸入學號，根據學號將該筆學生資料由此鏈結串列中刪除(delete)(可參考舊版p.516、新版p.659)，若找不到該筆資料，程式需要提醒使用者找不到。(50分)
+(c)	將題(b)改為能夠刪除多筆重複內容的節點的程式。(10分)
+
 
 // Fig. 12.3: fig12_03.c
 // Inserting and deleting nodes in a list
