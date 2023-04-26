@@ -1,0 +1,11 @@
+建立一個結構，成員定義如下:
+
+typedef struct student {
+
+          unsigned int stuID;
+          char name[20];
+          int math,computer;
+}STU;
+
+建立一個結構請使用自行寫入10筆資料至該結構中，根據Problem 1寫入鏈結串列內容，並存入隨機檔之中。此時內容應該是根據學號排序過的結果。
+存取隨機檔方式可修改以下程式碼。
