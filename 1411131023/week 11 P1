@@ -1,0 +1,36 @@
+#include <iostream>
+#include <cmath> // 包含數學函數庫
+using namespace std;
+
+void cube(int &);
+float cylinder(int &,int &);
+int volume(int &,int &,int &);
+
+int main() {
+    int a,b,c;
+    cout << "Enter a number1:\n";
+    cin >> a;
+    cout << "Enter a number2:\n";
+    cin >> b;
+    cout << "Enter a number3:\n";
+    cin >> c;
+    
+    cout << "圓柱體體積=" << cylinder(a,b) << endl;
+    cout << "長方體體積=" << volume(a,b,c) << endl; 
+    cube(a);
+    cout << "正方體體積=" << a << endl;
+    return 0;
+}
+
+void cube(int &num){
+    num = num * num * num;
+}
+
+float cylinder(int &numF1, int &numF2){
+    float pi = M_PI; // 使用數學函數庫中的 pi 常數
+    return numF1 * numF1 * pi * numF2; 
+}
+
+int volume(int &A, int &B, int &C){
+    return A * B * C;
+}
