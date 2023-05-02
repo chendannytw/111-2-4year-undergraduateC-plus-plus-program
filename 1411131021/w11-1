@@ -2,7 +2,8 @@
 //1‧ 建立函數 void cube( int &)計算正方體體積(a^3);
 //2．建立函數 float cylinder( int &, int &），輸人 2個參數，計算圓柱體體積(a^2*元 *b);
 //3.建立函數int volume( int &,int &,int &)輪人 3 個參數，計算長方體體積(a*6*C)。
-#include <>
+#include <iostream>
+#include <cmath>
 
 using namespace std;
 
