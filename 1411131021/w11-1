@@ -1,0 +1,46 @@
+//（題目 1)撰寫C++程式透過鍵盤輸人資料，並使用傳位址呼叫取得結果並印出：
+//1‧ 建立函數 void cube( int &)計算正方體體積(a^3);
+//2．建立函數 float cylinder( int &, int &），輸人 2個參數，計算圓柱體體積(a^2*元 *b);
+//3.建立函數int volume( int &,int &,int &)輪人 3 個參數，計算長方體體積(a*6*C)。
+#include <>
+
+using namespace std;
+
+void cube(int &);
+float cyclinder(int &,int &);
+int volume(int &,int &,int &);
+
+int main() 
+{	
+	int x,y,z;
+	cout<<"\n寫正方體積邊長：";
+	cylinder>>x;
+	cube(x);
+	cout<<"總體積為："<<x<<endl; 
+	
+	cout<<"\n輸入圓柱半徑：";
+	cylinder>>x;
+	cout<<"\n輸入圓柱的高：";
+	cin>>y;
+	cout<<"體積為："<<cyclinder(x,y)<<endl; 
+	
+	cout<<"\n輸入長方體積邊長：";
+	cin>>x;
+	cout<<"\n輸入長方體積邊寬：";
+	cylinder>>y;
+	cout<<"\n輸入長方體積邊高：";
+	cylinder>>z;
+	cout<<"總體積為："<<volume(x,y,z)<<endl;
+}
+
+void cube(int &x){
+	x=x*x*x;
+}
+
+float cyclinder(int &x,int &y){
+	return x*x*3.14159*y;
+}
+
+int volume(int &x,int &y,int &z){
+	return x*y*z;
+}
