@@ -2,7 +2,7 @@
 //1‧ 建立函數 void cube( int &)計算正方體體積(a^3);
 //2．建立函數 float cylinder( int &, int &），輸人 2個參數，計算圓柱體體積(a^2*元 *b);
 //3.建立函數int volume( int &,int &,int &)輪人 3 個參數，計算長方體體積(a*6*C)。
-#include <iostream>
+#include <iostream> //數 
 #include <cmath>
 
 using namespace std;
@@ -13,35 +13,37 @@ int volume(int &,int &,int &);
 
 int main() 
 {	
-	int x,y,z;
-	cout<<"\n寫正方體積邊長：";
-	cylinder>>x;
-	cube(x);
-	cout<<"總體積為："<<x<<endl; 
-	
-	cout<<"\n輸入圓柱半徑：";
-	cylinder>>x;
-	cout<<"\n輸入圓柱的高：";
-	cin>>y;
-	cout<<"體積為："<<cyclinder(x,y)<<endl; 
-	
-	cout<<"\n輸入長方體積邊長：";
-	cin>>x;
-	cout<<"\n輸入長方體積邊寬：";
-	cylinder>>y;
-	cout<<"\n輸入長方體積邊高：";
-	cylinder>>z;
-	cout<<"總體積為："<<volume(x,y,z)<<endl;
+    int a,b,c;
+   
+    cout << "寫正方體積邊長:\n";//1
+    cin >> a;
+    cube(a);
+    cout<<"體："<<a<<endl;
+    
+    cout<<"輸入圓柱半徑：\n";//2
+    cin>>a;
+    cout<<"輸入圓柱高：\n";
+    cin>>b;
+    cout << "圓柱體體積=" << cylinder(a,b) << endl;
+    
+    cout<<"輸入長方體邊長：\n";//3
+    cin>>a;
+    cout<<"輸入長方體邊寬：\n";
+    cin>>b;
+    cout<<"輸入長方體邊高：\n";
+    cin>>c;
+    cout<<"長方形體積="<<volume(a,b,c)<<endl;
+    return 0;
 }
 
-void cube(int &x){
-	x=x*x*x;
+void cube(int &a){
+	a=a*a*a;
 }
 
-float cyclinder(int &x,int &y){
-	return x*x*3.14159*y;
+float cyclinder(int &a,int &b){
+	return a*a*3.14159*b;//算圓(半
 }
 
-int volume(int &x,int &y,int &z){
-	return x*y*z;
+int volume(int &a,int &b,int &c){
+	return a*b*c;
 }
