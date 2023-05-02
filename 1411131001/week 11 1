@@ -1,0 +1,41 @@
+/*題目一撰寫C++程式透過鍵盤輸入資料，並使用傳位址呼叫取得結果並印出:
+1. 建立函數Void cube(int &)計算正方體體積(a^3);
+2. 建立函數float cylinder(int &, int &),輸入2個參數，計算圓柱體體積(a^2*3.14159*b);
+3. 建立函數 int volume(int &,int &,int &)輸入3個參數，計算長方體體積(a*b*c)。
+*/
+#include <iostream>
+#include <cmath> 
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+using namespace std;
+
+void cube(int &);//function prototype (value pass)
+float cylinder(int &,int &);//function prototype(reference pass)
+int volume(int &,int &,int &);
+int main() {
+//demonstrate aquareByValue
+int x,y,z;
+double pi=3.14159;
+  cout <<"\nEnter the side length of cube:";cin>> x;
+  cube(x);
+  cout<<"Value returned by 正方體體積:"<<x<<endl;
+  
+  cout<<"\nEnter the height of cylinder:"; cin>>y;
+  cout<<"\nEnter the radius of cylinder:"; cin>>z;
+  cout<<"Value returned by 圓柱體體積:"<<cylinder(y,z) <<endl;
+
+  cout <<"\nEnter the side length of cube:";cin>> x;
+  cout<<"\nEnter the height of cylinder:"; cin>>y;
+  cout<<"\nEnter the radius of cylinder:"; cin>>z;
+  cout<<"Value returned by 長方體體積:"<<volume(x,y,z) <<endl;
+}
+void cube(int &number){
+	number = number*number*number;//caller's argument not modified
+}
+float cylinder(int &height,int &radius){
+	return radius*radius*3.14159*height;//caller's argument modified
+}
+int volume(int &length,int &height,int &width){
+	return length*height*width;
+}
+
