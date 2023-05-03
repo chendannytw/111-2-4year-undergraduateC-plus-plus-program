@@ -2,44 +2,209 @@
 #include <stdlib.h>
 #include <string.h>
 
+struct listNode {                                      
+   unsigned int StuNum;
+   char name[20]; 
+   int math, computer; // each listNode contains a character 
+   struct listNode *nextPtr; // pointer to next node
+}; 
+
+typedef struct listNode ListNode; 
+typedef ListNode *ListNodePtr;
+
+void insert(ListNodePtr *sPtr, unsigned int ID, char name[], int mat, int comp);
+char delete(ListNodePtr *sPtr, unsigned int value);
+int isEmpty(ListNodePtr sPtr);
+void printList(ListNodePtr currentPtr);
+void instructions(void);
+
 void blank(FILE *cfPtr); //空白 
 void write(FILE *cfPtr); //寫入 
 void read(FILE *cfPtr);  //讀取 
 
 
-typedef struct {
-    unsigned int StuNum;
-    char Name[20];
-    int math; 
-    int computer;
-    float average;
-    int rank;
-}stuData;
-
-typedef struct stuData StuData; // synonym for struct listNode
-typedef StuData *StuDataPtr; 
-
-void insert(StuDataPtr *sPtr, unsigned int ID, char name[], int mat, int comp);
-char delete(StuDataPtr *sPtr, unsigned int value);
-int isEmpty(StuDataPtr sPtr);
-void printList(StuDataPtr currentPtr);
-void instructions(void);
-
 int main(void){
+   ListNodePtr startPtr = NULL;
+   unsigned int StuID; // initially there are no nodes
+   char Sname[20];
+   int mat, comp; // char entered by user
+
+   instructions(); // display the menu
+   printf("%s", "? ");
+   unsigned int choice; // user's choice
+   scanf("%u", &choice);
+
+   // loop while user does not choose 3
+   while (choice != 3) { 
+
+      switch (choice) { 
+         case 1:
+            printf("%s", "Enter a student ID: ");
+            scanf("\n%d", &StuID);
+            printf("%s", "Enter a student Name: ");
+            scanf("\n%s", Sname);
+            printf("%s", "Enter math: ");
+            scanf("\n%d", &mat);
+            printf("%s", "Enter computer: ");
+            scanf("\n%d", &comp);
+            insert(&startPtr, StuID, Sname, mat, comp); // insert item in list
+            printList(startPtr);
+            break;
+         case 2: // delete an element
+            // if list is not empty
+            if (!isEmpty(startPtr)) { 
+               printf("%s", "Enter character to be deleted: ");
+               scanf("\n%d", &StuID);
+
+               // if character is found, remove it
+               if (delete(&startPtr, StuID)) { // remove item
+                  printf("%d deleted.\n", StuID);
+                  printList(startPtr);
+               } 
+               else {
+                  printf("%d not found.\n\n", StuID);
+               } 
+            } 
+            else {
+               puts("List is empty.\n");
+            } 
+
+            break;
+         default:
+            puts("Invalid choice.\n");
+            instructions();
+            break;
+      } // end switch
+
+      printf("%s", "? ");
+      scanf("%u", &choice);
+   } 
     FILE *cfPtr;            // 建立檔案指標 
     blank(cfPtr);
     write(cfPtr);
     read(cfPtr);
-    } 
+	 
+   puts("End of run.");
+} 
+
+// display program instructions to user
+void instructions(void)
+{ 
+   puts("Enter your choice:\n"
+      "   1 to insert an element into the list.\n"
+      "   2 to delete an element from the list.\n"
+      "   3 to end.");
+    
+}
+
+void insert(ListNodePtr *sPtr, unsigned int ID, char name[], int mat, int comp)
+{ 
+   ListNodePtr newPtr = malloc(sizeof(ListNode)); // create node
+
+   if (newPtr != NULL) { // is space available
+      newPtr->StuNum = ID;
+	  strcpy(newPtr->name,name);
+	  newPtr->math = mat;
+	  newPtr->computer = comp;  // place value in node
+      newPtr->nextPtr = NULL; // node does not link to another node
+
+      ListNodePtr previousPtr = NULL;
+      ListNodePtr currentPtr = *sPtr;
+
+      // loop to find the correct location in the list       
+      while (currentPtr != NULL && ID > currentPtr->StuNum) {
+         previousPtr = currentPtr; // walk to ...               
+         currentPtr = currentPtr->nextPtr; // ... next node 
+      }                                          
+
+      // insert new node at beginning of list
+      if (previousPtr == NULL) { 
+         newPtr->nextPtr = *sPtr;
+         *sPtr = newPtr;
+      } 
+      else { // insert new node between previousPtr and currentPtr
+         previousPtr->nextPtr = newPtr;
+         newPtr->nextPtr = currentPtr;
+      } 
+   } 
+   else {
+      printf("%d not inserted. No memory available.\n", ID);
+   } 
+} 
+
+// delete a list element
+char delete(ListNodePtr *sPtr, unsigned int value)
+{ 
+   // delete first node if a match is found
+   if (value == (*sPtr)->StuNum) { 
+      ListNodePtr tempPtr = *sPtr; // hold onto node being removed
+      *sPtr = (*sPtr)->nextPtr; // de-thread the node
+      free(tempPtr); // free the de-threaded node
+      return value;
+   } 
+   else { 
+      ListNodePtr previousPtr = *sPtr;
+      ListNodePtr currentPtr = (*sPtr)->nextPtr;
+
+      // loop to find the correct location in the list
+      while (currentPtr != NULL && currentPtr->StuNum != value) { 
+         previousPtr = currentPtr; // walk to ...  
+         currentPtr = currentPtr->nextPtr; // ... next node  
+      } 
+
+      // delete node at currentPtr
+      if (currentPtr != NULL) { 
+         ListNodePtr tempPtr = currentPtr;
+         previousPtr->nextPtr = currentPtr->nextPtr;
+         free(tempPtr);
+         return value;
+      } 
+   } 
+
+   return '\0';
+} 
+
+// return 1 if the list is empty, 0 otherwise
+int isEmpty(ListNodePtr sPtr)
+{ 
+   return sPtr == NULL;
+} 
+
+// print the list
+void printList(ListNodePtr currentPtr)
+{ 
+   // if list is empty
+   if (isEmpty(currentPtr)) {
+      puts("List is empty.\n");
+   } 
+   else { 
+      puts("The list is:");
+
+      // while not the end of the list
+      while (currentPtr != NULL) { 
+         printf("%d %s %d %d--> ", currentPtr->StuNum, currentPtr->name, currentPtr->math, currentPtr->computer);
+         currentPtr = currentPtr->nextPtr;   
+      } 
+
+      puts("NULL\n");
+   } 
+} 
 
 
+typedef struct{
+    unsigned int StuNum;
+    char Name[20];
+    int math; 
+    int computer;
+}stuData;
+    
 void blank(FILE *cfPtr){
     int i;
     if((cfPtr = fopen("accounts1.dat","wb"))==NULL){     //開啟檔案 
         puts("File could not be opened.");
     }
     else{
-        stuData blankstudent = {0,"",0,0,0.0,0};
+        stuData blankstudent = {0,"",0,0};
 
         for(i = 1 ; i <= 100 ; i++){
             fwrite(&blankstudent, sizeof(stuData),1,cfPtr);   //存取檔案
@@ -52,69 +217,28 @@ void write(FILE *cfPtr){
     if((cfPtr = fopen("accounts1.dat","rb+")) == NULL){      //開啟檔案 
         puts("File could not be opened.");
     }
+    else if(isEmpty(currentPtr)) {
+    	puts("List is empty.\n");
+	}
     else{
-         StuDataPtr startPtr = NULL;
-         unsigned int StuID; // initially there are no nodes
-         char Sname[20];
-         int mat, comp; // char entered by user
+        stuData student = {0,"",0,0};
+        puts("The list saved in the file is:"); 
 
-         instructions(); // display the menu
-         printf("%s", "? ");
-         unsigned int choice; // user's choice
-         scanf("%u", &choice);
-
-   // loop while user does not choose 3
-       { while (choice != 3) { 
-
-           switch (choice) { 
-                case 1:
-                    printf("%s", "Enter a student ID: ");
-                    scanf("\n%d", &StuID);
-                    printf("%s", "Enter a student Name: ");
-                    scanf("\n%s", Sname);
-                    printf("%s", "Enter math: ");
-                    scanf("\n%d", &mat);
-                    printf("%s", "Enter computer: ");
-                    scanf("\n%d", &comp);
-                    insert(&startPtr, StuID, Sname, mat, comp); // insert item in list
-                    printstu(startPtr);
-                    break;
-                case 2: // delete an element
-            // if list is not empty
-                    if (!isEmpty(startPtr)) { 
-                      printf("%s", "Enter character to be deleted: ");
-                      scanf("\n%d", &StuID);
-
-               // if character is found, remove it
-                      if (delete(&startPtr, StuID)) { // remove item
-                        printf("%d deleted.\n", StuID);
-                        printstu(startPtr);
-                      } 
-                      else {
-                        printf("%d not found.\n\n", StuID);
-                      } 
-               } 
-               else {
-               puts("List is empty.\n");
-               } 
-
-               break;
-            default:
-               puts("Invalid choice.\n");
-               instructions();
-               break;
-            } // end switch
-
-            printf("%s", "? ");
-            scanf("%u", &choice); 
-	    }
-        puts("End of run.");	
-   
+        while(student.StuNum != 0 ){
+            printf("%s","\nEnter name ,math, computer : ");
+            fscanf(stdin,"%19s%3d%3d",student.Name,&student.math,&student.computer);           
+            student.average=(double)(student.math+student.computer)/2;
+            fseek(cfPtr,(student.StuNum-1)*sizeof(stuData),SEEK_SET);
+            fwrite(&student,sizeof(stuData),1,cfPtr); 
+			printf("\n");                   
+            printf("%s","\nEnter student number : ");
+            scanf("%d",&student.StuNum);
+        }
         fclose(cfPtr);                                                //關閉檔案 
-        printf("\n");                      
-     }
-   }
-/*
+        printf("\n");
+    }                        
+}
+
 void read(FILE *cfPtr){
     
     stuData stuAvg[100];  //************************新增結構陣列 
@@ -126,7 +250,7 @@ void read(FILE *cfPtr){
         printf("%-6s%-10s%-10s%-10s%-10s%-5s\n","Num","Name","math","computer","average","rank");
 
         while(!feof(cfPtr)){
-            stuData student = {0,"",0,0,0.0};
+            stuData student = {0,"",0,0};
 
             int result = fread(&student,sizeof(stuData),1,cfPtr);
 
@@ -148,5 +272,3 @@ void read(FILE *cfPtr){
     for(j=0;j<i;++j)
         printf("%-6d%-10s%-10d%-10d%-10.2f\n",stuAvg[j].StuNum,stuAvg[j].Name,stuAvg[j].math,stuAvg[j].computer,stuAvg[j].average);
     printf("\n");
-    
-*/
