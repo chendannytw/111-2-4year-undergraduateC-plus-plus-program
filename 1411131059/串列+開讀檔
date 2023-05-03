@@ -254,7 +254,7 @@ void read(FILE *cfPtr)
         printf("%-6s%-16s%-10s%-10s\n","Num","Name","math","computer");
 
         while(!feof(cfPtr)){
-            stuData student = {0,"",0,0,};
+            stuData student = {0,"",0,0};
 
             int result = fread(&student,sizeof(stuData),1,cfPtr);
 
