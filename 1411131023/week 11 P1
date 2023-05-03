@@ -2,35 +2,37 @@
 #include <cmath> // 包含數學函數庫
 using namespace std;
 
-void cube(int &);
-float cylinder(int &,int &);
-int volume(int &,int &,int &);
+void cube(int& a) {
+    a = a * a * a;
+}
+
+void cylinder(int& a, int& b) {
+
+    const double pi = 3.14159;
+    a = a * a * pi * b;
+}
+
+void volume(int& a, int& b, int& c) {
+    a = a * b * c;
+}
 
 int main() {
-    int a,b,c;
+    int a, b, c;
     cout << "Enter a number1:\n";
     cin >> a;
-    cout << "Enter a number2:\n";
-    cin >> b;
-    cout << "Enter a number3:\n";
-    cin >> c;
-    
-    cout << "圓柱體體積=" << cylinder(a,b) << endl;
-    cout << "長方體體積=" << volume(a,b,c) << endl; 
     cube(a);
-    cout << "正方體體積=" << a << endl;
+    cout << "Cube volume=" << a << endl;
+
+    cout << "Enter number1 and number2:\n";
+    cin >> a >> b;
+    cylinder(a, b);
+    cout << "Cylinder volume=" << a << endl;
+
+    cout << "Enter number1 ,number2 and number3:\n";
+    cin >> a >> b >> c;
+    volume(a, b, c);
+    cout << "Rectangular volume=" << a << endl;
+
     return 0;
-}
 
-void cube(int &num){
-    num = num * num * num;
-}
-
-float cylinder(int &numF1, int &numF2){
-    float pi = M_PI; // 使用數學函數庫中的 pi 常數
-    return numF1 * numF1 * pi * numF2; 
-}
-
-int volume(int &A, int &B, int &C){
-    return A * B * C;
 }
