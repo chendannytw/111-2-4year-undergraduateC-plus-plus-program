@@ -1,0 +1,51 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+void cube(int&);
+void cylinder(int&, int&);
+void volume(int&, int&, int&);
+
+int main()
+{
+    int a, b, c;
+
+   
+    cout << "請輸入正方體的邊長a: ";
+    cin >> a;
+
+    cout << "請輸入圓柱體的底面半徑a和高b: ";
+    cin >> a >> b;
+
+    cout << "請輸入長方體的三個邊長a、b、c: ";
+    cin >> a >> b >> c;
+
+  
+    cube(a);
+    cout << "正方體的體積為：" << a << endl;
+    cylinder(a, b);
+    cout << "圓柱體的體積為：" <<  a * 3.14159 << endl;
+    volume(a, b, c);
+    cout << "長方體的體積為：" << a<< endl;
+
+    return 0;
+}
+
+
+void cube(int& a)
+{
+    a = a * a * a;
+}
+
+
+void cylinder(int& a, int& b)
+{
+    a = a * a * b;
+}
+
+
+void volume(int& a, int& b, int& c)
+{
+    a = a * b * c;
+}
