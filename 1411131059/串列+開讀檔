@@ -1,0 +1,268 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct listNode 
+{                                      
+   unsigned int StuNum; 
+   char name[20];
+   int math, computer;
+   struct listNode *nextPtr;
+}; 
+
+typedef struct listNode ListNode;
+typedef ListNode *ListNodePtr;
+
+void insert(ListNodePtr *sPtr, unsigned int ID, char* name, int math, int computer);
+char delete(ListNodePtr *sPtr, unsigned int value);
+int isEmpty(ListNodePtr sPtr);
+void printList(ListNodePtr currentPtr);
+void instructions(void);
+
+void blank(FILE *cfPtr);
+void write(FILE *cfPtr, ListNodePtr currentPtr);
+void read(FILE *cfPtr);
+
+int main(void)
+{ 
+   ListNodePtr startPtr = NULL;
+   unsigned int StuID;
+   char name[20];
+   int math, comp;
+
+   instructions();
+   printf("%s", "? ");
+   unsigned int choice;
+   scanf("%u", &choice);
+
+   while (choice != 3)
+   { 
+      switch (choice)
+      { 
+         case 1:
+            printf("%s", "Enter a student ID: ");
+            scanf("\n%d", &StuID);
+            printf("%s", "Enter a student Name: ");
+            scanf("\n%s", &name);
+            printf("%s", "Enter math: ");
+            scanf("\n%d", &math);
+            printf("%s", "Enter computer: ");
+            scanf("\n%d", &comp);
+            insert(&startPtr, StuID,name,math,comp);
+            printList(startPtr);
+            break;
+         case 2:
+            if (!isEmpty(startPtr)) 
+            { 
+               printf("%s", "Enter student ID to be deleted: ");
+               scanf("\n%d", &StuID);
+
+               if (delete(&startPtr, StuID)) 
+               { 
+                  printf("%d deleted.\n", StuID);
+                  printList(startPtr);
+               } 
+               else 
+               {
+                  printf("%d not found.\n\n", StuID);
+               } 
+            } 
+            else 
+            {
+               puts("List is empty.\n");
+            }    
+            break;
+         default:
+            puts("Invalid choice.\n");
+            instructions();
+            break;
+      } 
+      printf("%s", "? ");
+      scanf("%u", &choice);
+   } 
+    FILE *cfPtr;
+    blank(cfPtr);
+    write(cfPtr,startPtr);
+    read(cfPtr);
+   puts("End of run.");
+} 
+
+void instructions(void)
+{ 
+   puts("Enter your choice:\n"
+      "   1 to insert an element into the list.\n"
+      "   2 to delete an element from the list.\n"
+      "   3 to end.");
+} 
+
+void insert(ListNodePtr *sPtr, unsigned int ID, char* name, int math, int computer)
+{ 
+   ListNodePtr newPtr = malloc(sizeof(ListNode)); 
+
+   if (newPtr != NULL) 
+   {
+      newPtr->StuNum = ID; 
+      strcpy(newPtr->name, name);
+      newPtr->math = math; 
+      newPtr->computer = computer; 
+      newPtr->nextPtr = NULL; 
+
+      ListNodePtr previousPtr = NULL;
+      ListNodePtr currentPtr = *sPtr;
+      
+      while (currentPtr != NULL && ID > currentPtr->StuNum) 
+      {
+         previousPtr = currentPtr;             
+         currentPtr = currentPtr->nextPtr; 
+      }                                          
+
+      if (previousPtr == NULL) 
+      { 
+         newPtr->nextPtr = *sPtr;
+         *sPtr = newPtr;
+      } 
+      else 
+      { 
+         previousPtr->nextPtr = newPtr;
+         newPtr->nextPtr = currentPtr;
+      } 
+   } 
+   else 
+   {
+      printf("%d not inserted. No memory available.\n", ID);
+   } 
+} 
+
+char delete(ListNodePtr *sPtr, unsigned int value)
+{ 
+   if (value == (*sPtr)->StuNum) 
+   { 
+      ListNodePtr tempPtr = *sPtr;
+      *sPtr = (*sPtr)->nextPtr;
+      free(tempPtr);
+      return value;
+   } 
+   else 
+   { 
+      ListNodePtr previousPtr = *sPtr;
+      ListNodePtr currentPtr = (*sPtr)->nextPtr;
+
+      while (currentPtr != NULL && currentPtr->StuNum != value)
+      { 
+         previousPtr = currentPtr; 
+         currentPtr = currentPtr->nextPtr; 
+      } 
+
+      if (currentPtr != NULL) 
+      { 
+         ListNodePtr tempPtr = currentPtr;
+         previousPtr->nextPtr = currentPtr->nextPtr;
+         free(tempPtr);
+         return value;
+      } 
+   } 
+
+   return '\0';
+} 
+
+int isEmpty(ListNodePtr sPtr)
+{ 
+   return sPtr == NULL;
+} 
+
+
+void printList(ListNodePtr currentPtr)
+{ 
+   if (isEmpty(currentPtr))
+   {
+      puts("List is empty.\n");
+   } 
+   else { 
+      puts("result:");
+
+      while (currentPtr != NULL) 
+      { 
+         printf("%d %s %d %d--> ", currentPtr->StuNum,currentPtr->name,currentPtr->math,currentPtr->computer);
+         currentPtr = currentPtr->nextPtr;   
+      } 
+      puts("NULL\n");
+   } 
+}
+
+typedef struct{
+    unsigned int StuNum;  
+    char Name[20];        
+    int math, computer;  
+}stuData;               
+
+
+void blank(FILE *cfPtr){
+    int i;
+    if((cfPtr = fopen("accounts1.txt","wb"))==NULL){     
+        puts("File could not be opened.");
+    }
+    else{
+        stuData blankstudent = {0,"",0,0};
+
+        for(i = 1 ; i <= 100 ; i++){
+            fwrite(&blankstudent, sizeof(stuData),1,cfPtr);   
+        }
+    }
+    fclose(cfPtr);                                            
+}
+
+void write(FILE *cfPtr, ListNodePtr currentPtr)
+{
+    if((cfPtr = fopen("accounts1.txt","rb+")) == NULL)
+    {    
+        puts("File could not be opened.");
+    }
+    else if(isEmpty(currentPtr)) 
+    {
+      puts("List is empty.\n");
+    }
+    else{
+        stuData student = {0,"",0,0};
+        
+        puts("The list saved in the file is:");
+        
+        while(currentPtr != NULL)
+        {
+      	 	student.StuNum=currentPtr->StuNum;
+      	    strcpy(student.Name,currentPtr->name);
+      	    student.math =currentPtr->math;
+     	    student.computer =currentPtr->computer;
+    	    
+    	    
+            fseek(cfPtr,(student.StuNum-1)*sizeof(stuData),SEEK_SET);
+            fwrite(&student,sizeof(stuData),1,cfPtr);                    
+            
+            currentPtr = currentPtr->nextPtr; 
+        }
+        fclose(cfPtr);                                            
+    }                        
+}
+
+void read(FILE *cfPtr)
+{    
+    int i=0,j;
+    if((cfPtr = fopen("accounts1.txt","rb")) == NULL)
+	{                
+        puts("File could not be opened.");
+    }
+    else{
+        printf("%-6s%-16s%-10s%-10s\n","Num","Name","math","computer");
+
+        while(!feof(cfPtr)){
+            stuData student = {0,"",0,0,};
+
+            int result = fread(&student,sizeof(stuData),1,cfPtr);
+
+            if(result != 0 && student.StuNum != 0 ){
+                printf("%-6d%-16s%-10d%-10d\n",student.StuNum,student.Name,student.math,student.computer);
+            }
+        }
+        fclose(cfPtr);
+    }
+     printf("\n");
+}
