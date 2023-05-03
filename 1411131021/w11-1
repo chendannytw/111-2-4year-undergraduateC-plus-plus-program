@@ -46,7 +46,7 @@ int volume(int &a,int &b,int &c){
 
 
 ////////改
-#include <iostream>
+#include <iostream> //數 
 
 using namespace std;
 
@@ -57,16 +57,16 @@ int volume(int&, int&, int&);
 int main()
 {
     int a, b, c;
-    cout << "請輸入正方體邊長：";
+    cout << "請輸入正方體邊長："; //1
     cin >> a;
     cube(a);
     cout << "正方體體積：" << a << endl;
 
-    cout << "請輸入圓柱底面半徑和高：";
+    cout << "請輸入圓柱底面半徑和高："; //2
     cin >> a >> b;
     cout << "圓柱體積：" << cylinder(a, b) << endl;
 
-    cout << "請輸入長方體三邊長：";
+    cout << "請輸入長方體三邊長："; //3
     cin >> a >> b >> c;
     cout << "長方體體積：" << volume(a, b, c) << endl;
 
