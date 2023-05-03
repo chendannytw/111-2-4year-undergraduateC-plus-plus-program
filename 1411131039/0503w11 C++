@@ -1,0 +1,35 @@
+#include <iostream>
+using namespace std;
+
+int cube(int &); 
+float cylinder(float &, float &);
+int volume(int&, int&, int&);
+
+int main()
+{   
+    int x,y,z;
+    float r,h;
+        cout << "\n請輸入正方體邊長：";
+        cin >> x;
+        cube(x);
+        cout << "體積為：" << cube(x) << endl;
+        cout << "\n請輸入圓柱體(半徑,高)：";
+        cin >> r >> h;
+        cout << "體積為：" << cylinder(r,h) << endl;
+        cout << "\n請輸入長方體(長,寬,高)：";
+        cin >> x >> y >> z;
+        cout << "體積為：" << volume(x,y,z) << endl;
+
+} 
+
+int cube(int &x) {
+    return x * x * x;
+}
+float cylinder(float &r,float &h)
+{
+
+    return r * r *3.14159* h;
+} 
+int volume(int &n1, int &n2, int &h) {
+    return n1 * n2 * h;
+}
