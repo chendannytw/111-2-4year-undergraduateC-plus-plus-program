@@ -43,3 +43,44 @@ float cyclinder(int &a,int &b){
 int volume(int &a,int &b,int &c){
 	return a*b*c;
 }
+
+
+////////改
+#include <iostream>
+
+using namespace std;
+
+void cube(int&);
+int cylinder(int&, int&);
+int volume(int&, int&, int&);
+
+int main()
+{
+    int a, b, c;
+    cout << "請輸入正方體邊長：";
+    cin >> a;
+    cube(a);
+    cout << "正方體體積：" << a << endl;
+
+    cout << "請輸入圓柱底面半徑和高：";
+    cin >> a >> b;
+    cout << "圓柱體積：" << cylinder(a, b) << endl;
+
+    cout << "請輸入長方體三邊長：";
+    cin >> a >> b >> c;
+    cout << "長方體體積：" << volume(a, b, c) << endl;
+
+    return 0;
+}
+
+void cube(int& a) {
+    a = a * a * a;
+}
+
+int cylinder(int& a, int& b) {
+    return a * a * 3.14159 * b;
+}
+
+int volume(int& a, int& b, int& c) {
+    return a * b * c;
+}
