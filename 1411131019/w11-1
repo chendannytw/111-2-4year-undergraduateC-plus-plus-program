@@ -63,7 +63,7 @@ int main() {
 	cout << "\n輸入圓柱高：";
 	cin >> y;
 	cyclinder(x, y);
-	cout << "體積為：" << x << endl;
+	cout << "體積為：" << x* 3.14159 << endl;
 
 	cout << "\n輸入長方體的長：";
 	cin >> x;
@@ -80,7 +80,7 @@ void cube(int& x) {
 }
 
 void cyclinder(int& x, int& y) {
-	x= x * x * 3.14159 * y;
+	x= x * x * y;
 }
 
 void volume(int& x, int& y, int& z) {
