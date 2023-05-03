@@ -1,0 +1,42 @@
+#include <iostream>
+
+using namespace std;
+
+float volume(double &);
+float volume(double &,double &);
+float volume(double &,double &,double &);
+
+int main() {
+	
+	double x,y,z;
+	cout<<"\n輸入正方體邊長：";
+	cin>>x;
+	volume(x);
+	cout<<"體積為："<<x<<endl; 
+	
+	cout<<"\n輸入圓柱半徑：";
+	cin>>x;
+	cout<<"\n輸入圓柱高：";
+	cin>>y;
+	cout<<"體積為："<<volume(x,y)<<endl; 
+	
+	cout<<"\n輸入長方體的長：";
+	cin>>x;
+	cout<<"\n輸入長方體的寬：";
+	cin>>y;
+	cout<<"\n輸入長方體的高：";
+	cin>>z;
+	cout<<"體積為："<<volume(x,y,z)<<endl;
+}
+
+float volume(double &x){
+	x=x*x*x;
+}
+
+float volume(double &x,double &y){
+	return x*x*3.14159*y;
+}
+
+float volume(double &x,double &y,double &z){
+	return x*y*z;
+}
