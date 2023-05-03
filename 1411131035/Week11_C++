@@ -1,0 +1,49 @@
+#include <iostream>
+using namespace std;
+
+
+void cube(int& a);
+float cylinder(int& a, int& b);
+void volume(int& a, int& b, int& c);
+
+int main()
+{
+    int a, b1,b2, c1,c2,c3 = 0;
+
+
+    cout << "輸入a" << endl;
+    cin >> a;
+    cube(a);
+    cout << "正方體體積(a^3) = " << a << " \n" << endl;
+
+    cout << "輸入b1,b2" << endl;
+    cin >> b1 >> b2;
+    
+    cout << "圓柱體體積(a^2*π*b) = " << cylinder(b1, b2) << " \n" << endl;
+    
+    cout << "輸入c1,c2,c3" << endl;
+    cin >> c1 >> c2 >> c3;
+    volume(c1, c2, c3);
+    cout << "長方體體積(a*b*c) = " << c1 << " \n" << endl;
+
+} 
+
+
+
+
+void cube(int& a)
+{
+    a = a * a * a;
+}
+
+float cylinder(int& b1, int& b2)
+{
+
+    return b1 * b1 * 3.14 * b2;
+    
+}
+
+void volume(int& c1, int& c2, int& c3)
+{
+    c1 = c1 * c2 * c3;
+}
