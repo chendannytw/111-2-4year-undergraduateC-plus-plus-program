@@ -1,0 +1,37 @@
+#include <iostream>
+using namespace std;
+
+void cube( int& number ){ // function prototype (reference pass)
+ int volume = number*number*number;
+ cout << "The volume of the cube is " << volume << ::endl;
+}
+void cylinder( int &a, int &b) {
+	float pi=3.14;
+	double volume = a*a*pi*b;
+	cout << "the result of the cylinder is " << volume <<::endl;
+}
+void volume( int &c, int &d, int &e) {
+	int result = c*d*e;
+	cout <<"the result of volume is " << result << ::endl;
+}
+int main()
+{
+   int num;
+   cout << "enter integer:";
+   cin >> num; 
+   cube(num);
+   return 0;
+   
+   int a,b;
+	cout <<"enter integers :";
+	cin >> a >> b;
+	cylinder(a,b);
+	return 0;
+	
+	int c,d,e;
+	cout <<"enter integers:";
+	cin >> c >> d >> e;
+	volume(c,d,e);
+	return 0;
+} // end main
+
