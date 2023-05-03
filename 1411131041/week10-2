@@ -1,3 +1,5 @@
+// Fig. 12.3: fig12_03.c
+// Inserting and deleting nodes in a list
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -187,9 +189,9 @@ void printList(ListNodePtr currentPtr)
 
       // while not the end of the list
       while (currentPtr != NULL) { 
-         printf("%d +", currentPtr->StuNum);
-         printf("%s +", currentPtr->name);
-         printf("%d +", currentPtr->math);
+         printf("%d ", currentPtr->StuNum);
+         printf("%s ", currentPtr->name);
+         printf("%d ", currentPtr->math);
          printf("%d -->", currentPtr->computer);
          currentPtr = currentPtr->nextPtr;   
       } 
@@ -237,7 +239,7 @@ void write(FILE *cfPtr, ListNodePtr currentPtr){
    		stuData student = {0,"",0,0};
         puts("The list saved in the file is:");
 
-        while((currentPtr->StuNum!= 0 )&& (currentPtr != NULL)){
+        while( currentPtr != NULL){
             
         	 printf("%d +", currentPtr->StuNum);
       	 	 student.StuNum=currentPtr->StuNum;
@@ -266,7 +268,7 @@ void read(FILE *cfPtr){
         puts("File could not be opened.");
     }
     else{
-        printf("%-6s%-16s%-10s%-10s%-10s%-4s\n","Num","Name","math","computer","average","rank");
+        printf("%-6s%-16s%-10s%-10s%-10s%-4s\n","Num","Name","math","computer");
 
         while(!feof(cfPtr)){
             stuData student = {0,"",0,0};
@@ -279,7 +281,7 @@ void read(FILE *cfPtr){
                 strcpy(stuArr[i].Name,student.Name);
                 stuArr[i].math=student.math;
                 stuArr[i].computer=student.computer;
-                //stuArr[i].average=student.average;
+                
                 i++;
             }
         }
