@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+
+void cube( float & );// function prototype (value pass)
+void cylinder( float &, float& ); // function prototype (reference pass)
+void volume( float &, float&, float&);
+
+int main()
+{
+    float x, y, z ; // value to square using squareByReference
+
+	double pi = 3.14159;
+	cout << "\n輸入邊長:"; cin >> x;
+	cube(x);
+	cout << "正方體體積:" << x << endl;
+
+	cout << "\n輸入半徑:"; cin >> y;
+	cout << "\n輸入高:"; cin >> z;
+	cylinder(y, z);
+	cout << "圓柱體體積:" << y * 3.14159l << endl;
+
+	cout << "\n輸入長:"; cin >> x;
+	cout << "\n輸入寬:"; cin >> y;
+	cout << "\n輸入高:"; cin >> z;
+	volume(x, y, z);
+	cout << "長方體體積:" << x << endl;
+} // end main
+
+void cube(float& x ) {
+	x = x * x * x;
+}
+// squareByValue multiplies number by itself, stores the 
+// result in number and returns the new value of number
+void cylinder(float& y, float& z)
+{
+    y = y * y * 3.14159 * z; // caller's argument not modified
+} // end function squareByValue
+
+// squareByReference multiplies numberRef by itself and stores the result
+// in the variable to which numberRef refers in function main
+void volume(float& x, float& y, float& z)
+{
+	x = x * y * z; // caller's argument modified
+} // end function squareByReference
