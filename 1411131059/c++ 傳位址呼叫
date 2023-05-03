@@ -1,0 +1,47 @@
+#include<iostream>
+using namespace std;
+
+void cube(int&);
+double cylinder(int&, int&);
+void volume(int&, int&, int&);
+
+int main()
+{
+	int x, y, z;
+
+	cout << "\n請輸入正方體邊長: ";
+	cin >> x;
+	cube(x);
+	cout << "\n正方體體積: " << x << endl;
+
+	cout << "\n請輸入圓柱體的高: ";
+	cin >> x;
+	cout << "請輸入圓柱體的半徑: ";
+	cin >> y;
+	cout << "\n圓柱體體積·: " << cylinder(x, y) << endl;
+
+	cout << "\n請輸入長方體的長: ";
+	cin >> x;
+	cout << "請輸入長方體的寬: ";
+	cin >> y;
+	cout << "請輸入長方體的高: ";
+	cin >> z;
+	volume(x, y, z);
+	cout << "\n長方體體積: " << x << endl;
+}
+
+void cube(int& num)
+{
+	num = num * num * num;
+}
+
+double cylinder(int& height, int& radius)
+{
+	double pi = 3.14159;
+	return radius * radius * pi * height;
+}
+
+void volume(int& length, int& width, int& height)
+{
+	length = length * width * height;
+}
