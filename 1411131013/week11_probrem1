@@ -1,0 +1,54 @@
+// Fig. 6.20: fig06_20.cpp
+// Passing arguments by value and by reference.
+//1. 建立函數void cube( int &)計算正方體體積(a^3);
+//2. 建立函數void cylinder( int &, int &)，輸入2個參數，計算圓柱體體積(a^2*π*b);
+
+//3. 建立函數void volume( int &, int &, int &)輸入3個參數，計算長方體體積(a*b*c)。 
+#include <iostream>
+using namespace std;
+
+void cube(int&);
+void cylinder(float&, int&);
+void volume(int&, int&, int&);
+
+int main()
+{
+    int x = 0; // value to square using squareByValue
+    float y = 0;
+    int y1 = 0;
+    int z = 0,z1 = 0, z2 = 0; // value to square using squareByReference
+
+    
+    cout <<  "請輸入正方形的邊長：" << endl;
+    cin >> x;
+    cube(x);
+    cout << "x = " << x << " 正方體體積" << endl;
+
+    cout << "請輸入園柱體的半徑及高：" << endl;
+    cin >> y >> y1;
+    cylinder(y ,y1);
+    cout << "y = " << y << " 圓柱體體積" << endl;
+
+    cout << "請輸入長方體的長、寬、高：" << endl;
+    cin >> z >> z1 >> z2;
+    volume(z, z1 ,z2);
+    cout << "z = " << z << " 長方體體積" << endl;
+
+
+} // end main
+
+
+void cube(int& numberRef)
+{
+    numberRef *= numberRef; // caller's argument modified
+} 
+
+void cylinder(float& numberRef, int& numberRef1)
+{
+    numberRef = numberRef* numberRef*3.14* numberRef1; // caller's argument modified
+}
+
+void volume(int& numberRef, int& numberRef1, int& numberRef2)
+{
+    numberRef = numberRef* numberRef1* numberRef2; // caller's argument modified
+}
