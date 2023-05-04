@@ -1,37 +1,42 @@
 #include <iostream>
 using namespace std;
 
-void cube( int& number ){ // function prototype (reference pass)
- int volume = number*number*number;
- cout << "The volume of the cube is " << volume << ::endl;
-}
-void cylinder( int &a, int &b) {
-	float pi=3.14;
-	double volume = a*a*pi*b;
-	cout << "the result of the cylinder is " << volume <<::endl;
-}
-void volume( int &c, int &d, int &e) {
-	int result = c*d*e;
-	cout <<"the result of volume is " << result << ::endl;
-}
+void cube( int &);
+void cylinder( float &, int &);
+void volume( int &, int &, int &);                                                   
 int main()
 {
-   int num;
+   int a;
    cout << "enter integer:";
-   cin >> num; 
-   cube(num);
-   return 0;
+   cin >> a; 
+   cube(a);
    
-   int a,b;
-	cout <<"enter integers :";
-	cin >> a >> b;
-	cylinder(a,b);
-	return 0;
+   float x;  int y;
+   cout << "enter integers:";
+   cin >> x >> y;
+   cylinder(x,y);
 	
-	int c,d,e;
+	int f,g,h;
 	cout <<"enter integers:";
-	cin >> c >> d >> e;
-	volume(c,d,e);
-	return 0;
+	cin >> f >> g >> h;
+	volume(f,g,h);
+	
 } // end main
 
+// squareByReference multiplies numberRef by itself and stores the result
+// in the variable to which numberRef refers in function main
+void cube( int& a1 ) { 
+ int inform = a1*a1*a1;
+ cout << "正方體體積:" << inform << ::endl;
+}
+
+void cylinder( float &x1, int &y1) {
+	float pi=3.14;
+	double value = x1*x1*pi*y1;
+	cout << "圓柱體體積: " << value <<::endl;
+}
+
+void volume( int &f1, int &g1, int &h1) {
+	int result = f1*g1*h1;
+	cout <<"長方體體積: " << result << ::endl;
+}
