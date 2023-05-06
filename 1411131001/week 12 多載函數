@@ -1,0 +1,81 @@
+/*題目一撰寫C++程式透過鍵盤輸入資料，並使用傳位址呼叫取得結果並印出:
+1. 建立函數Void volume(int &)計算正方體體積(a^3);
+2. 建立函數float volume(int &, int &),輸入2個參數，計算圓柱體體積(a^2*3.14159*b);
+3. 建立函數 int volume(int &,int &,int &)輸入3個參數，計算長方體體積(a*b*c)。
+*/
+#include <iostream>
+#include <cmath> 
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+using namespace std;
+
+int volume(int&);//function prototype (value pass)    宣告
+float volume(int&, int&);//function prototype(reference pass)
+int volume(int&, int&, int&);
+int main() {
+	//demonstrate aquareByValue
+	int x, y, z;
+	double pi = 3.14159;
+	cin >> x >> y >> z;
+	cout << "正方形體積:" <<volume(x) << endl;
+	cout << "圓柱體體積:" << volume(x, y) << endl;
+	cout << "長方體體積:" <<volume(x, y, z) << endl;
+}
+int volume(int& number) {
+	return number* number* number;
+}
+float volume(int& height, int& radius) {
+	return radius * radius * 3.14159 * height;//caller's argument modified
+}
+int volume(int& length, int& height, int& width) {
+	return length * height * width;
+}
+
+//第二種解法
+/*題目一撰寫C++程式透過鍵盤輸入資料，並使用傳位址呼叫取得結果並印出:
+1. 建立函數Void volume(int &)計算正方體體積(a^3);
+2. 建立函數float volume(int &, int &),輸入2個參數，計算圓柱體體積(a^2*3.14159*b);
+3. 建立函數 int volume(int &,int &,int &)輸入3個參數，計算長方體體積(a*b*c)。
+*/
+#include <iostream>
+#include <cmath> 
+
+using namespace std;
+
+void volume(int& number) {
+	number = number * number * number;
+}
+
+void volume(int& height, int& radius, double& result) {
+	result = radius * radius * 3.14159 * height;
+}
+
+void volume(int& length, int& height, int& width, int& result) {
+	result = length * height * width;
+}
+
+int main() {
+	int x, y, z, res;
+	double result;
+
+	cout << "請輸入正方體的邊長：";
+	cin >> x;
+	volume(x);
+	cout << "正方體體積：" << x << endl;
+
+	cout << "請輸入圓柱體的高和半徑：";
+	cin >> y >> z;
+	volume(y, z, result);
+	cout << "圓柱體體積：" << result << endl;
+
+	cout << "請輸入長方體的長、寬、高：";
+	cin >> x >> y >> z;
+	volume(x, y, z, res);
+	cout << "長方體體積：" << res << endl;
+
+	return 0;
+}
+
+
+
+
