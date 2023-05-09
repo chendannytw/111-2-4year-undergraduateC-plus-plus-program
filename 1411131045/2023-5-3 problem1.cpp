@@ -1,44 +1,43 @@
 ﻿// ConsoleApplication1.cpp : 此檔案包含 'main' 函式。程式會於該處開始執行及結束執行。
 //
 #include <iostream>
-#include <cmath>
+#include <math.h>
+using namespace std;
+void cube(int&a);
+void cylinder(int&a, int&b);
+void volume(int&a, int&b, int&c);
+int main()
+{
+    int side, r, h, rectangle,width, high;
+    cout << "Enter square side:";
+    cin >> side;
+    cube(side);
+    cout << "\ncube volume is" << side << endl;
+    
+    cout << "Enter cylinder radius and high:";
+    cin >>r>>h ;
+    cylinder(r,h);
+    cout << "\ncylinder volume is" << r << endl;
+    
+    cout << "Enter cuboid length,width and high:";
+    cin >> rectangle>> width>> high;
+    volume(rectangle,width,high);
+    cout << "\ncuboid volume is" << rectangle << endl;
 
-// 計算正方體體積
-void cube(int& a) {
-    a = std::pow(a, 3);
 }
-
-// 計算圓柱體體積
-void cylinder(int& r, int& h) {
-    double volume = std::pow(r, 2) * 3.14 * h;
-    // 因為傳入的參數型別是 int，所以這邊需要用四捨五入來取整
-    int roundedVolume = static_cast<int>(std::round(volume));
-    h = roundedVolume;
+void cube(int& a)
+{
+    a = pow(a, 3);
 }
-
-// 計算長方體體積
-void volume(int& a, int& b, int& c) {
+void cylinder(int& a, int& b)
+{
+    double c;
+    c=pow(a, 2) * 3.14 * b;
+    a = round(c);
+}
+void volume(int& a, int& b, int& c)
+{
     a = a * b * c;
-}
-
-int main() {
-    int a, b, c, r, h;
-    std::cout << "Enter the length of the cube: ";
-    std::cin >> a;
-    cube(a);
-    std::cout << "The volume of the cube is " << a << std::endl;
-
-    std::cout << "Enter the radius and height of the cylinder: ";
-    std::cin >> r >> h;
-    cylinder(r, h);
-    std::cout << "The volume of the cylinder is " << h << std::endl;
-
-    std::cout << "Enter the length, width, and height of the rectangular prism: ";
-    std::cin >> a >> b >> c;
-    volume(a, b, c);
-    std::cout << "The volume of the rectangular prism is " << a << std::endl;
-
-    return 0;
 }
 // 執行程式: Ctrl + F5 或 [偵錯] > [啟動但不偵錯] 功能表
 // 偵錯程式: F5 或 [偵錯] > [啟動偵錯] 功能表
