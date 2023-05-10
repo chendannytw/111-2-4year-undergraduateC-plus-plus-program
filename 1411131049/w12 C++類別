@@ -1,0 +1,77 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Pet
+{
+public:
+    void setPetName(string name)
+    {
+        PetName = name; 
+    } 
+
+    int setPetAge(int age)
+    {
+        if (age > 20 or age < 0)
+        {
+            return 1;
+        }
+        PetAge = age; 
+    }
+
+    // function that gets the course name
+    string getPetName() const
+    {
+        return PetName; // return the object's courseName  //私有資料成員courseName可以透過自家的函數存取
+    } // end function getCourseName
+
+    int getPetAge() const
+    {
+        return PetAge; // return the object's courseName  //私有資料成員courseName可以透過自家的函數存取
+    }
+
+    // function that displays a welcome message
+    void displayMessage() const
+    {
+        // this statement calls getCourseName to get the 
+        // name of the course this GradeBook represents
+        cout << "My pet name is:\n" << getPetName() << "!"
+            << endl;
+        cout << "My pet age is:\n" << getPetAge() << "!"
+            << endl;
+    } // end function displayMessage
+private:
+    string PetName = "unknown"; // course name for this GradeBook
+    int PetAge = 0 ;
+}; // end class GradeBook  
+
+// function main begins program execution
+int main()
+{
+    string nameOfPet; // string of characters to store the course name
+    int ageOfPet;
+    Pet myPet; // create a GradeBook object named myGradeBook
+
+    // display initial value of courseName
+    cout << "Initial Pet name is: " << myPet.getPetName()
+        << endl;
+    cout << "Initial Pet age is: " << myPet.getPetAge()
+        << endl;
+
+    // prompt for, input and set course name
+    cout << "\nPlease enter the Pet name:" << endl;
+    getline(cin, nameOfPet); // read a course name with blanks
+    myPet.setPetName(nameOfPet); // set the course name
+
+    cout << "\nPlease enter the Pet name:" << endl;
+    cin >> ageOfPet; // read a course name with blanks
+    myPet.setPetAge(ageOfPet);
+
+    cout << endl; // outputs a blank line
+    if (myPet.setPetAge(ageOfPet)==1)
+    {
+        cout << "unreasonabale age" << endl;
+    }
+    else 
+        myPet.displayMessage(); // display message with new course name
+} // end main
