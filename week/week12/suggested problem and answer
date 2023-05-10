@@ -1,0 +1,89 @@
+以類別建立成員函數與資料成員，包所需的“set”functions 與 “get”functions，用來設定與取得寵物狗的姓名與年齡(定義為私有資料成員)，透過“set”function判斷資料正確性(輸入姓名是否為空白、年齡是否>20歲)，透過“get”function 先詢問是否為主人，按Y，則印出寵物的姓名與年齡。
+
+#include<iostream>
+#include<string>
+using namespace std;
+
+//類別的初始設定
+class dog
+{
+//類別的成員函數群
+public:  
+explicit dog (string name, int age)     //明確建構子
+:Name(name), Age(age)  //直接修改資料成員Name與Age的內容，分別成為name 與age
+{
+setfunction(string name,int age);
+}
+
+	//運用回傳不同的值，判斷輸入值的正確性情況
+	int setfunction(string name,int age){
+		if (name ==" "&& age > 20){
+			return 0;
+		}
+		else if (name==" "){
+			return 1;
+		}
+		else if(age > 20){
+			return 2;
+		}
+		else{
+			Name = name;
+			Age = age;
+			return 3;
+		}
+	}
+	//取得名稱
+	string sgetfunction()const
+	{
+		return Name;
+	}
+	//取得年齡
+	int igetfunction()const
+	{
+		return Age;
+	}
+	//印出結果
+	void print()const{
+		cout << "The puppy's name and age is:\nName:"<<sgetfunction()<<"\nAge:"
+<<igetfunction()<<endl;
+	}
+//類別中的資料成員
+private:
+	string Name;
+	int Age;
+}; 
+
+int main(){
+	//儲存數入的值
+	string nameofpuppy;
+	int ageofpuppy;
+
+	cout << "Please enter the puppy's name and age:\n" << endl;
+	cout << "Name:" << endl;
+	getline(cin, nameofpuppy);                                  //取得輸入的姓名
+	cout << "Age:" << endl;
+	cin >> ageofpuppy;    
+
+	dog puppydata(nameofpuppy, ageofpuppy);			//利用建構子在建立物件時，賦予相關資料
+
+                                      //取得數入的年齡
+		
+	int result=puppydata.setfunction(nameofpuppy, ageofpuppy);//將值帶入類別，判斷其正確性
+		
+	//印出判斷之後的結果
+	if (result == 3){
+		
+		puppydata.print();
+		
+	}
+	else if (result == 0){
+		cout <<	"The name is empty or the age is over 20.Please try again."<<endl;
+	}
+	else if (result == 1){
+		cout << "The name is empty. Please try again." << endl;
+	}
+	else if (result == 2){
+		cout << "The age is over 20. Please try again." << endl;
+	}
+	system("pause");
+}
