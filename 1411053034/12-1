@@ -1,0 +1,73 @@
+建立一個可以讓使用者透過鍵盤輸入、設定以及印出寵物狗的名字及年齡的程式，但程式碼內需達成以下條件:
+
+1. 要有設定、取得、列印的方法(函數)
+2.  設定(set)函數裡需判斷狗的年齡是否合理，狗的年齡介於0~20歲，條件須放在設定(set)函數裡)
+
+
+// Define class GradeBook that contains a courseName data member
+// and member functions to set and get its value; 
+// Create and manipulate a GradeBook object with these functions.
+#include <iostream>
+#include <string> // program uses C++ standard string class
+using namespace std;
+
+// GradeBook class definition
+class Pet
+{
+public:
+    // function that sets the course name
+    void setPetName(string name)
+    {
+        PetName = name; // store the course name in the object
+    } // end function setCourseName
+    void setPetAge(int age)
+    {
+       PetAge = age; // store the course name in the object
+    } // end function setCourseName
+
+    // function that gets the course name
+    string getPetName() const
+    {
+        return PetName; // return the object's courseName  //私有資料成員courseName可以透過自家的函數存取
+    } // end function getCourseName
+    int getPetAge() const
+    {
+        return PetAge; // return the object's courseName  //私有資料成員courseName可以透過自家的函數存取
+    } // end function getCourseName
+
+    // function that displays a welcome message
+    void displayMessage() const
+    {
+        // this statement calls getCourseName to get the 
+        // name of the course this GradeBook represents
+        cout << "My pet name is:" << getPetName() << "!\n";
+        cout << "My pet age is: " << getPetAge() << "!"
+            << endl;
+    } // end function displayMessage
+private:
+    string PetName="unknown"; // course name for this GradeBook
+    int PetAge=0;
+}; // end class GradeBook  
+
+// function main begins program execution
+int main()
+{
+    string nameOfPet; // string of characters to store the course name
+    Pet myPet; // create a GradeBook object named myGradeBook
+    int nameOfAge;
+    // display initial value of courseName
+    cout << "Initial pet name is: " << myPet.getPetName()
+        << endl;
+    cout << "Initial pet age is: " << myPet.getPetAge()
+        << endl;
+    // prompt for, input and set course name
+    cout << "\nPlease enter the pet name:" << endl;
+    getline(cin, nameOfPet); // read a course name with blanks
+    myPet.setPetName(nameOfPet); // set the course name
+    cout << "\nPlease enter the pet age:" << endl;
+    cin>>nameOfAge; // read a course name with blanks
+    myPet.setPetAge(nameOfAge); // set the course name
+
+    cout << endl; // outputs a blank line
+    myPet.displayMessage(); // display message with new course name
+} // end main
