@@ -1,0 +1,48 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Pet
+{
+public:
+    void setPetName(string name, int age)
+    {
+        PetName = name;
+        PetAge = age;
+    }
+
+    string getPetName() const
+    {
+        return PetName;  //私有資料成員PetName可以透過自家的函數存取
+    }
+
+    int getPetAge() const
+    {
+        return PetAge;   //私有資料成員PetAge可以透過自家的函數存取
+    }
+
+    void displayMessage() const
+    {
+        cout << "My pet name is :" << getPetName() << "!";
+        cout << "\nMy pet age is :" << getPetAge() << "!"
+             << endl;
+    }
+private:
+    string PetName;
+    int PetAge;
+};
+
+int main()
+{
+    string nameOfPet;
+    Pet myPet;
+
+    cout << "Initial Pet name is unknown" << myPet.getPetName()
+         << endl;
+
+    cout << "\nPlease enter the pet name:" << endl;
+    getline(cin, nameOfPet);
+    myPet.setPetName(nameOfPet, 5);
+    cout << endl;
+    myPet.displayMessage();
+}
