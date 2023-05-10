@@ -54,7 +54,7 @@ int main()
 {
     string nameOfpet; // string of characters to store the course name
     pet mypet; // create a GradeBook object named myGradeBook
-
+    int petage;
     // display initial value of courseName
     cout << "Initial course name is: " << mypet.getpetName()
         << endl;
@@ -62,7 +62,9 @@ int main()
     // prompt for, input and set course name
     cout << "\nPlease enter the pet name:" << endl;
     getline(cin, nameOfpet); // read a course name with blanks
-    mypet.setpetName(nameOfpet,10); // set the course name
+    cout << "\nPlease enter the pet age:" << endl;
+    cin >> petage;
+    mypet.setpetName(nameOfpet,petage); // set the course name
 
     cout << endl; // outputs a blank line
     mypet.displayMessage(); // display message with new course name
