@@ -1,0 +1,65 @@
+//1. 要有設定、取得、列印的方法(函數)
+//2.  設定(set)函數裡需判斷狗的年齡是否合理，狗的年齡介於0~20歲，條件須放在設定(set)函數裡)
+
+// Define class GradeBook that contains a courseName data member
+// and member functions to set and get its value; 
+// Create and manipulate a GradeBook object with these functions.
+#include <iostream>
+#include <string> // program uses C++ standard string class
+using namespace std;
+
+// GradeBook class definition
+class mypet
+{
+public:
+    // function that sets the course name
+    void setpetName(string name , int age)
+    {
+        petName = name; // store the course name in the object
+        petage = age;
+    } // end function setCourseName
+
+    // function that gets the course name
+    string getpetName() const
+    {
+        return petName; // return the object's courseName  //私有資料成員courseName可以透過自家的函數存取
+    } // end function getCourseName
+
+    int getpetage() const
+    {
+        return petage; // return the object's courseName  //私有資料成員courseName可以透過自家的函數存取
+    } // end function getCourseName
+
+    // function that displays a welcome message
+    void displayMessage() const
+    {
+        // this statement calls getCourseName to get the 
+        // name of the course this GradeBook represents
+        cout << "寵物狗的姓名：" << getpetName() << "!";
+        cout << "\n寵物狗的年齡：" << getpetage() << endl;
+            
+    } // end function displayMessage
+private:
+    string petName = "unknown"; // course name for this GradeBook
+    int petage = 0;
+}; // end class GradeBook  
+
+// function main begins program execution
+int main()
+{
+    string nameOfpet; // string of characters to store the course name
+    mypet pet; // create a GradeBook object named myGradeBook
+
+    // display initial value of courseName
+    cout << "Initial course name is: " << pet.getpetName()
+        << endl;
+
+    // prompt for, input and set course name
+    cout << "\nPlease enter the pet name:" << endl;
+    getline(cin, nameOfpet); // read a course name with blanks
+
+    pet.setpetName(nameOfpet,5); // set the course name
+
+    cout << endl; // outputs a blank line
+    pet.displayMessage(); // display message with new course name
+} // end main
