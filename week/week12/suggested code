@@ -1,0 +1,66 @@
+利用建構子賦予新的寵物成員姓名與年齡
+
+// Fig. 3.7: fig03_07.cpp
+// Instantiating multiple objects of the GradeBook class and using  
+// the GradeBook constructor to specify the course name 
+// when each GradeBook object is created.
+#include <iostream>
+#include <string> // program uses C++ standard string class
+using namespace std;
+
+// GradeBook class definition
+class Dog
+{
+public:
+   // constructor initializes courseName with string supplied as argument
+   Dog( string name , int age)
+       // member initializer to initialize courseName 
+   {setDogName(name);
+    setDogAge(age);
+      // empty body
+   } // end GradeBook constructor
+
+   // function to set the course name
+   void setDogName( string name )
+   {
+      dogName = name; // store the course name in the object
+   } // end function setCourseName
+   
+   void setDogAge(int age)
+   {dogAge=age;
+   }
+
+   // function to get the course name
+   string getDogName() const
+   {
+      return dogName; // return object's courseName
+   } // end function getCourseName
+   int getDogAge() 
+   {
+      return dogAge; // return object's courseName
+   } // end function getCourseName
+
+   // display a welcome message to the GradeBook user
+   void displayMessage() const
+   {
+      // call getCourseName to get the courseName
+      cout << "Welcome to the pet for\n" << getDogName()  
+         << "!" << endl;
+   } // end function displayMessage
+private:
+    int dogAge=0;
+   string dogName; // course name for this GradeBook
+}; // end class GradeBook  
+
+// function main begins program execution
+int main()
+{
+   // create two GradeBook objects
+   Dog firstDog("肥肥",0);
+   Dog secondDog( "阿肥", 2 );
+
+   // display initial value of courseName for each GradeBook
+   cout << "first dog created for name is: " << firstDog.getDogName()<<" with age is :"<<firstDog.getDogAge()
+      << "\nsecond dog created for name is: " << secondDog.getDogName() <<" with age is :"<<secondDog.getDogAge()
+      << endl;
+} // end main
