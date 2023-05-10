@@ -1,0 +1,36 @@
+題目:把11周的程式改為使用多載函數
+
+#include <iostream>
+#include <cmath> 
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+using namespace std;
+int volume(int& x);
+float volume(int&y, int&z);
+int volume(int&x, int&y, int&z);
+int main() {
+	//demonstrate aquareByValue
+	int x, y, z;
+	cout << "\n輸入邊長:";
+	cin >> x;
+	cout << "正方體體積:" << volume(x) << endl;
+
+	cout << "\n輸入半徑:"; cin >> y;
+	cout << "\n輸入高:"; cin >> z;
+	cout << "圓柱體體積:" <<volume(y,z) << endl;
+
+	cout << "\n輸入長:"; cin >> x;
+	cout << "\n輸入寬:"; cin >> y;
+	cout << "\n輸入高:"; cin >> z;
+	volume(x, y, z);
+	cout << "長方體體積:" <<volume(x,y,z) << endl;
+}
+int volume(int& x) {
+	return x * x * x;//caller's argument not modified
+}
+float volume(int&y, int&z) {
+	return y * y *3.14159 * z;//caller's argument modified
+}
+int volume(int&x, int&y, int&z) {
+	return x * y * z;
+}
