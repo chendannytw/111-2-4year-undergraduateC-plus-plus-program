@@ -1,0 +1,65 @@
+#include <iostream>
+#include <string> // program uses C++ standard string class
+using namespace std;
+
+// GradeBook class definition
+class Pet
+{
+public:
+    
+    int setPetName(string name,int age)
+    {
+        if (name=="" || name == "unknown") {
+            return 0;
+        }
+        else if (age > 20 || age < 0) {
+            return 1;
+        }
+        else {
+            PetName = name;
+            PetAge = age;
+            return 2;
+        }
+    } 
+    string getPetName() const
+    {
+        return PetName; 
+    } 
+    int getPetAge() const
+    {
+        return PetAge; 
+    }
+    void displayMessage() const
+    {
+        cout << "Pet name is:" << getPetName() << "!\nPet age is:" << getPetAge() << endl;
+    } 
+private:
+    string PetName="unknown";
+    int PetAge=0;// course name for this GradeBook
+}; // end class GradeBook  
+
+// function main begins program execution
+int main()
+{
+    string Petname;
+    int Petage;// string of characters to store the course name
+    Pet myPet; // create a GradeBook object named myGradeBook
+
+    // display initial value of courseName
+    cout << "Initial Pet name is: " << myPet.getPetName() << endl;
+    cout << "\nPlease enter the Pet name:" << endl;
+    getline(cin, Petname);
+    cout << "\nPlease enter the Pet age:" << endl;
+    cin >> Petage;
+    if (myPet.setPetName(Petname, Petage) == 0) {
+        cout << "名字未輸入" << endl;
+    }
+    else if (myPet.setPetName(Petname, Petage) == 1) {
+        cout << "年齡超出範圍。" << endl;
+    }
+    else if(myPet.setPetName(Petname, Petage) == 2) {
+        myPet.displayMessage();
+    }
+        
+} 
+
