@@ -1,1 +1,75 @@
+// ConsoleApplication1.cpp : 此檔案包含 'main' 函式。程式會於該處開始執行及結束執行。
+//
 
+#include <iostream>
+#include <string>
+using namespace std;
+
+class gradebook
+{
+public:
+    void setdogname(string name)                         //設定狗狗名字副程式
+    {
+        dogname = name;
+    }
+
+    void setdogage(int age)                              //設定狗狗年齡副程式
+    {
+        while (age > 20) {
+            cout << "Please enter again"<<endl;
+            cin >> age;
+        }
+        dogage = age;
+    }
+
+    string getdogname() const                            //取得狗狗名字副程式
+    {
+        return dogname;
+    }
+
+    int getdogage() const                                //取得狗狗年齡副程式
+    {
+        return dogage;
+    }
+
+    void displaymessage() const                          //列印最終結果副程式
+    {
+        cout << "The dog name is" << getdogname() << "  age is：" << getdogage() << endl;
+    }
+
+private:
+    string dogname;
+    int dogage;
+};
+int main()
+{
+    string nameofdog;
+    int ageofdog;
+    gradebook mygradebook;
+   /* cout << "Initial dog name is：" << mygradebook.getdogname() << endl;
+    cout << "Initial dog age is：" << 0 << endl;*/
+
+    cout << "\nPlease enter the dog name：" << endl;
+    getline(cin, nameofdog);
+
+    cout << "\nPlease enter the dog age：" << endl;
+    cin >> ageofdog;
+
+    mygradebook.setdogname(nameofdog);
+    mygradebook.setdogage(ageofdog);
+
+    cout << endl;
+    mygradebook.displaymessage();
+
+}
+
+// 執行程式: Ctrl + F5 或 [偵錯] > [啟動但不偵錯] 功能表
+// 偵錯程式: F5 或 [偵錯] > [啟動偵錯] 功能表
+
+// 開始使用的提示: 
+//   1. 使用 [方案總管] 視窗，新增/管理檔案
+//   2. 使用 [Team Explorer] 視窗，連線到原始檔控制
+//   3. 使用 [輸出] 視窗，參閱組建輸出與其他訊息
+//   4. 使用 [錯誤清單] 視窗，檢視錯誤
+//   5. 前往 [專案] > [新增項目]，建立新的程式碼檔案，或是前往 [專案] > [新增現有項目]，將現有程式碼檔案新增至專案
+//   6. 之後要再次開啟此專案時，請前往 [檔案] > [開啟] > [專案]，然後選取 .sln 檔案
