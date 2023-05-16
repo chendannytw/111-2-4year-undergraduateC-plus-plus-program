@@ -1,0 +1,74 @@
+【main.cpp】
+#include <iostream>
+#include <string>
+#include "pet.h"
+using namespace std;
+
+int main()
+{
+    string nameofpet;
+    int ageofpet;
+    petbook mypetbook;
+
+    cout << "請輸入寵物名：" << endl;
+    getline(cin, nameofpet);
+
+    cout << "請輸入寵物年齡：" << endl;
+    cin >> ageofpet;
+
+    mypetbook.setpetname(nameofpet);
+    mypetbook.setpetage(ageofpet);
+    
+    cout << endl;
+    mypetbook.displaymessage();
+}
+
+【enter.cpp】
+#include <iostream>
+#include <string>
+#include "pet.h"
+using namespace std;
+
+ void petbook::setpetname(string name)
+    {
+        petname = name;
+    }
+    void petbook::setpetage(int age)
+    {
+        while (age > 20) {
+            cout << "超出範圍，再次輸入:"<<endl;
+            cin >> age;
+        }
+        petage = age;
+    }
+    string petbook::getpetname()
+    {
+        return petname;
+    }
+    int petbook::getpetage()
+    {
+        return petage;
+    }
+    void petbook::displaymessage()
+    {
+        cout << "寵物名是: " << getpetname() << endl;
+		    cout << "寵物年齡是:" << getpetage() << endl;
+    }
+    
+【pet.h】
+#include <iostream>
+#include <string>
+using namespace std;
+
+class petbook
+{
+public:
+    void setpetname(string name);
+    string getpetname();
+    void setpetage(int age);
+    int getpetage();
+    void displaymessage();
+private:
+    string petname;
+    int petage;
+};
