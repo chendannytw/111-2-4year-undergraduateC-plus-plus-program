@@ -1,0 +1,36 @@
+#include<iostream>
+#include "Gradebook.h"
+
+    Gradebook::Gradebook( string name,int age)
+    
+    {
+        courseName=name;
+    }
+    
+    void Gradebook::setCourseName( string name)
+    {
+        cout << "你是否為主人?" <<endl;
+        getline(cin,y);
+        if(y=='y' or y=='Y')
+            {courseName = name;
+            dogName
+            }
+    }
+    
+    string Gradebook::getCourseName()
+    {
+        char y;
+        cout << "你是否為主人?" <<endl;
+        getline(cin,y);
+        if(y=='y' or y=='Y')
+            {
+        return courseName;
+            }
+        return courseName;
+    }
+    
+    void Gradebook::displayMessage()
+    {
+        cout << "welcome to the grade book for\n" << getCourseName()
+            << "!" << endl;
+    }
