@@ -1,0 +1,35 @@
+face2.cpp
+
+#include <iostream>
+#include <string>
+#include "petclass.h"
+using namespace std;
+
+ void gradebook::setdogname(string name)                         //設定狗狗名字副程式
+    {
+        dogname = name;
+    }
+
+    void gradebook::setdogage(int age)                              //設定狗狗年齡副程式
+    {
+        while (age > 20) {
+            cout << "Please enter again"<<endl;
+            cin >> age;
+        }
+        dogage = age;
+    }
+
+    string gradebook::getdogname()                             //取得狗狗名字副程式
+    {
+        return dogname;
+    }
+
+    int gradebook::getdogage()                                 //取得狗狗年齡副程式
+    {
+        return dogage;
+    }
+
+    void gradebook::displaymessage()                           //列印最終結果副程式
+    {
+        cout << "The dog name is " << getdogname() << "  age is：" << getdogage() << endl;
+    }
