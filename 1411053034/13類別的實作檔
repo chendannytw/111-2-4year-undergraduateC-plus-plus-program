@@ -1,0 +1,41 @@
+#include <iostream>
+#include <string> // program uses C++ standard string class
+using namespace std;
+#include "pet.h"
+
+Pet::Pet(string name)
+{
+    PetName = name; // store the course name in the object
+}
+Pet:: ~Pet()
+{
+    cout << "bye bye!" << endl;
+}
+void Pet::setPetName(string name)
+{
+    PetName = name; // store the course name in the object
+} // end function setCourseName
+void  Pet::setPetAge(int age)
+{
+    PetAge = age; // store the course name in the object
+} // end function setCourseName
+
+// function that gets the course name
+string  Pet::getPetName() const
+{
+    return PetName; // return the object's courseName  //私有資料成員courseName可以透過自家的函數存取
+} // end function getCourseName
+int  Pet::getPetAge() const
+{
+    return PetAge; // return the object's courseName  //私有資料成員courseName可以透過自家的函數存取
+} // end function getCourseName
+
+// function that displays a welcome message
+void  Pet::displayMessage() const
+{
+    // this statement calls getCourseName to get the 
+    // name of the course this GradeBook represents
+    cout << "My pet name is:" << getPetName() << "!\n";
+    cout << "My pet age is: " << getPetAge() << "!"
+        << endl;
+} // end function displayMessage
