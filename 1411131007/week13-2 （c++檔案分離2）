@@ -1,0 +1,75 @@
+【main.cpp】
+#include <iostream>  
+#include <string>
+#include "Pet.h"
+using namespace std;
+
+int main()
+{
+    string nameOfPet;
+    Pet myPet("coco", 5);
+
+    cout << "Initial Pet name is :" << myPet.getPetName()
+         << "\nInitial Pet age is :" << myPet.getPetAge()
+         << endl;
+
+    cout << "\nPlease enter the pet name:" << endl;
+    getline(cin, nameOfPet);
+    myPet.setPetName(nameOfPet, 5);
+    cout << endl;
+    myPet.displayMessage();
+}
+
+【Pet.h】
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Pet
+{
+public:
+    Pet(string name, int age);
+    ~Pet();
+    void setPetName(string name, int age);
+    string getPetName() const;
+    int getPetAge() const;
+    void displayMessage() const;
+private:
+    string PetName;
+    int PetAge;
+};
+
+【enter.cpp】
+#include <iostream>
+#include <string>
+#include "Pet.h"
+using namespace std;
+
+Pet::Pet(string name, int age)
+{
+    PetName = name;
+    PetAge = age;
+}
+Pet::~Pet()
+{
+    cout << "Bye bye" << endl;
+}
+void Pet::setPetName(string name, int age)
+{
+    PetName = name;
+    PetAge = age;
+}
+string Pet::getPetName() const
+{
+    return PetName;  //私有資料成員PetName可以透過自家的函數存取
+}
+int Pet::getPetAge() const
+{
+    return PetAge;   //私有資料成員PetAge可以透過自家的函數存取
+}
+void Pet::displayMessage() const
+{
+    cout << "My pet name is :" << getPetName() << "!";
+    cout << "\nMy pet age is :" << getPetAge() << "!"
+        << endl;
+}
