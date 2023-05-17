@@ -1,0 +1,91 @@
+主cpp檔
+#include <iostream>
+#include <string> // program uses C++ standard string class
+#include "Pet.h"
+using namespace std;
+
+// GradeBook class definition
+
+// function main begins program execution
+int main()
+{
+    string nameOfPet; // string of characters to store the course name
+    Pet myPet("Danny",10); // create a GradeBook object named myGradeBook
+    int ageOfPet;
+    // display initial value of courseName
+    cout << "Initial Pat name is: " << myPet.getPetName() << "\nInitial Pat age is: " << myPet.getPetAge()
+        << endl;
+
+
+    // prompt for, input and set course name
+    cout << "\nPlease enter the pet name:" << endl;
+    getline(cin, nameOfPet); // read a course name with blanks
+    myPet.setPetName(nameOfPet, 10); // set the course name
+
+    cout << endl; // outputs a blank line
+    myPet.displayMessage(); // display message with new course name
+} // end main
+---------------------------------
+Pet.h檔(介面檔)
+#include <iostream>
+#include <string> // program uses C++ standard string class
+using namespace std;
+
+class Pet
+{
+public:
+    // function that sets the course name
+    Pet(string name, int age);
+    ~Pet();
+    void setPetName(string name, int age);// function that gets the course name
+    string getPetName() const;
+    int getPetAge() const;// function that displays a welcome message
+    void displayMessage() const;
+    
+private:
+    string PetName = "unknown"; // course name for this GradeBook
+    int PetAge = 0;
+}; // end class GradeBook  
+------------------------------------
+副cpp檔
+#include <iostream>
+#include <string> // program uses C++ standard string class
+#include "Pet.h"
+using namespace std;
+
+Pet::Pet(string name, int age)
+{
+    PetName = name; // store the course name in the object
+    PetAge = age;
+} // end function setCourseName
+
+Pet::~Pet()
+{
+    cout << "bye bye!" << endl;
+}
+
+void Pet:: setPetName(string name, int age)
+{
+    PetName = name; // store the course name in the object
+    PetAge = age;
+} // end function setCourseName
+
+string Pet:: getPetName() const
+{
+    return PetName; // return the object's courseName  //私有資料成員courseName可以透過自家的函數存取
+} // end function getCourseName
+
+int Pet:: getPetAge() const
+{
+    return PetAge; // return the object's courseName  //私有資料成員courseName可以透過自家的函數存取
+} // end function getCourseName
+
+void Pet:: displayMessage() const
+{
+    // this statement calls getCourseName to get the 
+    // name of the course this GradeBook represents
+    cout << "My pet name is:" << getPetName() << "!";
+    cout << "\nMy pet age is:" << getPetAge() << "!"
+        << endl;
+} // end function displayMessage
+
