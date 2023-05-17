@@ -1,0 +1,99 @@
+//主程式
+// Define class GradeBook that contains a courseName data member
+// and member functions to set and get its value; 
+// Create and manipulate a GradeBook object with these functions.
+#include <iostream>
+#include <string> // program uses C++ standard string class
+#include "pet.h"
+using namespace std;
+
+// function main begins program execution
+int main()
+{
+    string nameOfPet; // string of characters to store the course name
+    Pet myPet("Jenny",10); // 為什麼在建立物件的同時可以給他兩個參數?create a GradeBook object named myGradeBook
+    int ageOfPet;
+    // display initial value of courseName
+    cout << "Initial Pat name is: " << myPet.getPetName()
+     << " Initial Pat age is: " << myPet.getPetAge()
+        << endl;
+
+    // prompt for, input and set course name
+    cout << "\nPlease enter the pet name:" << endl;
+    getline(cin, nameOfPet); // read a course name with blanks
+    myPet.setPetName(nameOfPet, 10); // set the course name
+
+    cout << endl; // outputs a blank line
+    myPet.displayMessage(); // display message with new course name
+
+    
+} // end main
+
+
+//介面檔
+#pragma once
+#include <iostream>
+#include <string> // program uses C++ standard string class
+using namespace std;
+
+// GradeBook class definition
+class Pet
+{
+public:
+    Pet(string name, int age);//類別/物件的介面
+    ~Pet();//類別/物件的介面
+    // function that sets the course name
+    void setPetName(string name, int age);//類別/物件的介面  
+    // function that gets the course name
+    string getPetName() const;//類別/物件的介面
+        int getPetAge() const;//類別/物件的介面
+    // function that displays a welcome message
+        void displayMessage() const;//類別/物件的介面
+ private:
+    string PetName = "unknown"; // course name for this GradeBook
+    int PetAge = 0;
+}; // end class GradeBook  
+
+
+
+//實作檔
+#include <iostream>
+#include <string> // program uses C++ standard string class
+#include "pet.h"
+using namespace std;
+Pet::Pet(string name, int age)//類別/物件的介面
+{// 類別實作的內容
+    PetName = name; // store the course name in the object
+    PetAge = age;
+}
+Pet::~Pet()//類別/物件的介面
+{// 類別實作的內容
+    cout << "bye bye!" << endl;
+}
+void Pet::setPetName(string name, int age)//類別/物件的介面
+{// 類別實作的內容
+    PetName = name; // store the course name in the object
+    PetAge = age;
+} // end function setCourseName
+string Pet:: getPetName() const//類別/物件的介面
+{// 類別實作的內容
+    return PetName; // return the object's courseName  //私有資料成員courseName可以透過自家的函數存取
+} // end function getCourseName
+int Pet:: getPetAge() const//類別/物件的介面
+{// 類別實作的內容
+    return PetAge; // return the object's courseName  //私有資料成員courseName可以透過自家的函數存取
+} // end function getCourseName
+void Pet::displayMessage() const//類別/物件的介面
+{// 類別實作的內容
+    // this statement calls getCourseName to get the 
+    // name of the course this GradeBook represents
+    cout << "My pet name is:" << getPetName() << "!";
+    cout << "My pet age is:" << getPetAge() << "!"
+        << endl;
+} // end function displayMessage
+
+
+
+
+
+
