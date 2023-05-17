@@ -1,21 +1,27 @@
-//缺少輸入寵物年齡的功能
-// Define class GradeBook that contains a courseName data member
-// and member functions to set and get its value; 
-// Create and manipulate a GradeBook object with these functions.
 #include <iostream>
 #include <string> // program uses C++ standard string class
-#include "pet.h"
+#include"pet.h"
 using namespace std;
 
+// function main begins program execution
 int main()
 {
-    string nameOfPet; // string of characters to store the course name
-    Pet myPet; // create a GradeBook object named myGradeBook
-    int ageOfPet;
-    cout << "Initial Pat name is: " << myPet.getPetName() << endl;
+    string nameOfpet; // string of characters to store the course name
+    pet mypet("may", 10); // create a GradeBook object named myGradeBook
+    int petage;
+    // display initial value of courseName
+    cout << "Initial course name is: " << mypet.getpetName()
+        << endl;
+    cout << "Initial course age is: " << mypet.getpetage()
+        << endl;
+
+    // prompt for, input and set course name
     cout << "\nPlease enter the pet name:" << endl;
-    getline(cin, nameOfPet); 
-    myPet.setPetName(nameOfPet, 10);
-    cout << endl; 
-    myPet.displayMessage(); 
+    getline(cin, nameOfpet); // read a course name with blanks
+    cout << "\nPlease enter the pet age:" << endl;
+    cin >> petage;
+    mypet.setpetName(nameOfpet,petage); // set the course name
+
+    cout << endl; // outputs a blank line
+    mypet.displayMessage(); // display message with new course name
 } // end main
