@@ -1,0 +1,26 @@
+#include <iostream>
+#include <string> 
+#include "pet.h"
+using namespace std;
+
+
+// GradeBook class definition
+
+int main()
+{
+    Pet myPet("abc",5);
+    string nameOfPet; // string of characters to store the course name
+  
+    int ageOfPet;
+    // display initial value of courseName
+    cout << "Initial Pat name is: " << myPet.getPetName()
+        << endl;
+
+    // prompt for, input and set course name
+    cout << "\nPlease enter the pet name:" << endl;
+    getline(cin, nameOfPet); // read a course name with blanks
+    myPet.setPetName(nameOfPet, 10); // set the course name
+
+    cout << endl; // outputs a blank line
+    myPet.displayMessage(); // display message with new course name
+} // end main
