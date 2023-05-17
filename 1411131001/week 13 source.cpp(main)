@@ -1,0 +1,34 @@
+/*利用「建構子」與「解構子」建立一個寵物類別，建構子參數包含寵物姓名與年齡，並且將此類別分別設置成:
+
+(1) 介面檔pet.h(抽離出實作內容的類別檔案)
+
+(2) 實作檔pet_source.cpp 包含“get”、“set” functions(成員函數的執行方式，p.s.要判斷狗名字和年齡是否>20的合理性) ，須透過“get”function 詢問是否為主人，按Y則印出寵物的姓名與年齡，類別內容(實作檔)的petset.cpp。
+(3) 主程式檔 source.cpp
+*/
+#include <iostream>
+#include <string> // program uses C++ standard string class
+#include"pet.h"
+using namespace std;
+
+// function main begins program execution
+int main()
+{
+    string nameOfpet; // string of characters to store the course name
+    pet mypet("may", 10); // create a GradeBook object named myGradeBook
+    int petage;
+    // display initial value of courseName
+    cout << "Initial course name is: " << mypet.getpetName()
+        << endl;
+    cout << "Initial course age is: " << mypet.getpetage()
+        << endl;
+
+    // prompt for, input and set course name
+    cout << "\nPlease enter the pet name:" << endl;
+    getline(cin, nameOfpet); // read a course name with blanks
+    cout << "\nPlease enter the pet age:" << endl;
+    cin >> petage;
+    mypet.setpetName(nameOfpet,petage); // set the course name
+
+    cout << endl; // outputs a blank line
+    mypet.displayMessage(); // display message with new course name
+} // end main
