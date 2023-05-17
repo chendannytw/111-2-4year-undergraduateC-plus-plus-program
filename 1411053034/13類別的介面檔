@@ -1,0 +1,18 @@
+#include <iostream>
+#include <string> // program uses C++ standard string class
+using namespace std;
+class Pet
+{
+public:
+    // function that sets the course name
+        Pet(string name);
+        ~Pet();
+        void setPetName(string name);
+        void setPetAge(int age);
+        string getPetName() const;
+        int getPetAge() const;
+        void displayMessage() const;
+private:
+    string PetName = "unknown"; // course name for this GradeBook
+    int PetAge = 0;
+}; // end class GradeBook  
