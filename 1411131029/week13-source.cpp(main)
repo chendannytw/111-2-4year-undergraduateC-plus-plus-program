@@ -7,7 +7,7 @@ using namespace std;
 int main()
 {
     string nameOfpet; // string of characters to store the course name
-    pet mypet("may", 10); // create a GradeBook object named myGradeBook
+    pet mypet; // create a GradeBook object named myGradeBook
     int petage;
     // display initial value of courseName
     cout << "Initial course name is: " << mypet.getpetName()
