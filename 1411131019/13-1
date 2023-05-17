@@ -3,7 +3,7 @@ main2.cpp
 
 #include <iostream>
 #include <string>
-#include "petclass.h"
+#include "pet.h"
 using namespace std;
 
 
@@ -11,9 +11,9 @@ int main()
 {
     string nameofdog;
     int ageofdog;
-    gradebook mygradebook;
-    cout << "Initial dog name is：" << mygradebook.getdogname() << endl;
-    cout << "Initial dog age is：" <<0 << endl;
+    pet mypet("ABC");
+    cout << "Initial dog name is：" << mypet.getdogname() << endl;
+    cout << "Initial dog age is：" << 0 << endl;
 
     cout << "\nPlease enter the dog name：" << endl;
     getline(cin, nameofdog);
@@ -21,10 +21,10 @@ int main()
     cout << "\nPlease enter the dog age：" << endl;
     cin >> ageofdog;
 
-    mygradebook.setdogname(nameofdog);
-    mygradebook.setdogage(ageofdog);
-    
+    mypet.setdogname(nameofdog);
+    mypet.setdogage(ageofdog);
+
     cout << endl;
-    mygradebook.displaymessage();
+    mypet.displaymessage();
 
 }
