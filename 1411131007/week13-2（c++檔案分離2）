@@ -1,3 +1,5 @@
+//建構子與解構子
+
 【main.cpp】
 #include <iostream>  
 #include <string>
