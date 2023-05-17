@@ -1,23 +1,27 @@
-petclass.h
+pet.h
 
 #include <iostream>
 #include <string>
 using namespace std;
 
-class gradebook
+class pet
 {
 public:
-    void setdogname(string name);                        //設定狗狗名字副程式
-    
-    void setdogage(int age);                             //設定狗狗年齡副程式
+    pet(string name);                       
+    ~pet();
+    void setdogname(string name);                        
    
-    string getdogname();                            //取得狗狗名字副程式
-   
-    int getdogage();                                     //取得狗狗年齡副程式
+    void setdogage(int age);                             
    
 
-    void displaymessage();                         //列印最終結果副程式
-    
+    string getdogname() const;                            
+   
+    int getdogage() const;                               
+   
+
+    void displaymessage() const;                         
+   
+
 private:
     string dogname;
     int dogage;
