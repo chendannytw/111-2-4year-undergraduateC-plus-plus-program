@@ -1,0 +1,50 @@
+#include <iostream>
+#include <string> // program uses C++ standard string class
+#include "pet.h"
+using namespace std;
+Pet::Pet(string name, int age) {
+    PetName = name;
+    PetAge = age;
+}
+
+Pet::~Pet() {
+    cout << "bye";
+}
+void Pet:: setPetName(string name)
+{
+    PetName = name;
+} 
+
+int Pet:: setPetAge(int age)
+{
+    if (age > 20 or age < 0)
+    {
+        return 1;
+    }
+    PetAge = age;
+}
+
+string Pet:: getPetName() const
+{
+
+    return PetName;
+}
+
+int Pet:: getPetAge() const
+{
+    return PetAge; 
+}
+
+void Pet:: displayMessage() const
+{
+    // this statement calls getCourseName to get the 
+    // name of the course this GradeBook represents
+    cout << "My pet name is:\n" << getPetName() << "!"
+        << endl;
+    cout << "My pet age is:\n" << getPetAge() << "!"
+        << endl;
+}
+
+
+
+
