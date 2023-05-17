@@ -1,0 +1,32 @@
+#include <iostream>
+#include <string>
+#include"pet.h"
+using namespace std;
+
+int main()
+{
+    string nameOfPet; 
+    int ageOfPet;
+    Pet myPet("qw",10 );
+
+    cout << "Initial Pet name is: " << myPet.getPetName()
+        << endl;
+    cout << "Initial Pet age is: " << myPet.getPetAge()
+        << endl;
+
+    cout << "\nPlease enter the Pet name:" << endl;
+    getline(cin, nameOfPet); 
+    myPet.setPetName(nameOfPet); 
+
+    cout << "\nPlease enter the Pet Age:" << endl;
+    cin >> ageOfPet; 
+    myPet.setPetAge(ageOfPet);
+
+    cout << endl; 
+    if (myPet.setPetAge(ageOfPet) == 1)
+    {
+        cout << "unreasonabale age" << endl;
+    }
+    else
+        myPet.displayMessage(); 
+}
