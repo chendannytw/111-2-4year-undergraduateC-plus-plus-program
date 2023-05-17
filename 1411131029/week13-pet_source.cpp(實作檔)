@@ -1,0 +1,37 @@
+//缺少輸入寵物年齡的功能
+// Define class GradeBook that contains a courseName data member
+// and member functions to set and get its value; 
+// Create and manipulate a GradeBook object with these functions.
+#include <iostream>
+#include <string>
+#include "pet.h" 
+using namespace std;
+
+    void Pet setPetName::(string name, int age)
+    {
+        PetName = name; // store the course name in the object
+        PetAge = age;
+    } // end function setCourseName
+
+    // function that gets the course name
+    string Pet::getPetName() const
+    {
+        return PetName; // return the object's courseName  //私有資料成員courseName可以透過自家的函數存取
+    } // end function getCourseName
+
+    int Pet::getPetAge() const
+    {
+        return PetAge; // return the object's courseName  //私有資料成員courseName可以透過自家的函數存取
+    } // end function getCourseName
+
+    // function that displays a welcome message
+    void Pet::displayMessage() const
+    {
+        // this statement calls getCourseName to get the 
+        // name of the course this GradeBook represents
+        cout << "My pet name is:" << getPetName() << "!";
+        cout << "My pet age is:" << getPetAge() << "!"
+            << endl;
+    } // end function displayMessage
+
+}; // end class GradeBook  
