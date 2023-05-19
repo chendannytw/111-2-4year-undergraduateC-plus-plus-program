@@ -1,0 +1,49 @@
+/*
+1.建立一個西元年、月、日的類別，包含可以分別印出"西元"與"民國"日期，但程式碼須達成以下條件：
+(1)請使用類別定義，定義部分請用"抽象方法"(抽象方法就是介面與實作分離)
+(2)日期部分請透過建構子設定預設值為1990年1月1日必須判斷內容是否正確，例如2017/03/32為錯誤的日期
+*/
+// Fig. 17.3: fig17_03.cpp(date.cpp)
+// Program to test class Time.
+// NOTE: This file must be compiled with Time.cpp.
+#include <iostream>
+#include <stdexcept> // for invalid_argument exception class
+#include "date.h" // include definitionof class Time from Time.h
+using namespace std;
+
+int main()
+{
+    date t; // instantiate object t of class Time
+
+    // output Time object t's initial values
+    cout << "The initial universal date is ";
+    t.printUniversal(); // 00:00:00
+    cout << "\nThe initial standard date is ";
+    t.printROC(); // 12:00:00 AM
+
+    t.setdate(2004, 8, 11); // change time
+
+    // output Time object t's new values
+    cout << "\n\nUniversal date after setdate is ";
+    t.printUniversal(); // 13:27:06
+    cout << "\nStandard date after setdate is ";
+    t.printROC(); // 1:27:06 PM
+
+    // attempt to set the time with invalid values
+    try
+    {
+        t.setdate(4000, 99, 99); // all values out of range
+    } // end try
+    catch (invalid_argument& e)
+    {
+        cout << "\n\nException: " << e.what() << endl;
+    } // end catch
+
+    // output t's values after specifying invalid values
+    cout << "\nAfter attempting invalid settings:"
+        << "\nUniversal date: ";
+    t.printUniversal(); // 00:00:00
+    cout << "\nStandard date: ";
+    t.printROC(); // 12:00:00 AM
+    cout << endl;
+} // end main
