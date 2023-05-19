@@ -1,0 +1,44 @@
+// Fig. 17.2: Time.cpp(DATE_main.cpp)
+// Member-function definitions for class Time.
+#include <iostream>
+#include <iomanip>
+#include <stdexcept> // for illegal_argument exception class
+#include "date.h" // include definition of class Time from Time.h
+
+using namespace std;
+
+// Time constructor initializes each data member to zero.
+date::date()
+{
+    year = month = day = 0;
+} // end Time constructor
+
+// set new Time value using universal time
+void date::setdate(int h, int m, int s)
+{// validate hour, minute and second
+    if ((h >= 0 && h < 3000) && (m >= 0 && m <= 12) &&
+        (s >= 0 && s <= 31))
+    {
+        year = h;
+        month = m;
+        day = s;
+    } // end if
+    else
+        throw invalid_argument(
+            "year, month and/or day was out of range");
+} // end function setTime
+
+// print Time in universal-time format (HH:MM:SS)
+void date::printUniversal()  //印出24小時制 
+{
+    cout << setfill('0') << setw(4) << year << "/"
+        << setw(2) << month << "/" << setw(2) << day<<"西元"<<endl;
+} // end function printUniversal
+
+// print Time in standard-time format (HH:MM:SS AM or PM)
+void date::printROC()//印出12小時制
+{
+    cout << ((year < 200) ? year : year - 1911) << "/"
+        << setfill('0') << setw(2) << month << "/" << setw(2)
+        << day <<" 民國"<<endl;
+} // end function printStandard
