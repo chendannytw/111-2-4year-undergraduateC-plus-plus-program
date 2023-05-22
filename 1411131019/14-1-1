@@ -1,0 +1,36 @@
+//主程式檔
+
+#include <iostream>
+#include <stdexcept>
+using namespace std;
+#include "Time.h"				//將標頭檔Time.h引入此專案
+int main()
+{
+	Date t;						//建立一個Date類別't'
+	cout << "The initial Date  is ";				
+	t.printDate();									//印出初始西元、民國日期(皆為0)
+	cout << "\nThe initial ROCDate time is ";
+	t.printROCDate();
+
+	t.setDate(2023,5, 22);			//設定日期
+
+	cout << "\n\nDate after setDate is ";			//分別印出轉換後的西元、民國日期
+	t.printDate();
+	cout << "\n\nROCDate after setDate is ";
+	t.printROCDate();
+
+	/*try {
+		t.setDate(99, 99, 99);
+	}
+	catch (invalid_argument& e)
+	{
+		cout << "\n\nException：" << e.what() << endl;
+	}
+
+	cout << "\n\nAfter attempting invalid settings：" << "\nDate：";		
+	t.printDate();
+	cout << "\nROCDate：";
+	t.printROCDate();
+	cout << endl;*/
+}
+
