@@ -1,0 +1,37 @@
+//類別實作檔
+#include <iostream>
+#include <iomanip>
+#include <stdexcept>
+#include"Time.h"
+using namespace std;
+
+Date::Date()					//給建構子Date初始值'0'
+	:year(0), month(0), day(0)
+{
+	
+/*	year=0;
+	month=0;
+	day=0;    */
+	
+}
+
+void Date::setDate(int y, int m, int d)			
+{		//若年介於0-2999、月介於0-12、日介於0-31之間
+	if ((y >= 0 && y < 3000) && (m >= 0 && m < 13) && (d >= 0 && d < 32))
+	{
+		year = y;			//將y值傳遞給私有成員year
+		month = m;
+		day = d;
+	}
+	/*else
+		throw invalid_argument("hour,minute and/or second was out of range");*/
+}
+void Date::printDate()const		
+{						//setw()設定寬度
+	cout << setfill('0') << setw(4) << year << "/" << setw(2) << month << "/" << setw(2) << day << " 西元";
+}
+
+void Date::printROCDate()const
+{			//(  ?  :  )三元運算子  若year<2000則印出year否則將year-1911後印出
+	cout << ((year <2000) ? year : year -1911) << "/" << setfill('0') << setw(2) << month << "/" << setw(2) << day << " 民國";
+}
