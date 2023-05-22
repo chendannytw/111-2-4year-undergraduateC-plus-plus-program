@@ -1,0 +1,18 @@
+//類別介面檔
+#ifndef TIME_H			//ifndef = if not define --->如果TIME_H沒有被定義
+#define TIME_H			//將#endif以上的程式內容定義為TIME_H
+
+class Date							//建立一個類別Date
+{
+public:									//公開成員有
+	Date();								//明確建構子
+	void setDate(int, int, int);		//設定日期
+	void printDate()const;				  //印出西元日期
+	void printROCDate()const;			  //印出民國日期
+private:								//私有成員有
+	int year;							//年
+	int month;						//月
+	int day;							//日
+};
+
+#endif			//以上範圍皆為TIME_H
