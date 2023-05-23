@@ -1,0 +1,19 @@
+//Time.h介面檔
+
+#ifndef TIME_H		
+#define TIME_H		
+
+class Date						
+{
+public:						
+	Date();	
+	void setDate(int, int, int);		//日期設定
+	void printDate()const;				  //西元日期
+	void printROCDate()const;			  //民國日期
+private:	
+	int year;	
+	int month;	
+	int day;	
+};
+
+#endif			//以上範圍皆為TIME_H
