@@ -1,0 +1,27 @@
+#include <iostream>
+#include <iomanip>
+#include <stdexcept>
+#include <string>
+using namespace std;
+
+class pet
+{
+public:
+    pet(string name);
+    ~pet();
+    void setdogname(string name);
+    void setdogage(int age);
+    void setdogbirth(int y,int m,int d);
+    string getdogname() const;
+    int getdogage() const;
+    int getdogyear() const;
+    int getdogmonth() const;
+    int getdogday() const;
+    void displaymessage() const;
+private:
+    string dogname;
+    int dogage;
+    int year;
+    int month;
+    int day;
+}; 
