@@ -1,0 +1,67 @@
+#include <iostream>
+#include <iomanip>
+#include <stdexcept>
+#include <string>
+#include "pet.h"
+using namespace std;
+
+pet::pet(string name)  
+{
+    dogname = name;
+}
+
+pet:: ~pet() {
+    cout << "bye bye！" << endl;
+}
+
+void pet::setdogname(string name)  
+{
+    dogname = name;
+}
+
+void pet::setdogage(int age)  
+{
+    while (age > 20) {
+        cout << "Please enter again" << endl;
+        cin >> age;
+    }
+    dogage = age;
+}
+
+void pet::setdogbirth(int y, int m, int d)
+{
+    year = y;
+    month = m;
+    day = d;
+}
+
+string pet::getdogname() const 
+{
+    return dogname;
+}
+
+int pet::getdogage() const 
+{
+    return dogage;
+}
+
+int pet::getdogyear() const                                
+{
+    return year;
+}
+
+int pet::getdogmonth() const
+{
+    return month;
+}
+
+int pet::getdogday() const
+{
+    return day;
+}
+
+void pet::displaymessage() const  
+{
+    cout << "The dog name is  " << getdogname() << "  age is：" << getdogage() <<endl;
+    cout <<getdogyear() << "/"<< getdogmonth() << "/" << getdogday();
+}
