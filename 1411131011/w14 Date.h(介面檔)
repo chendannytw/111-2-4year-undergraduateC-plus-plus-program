@@ -1,0 +1,23 @@
+// Fig. 17.1: Time.h
+// Declaration of class Time.
+// Member functions are defined in Time.cpp
+
+// prevent multiple inclusions of header
+#ifndef DATE_H
+#define DATE_H
+
+// Date class definition
+class Date 
+{
+public:
+   Date(); // constructor
+   void setDate( int, int, int ); // set hour, minute and second
+   void printUniversal(); // print time in universal-time format
+   void printROC(); // print time in standard-time format
+private:
+   int year; 
+   int month; // 1 - 12
+   int day; // 1 - 31
+}; // end class Time
+
+#endif
