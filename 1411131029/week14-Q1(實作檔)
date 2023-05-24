@@ -24,7 +24,6 @@ Date::Date() {
 	void Date::printDate()const
 	{
 		cout << setfill('0') << setw(4) << year << "/" << setw(2) << month << "/" << setw(2) << day << " 西元";
-		//cout << setfill('0') << setw(4) << year << "/" << setw(2) << month << "/" << setw(2) << day << " 西元";
 	}   //setw()設定寬度
 	void Date::printROCDate()const
 	{
