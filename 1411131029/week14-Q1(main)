@@ -4,15 +4,19 @@ using namespace std;
 #include "Time.h"	//引入Time.h
 int main()
 {
-	Date t;			
-	cout << "The initial Date  is ";				
+	Date t;
+
+	cout << "The initial Date  is ";
 	t.printDate();		//印出初始西元、民國日期
+
 	cout << "\nThe initial ROCDate time is ";
 	t.printROCDate();
-	t.setDate(2023,5, 24);	//設定日期
+
+	t.setDate(2023, 5, 24);	//設定日期
 
 	cout << "\n\nDate after setDate is ";			//印出轉換後的西元日期、民國日期
 	t.printDate();
+
 	cout << "\n\nROCDate after setDate is ";
 	t.printROCDate();
 
