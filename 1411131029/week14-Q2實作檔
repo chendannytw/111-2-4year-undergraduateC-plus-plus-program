@@ -5,7 +5,7 @@
 #include "pet.h"
 using namespace std;
 
-pet::pet(string name)  
+pet::pet(string name)
 {
     dogname = name;
 }
@@ -14,15 +14,15 @@ pet:: ~pet() {
     cout << "bye bye！" << endl;
 }
 
-void pet::setdogname(string name)  
+void pet::setdogname(string name)
 {
     dogname = name;
 }
 
-void pet::setdogage(int age)  
+void pet::setdogage(int age)
 {
     while (age > 20) {
-        cout << "Please enter again" << endl;
+        cout << "Please enter again the dog age." << endl;
         cin >> age;
     }
     dogage = age;
@@ -35,17 +35,17 @@ void pet::setdogbirth(int y, int m, int d)
     day = d;
 }
 
-string pet::getdogname() const 
+string pet::getdogname() const
 {
     return dogname;
 }
 
-int pet::getdogage() const 
+int pet::getdogage() const
 {
     return dogage;
 }
 
-int pet::getdogyear() const                                
+int pet::getdogyear() const
 {
     return year;
 }
@@ -60,8 +60,8 @@ int pet::getdogday() const
     return day;
 }
 
-void pet::displaymessage() const  
+void pet::displaymessage() const
 {
-    cout << "The dog name is  " << getdogname() << "  age is：" << getdogage() <<endl;
-    cout <<getdogyear() << "/"<< getdogmonth() << "/" << getdogday();
+    cout << "The dog name is：" << getdogname()<<"　　age is：" << getdogage() << endl;
+    cout << "dog birthdar is：" << getdogyear() << " / " << getdogmonth() << " / " << getdogday()<< endl;
 }
