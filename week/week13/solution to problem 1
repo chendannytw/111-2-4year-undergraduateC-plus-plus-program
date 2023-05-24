@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string> // program uses C++ standard string class
 #include "pet.h"
+#include "Date.h"
 using namespace std;
 
 // function main begins program execution
@@ -30,10 +31,11 @@ int main()
 } // end main
 
 
-//介面檔
+//寵物介面檔
 #pragma once
 #include <iostream>
 #include <string> // program uses C++ standard string class
+#include "Date.h"
 using namespace std;
 
 // GradeBook class definition
@@ -52,11 +54,12 @@ public:
  private:
     string PetName = "unknown"; // course name for this GradeBook
     int PetAge = 0;
+    Date Birthday;
 }; // end class GradeBook  
 
 
 
-//實作檔
+//寵物實作檔
 #include <iostream>
 #include <string> // program uses C++ standard string class
 #include "pet.h"
@@ -65,6 +68,9 @@ Pet::Pet(string name, int age)//類別/物件的介面
 {// 類別實作的內容
     PetName = name; // store the course name in the object
     PetAge = age;
+    Birthday.year=2023;
+    Birthday.month=05;
+    Birthday.day=24;
 }
 Pet::~Pet()//類別/物件的介面
 {// 類別實作的內容
@@ -90,7 +96,206 @@ void Pet::displayMessage() const//類別/物件的介面
     cout << "My pet name is:" << getPetName() << "!";
     cout << "My pet age is:" << getPetAge() << "!"
         << endl;
+    cout <<"My pet was born in " <<Birthday.year<<Birthday.month<<Birthday.day<<endl;
 } // end function displayMessage
+
+
+
+
+
+
+
+
+
+
+
+
+///problem 2
+//主程式
+// Define class GradeBook that contains a courseName data member
+// and member functions to set and get its value; 
+// Create and manipulate a GradeBook object with these functions.
+#include <iostream>
+#include <string> // program uses C++ standard string class
+#include "pet.h"
+#include "Date.h"
+using namespace std;
+
+// function main begins program execution
+int main()
+{
+    string nameOfPet; // string of characters to store the course name
+    Pet myPet("Jenny", 10, 2023,12,22); // 為什麼在建立物件的同時可以給他兩個參數?create a GradeBook object named myGradeBook
+    int ageOfPet;
+    // display initial value of courseName
+    cout << "Initial Pat name is: " << myPet.getPetName()
+        << " Initial Pat age is: " << myPet.getPetAge()
+        << endl;
+
+    // prompt for, input and set course name
+    cout << "\nPlease enter the pet name:" << endl;
+    getline(cin, nameOfPet); // read a course name with blanks
+    myPet.setPetName(nameOfPet, 10); // set the course name
+
+    cout << endl; // outputs a blank line
+    myPet.displayMessage(); // display message with new course name
+
+
+} // end main
+
+
+
+
+// Fig. 9.2: Time.cpp
+// Time class member-function definitions.
+#include <iostream>
+#include <iomanip>
+#include <stdexcept> // for illegal_argument exception class
+#include "Date.h" // include definition of class Time from Time.h
+
+using namespace std;
+
+// Time constructor initializes each data member to zero.
+Date::Date(int y, int m, int d)
+{
+    year = y;
+    month = m;
+    day = d;
+
+} // end Time constructor
+
+// set new Time value using universal time
+void Date::setDate(int y, int m, int d)
+{
+    // validate hour, minute and second
+    if ((y >= 1 && y < 9999) && (m >= 1 && m < 13) &&
+        (d >= 1 && d < 31))
+    {
+        year = y;
+        month = m;
+        day = d;
+    } // end if
+    else
+        throw invalid_argument(
+            "year, month and/or day was out of range");
+} // end function setTime
+
+// print Time in universal-time format (HH:MM:SS)
+void Date::printUniversal() const   //印出西元年
+{
+    cout << setfill('0') << setw(4) << year << "/"
+        << setw(2) << month << "/" << setw(2) << day;
+} // end function printUniversal
+
+// print Time in standard-time format//印出民國年
+void Date::printStandard() const
+{
+    cout << ((year >1911) ? year-1911 : 1911-year) << "/"
+        << setfill('0') << setw(2) << month << "/" << setw(2)
+        << day << (year < 1911 ? " 民國前" : " 民國");
+} // end function printStandard
+
+
+
+
+//Date.h
+// prevent multiple inclusions of header
+#ifndef DATE_H
+#define DATE_H
+
+// Time class definition
+class Date
+{
+public:
+	Date(int, int, int); // constructor
+	void setDate(int, int, int); // set hour, minute and second
+	void printUniversal() const; // 印出西元年格式 format
+	void printStandard() const; // 印出民國年格式 format
+private:
+	unsigned int year; // 0 - 9999 
+	unsigned int month; // 1 - 12
+	unsigned int day; // 1 - 31
+}; // end class Time
+
+#endif
+
+
+
+//寵物介面檔
+#pragma once
+#include <iostream>
+#include <string> // program uses C++ standard string class
+#include "Date.h"
+using namespace std;
+
+// GradeBook class definition
+class Pet
+{
+public:
+    Pet(string name, int age, int year, int month, int day);//類別/物件的介面
+    ~Pet();//類別/物件的介面
+    // function that sets the course name
+    void setPetName(string name, int age);//類別/物件的介面  
+    // function that gets the course name
+    string getPetName() const;//類別/物件的介面
+    int getPetAge() const;//類別/物件的介面
+// function that displays a welcome message
+    void displayMessage() const;//類別/物件的介面
+private:
+    string PetName = "unknown"; // course name for this GradeBook
+    int PetAge = 0;
+    Date Birthday;
+}; // end class GradeBook  
+
+
+
+
+
+//寵物實作檔
+#include <iostream>
+#include <string> // program uses C++ standard string class
+#include "pet.h"
+#include "Date.h"
+using namespace std;
+Pet::Pet(string name, int age, int year,int month, int day)//類別/物件的介面
+{// 類別實作的內容
+    PetName = name; // store the course name in the object
+    PetAge = age;
+    Date Birthday(year, month, day);
+    
+}
+Pet::~Pet()//類別/物件的介面
+{// 類別實作的內容
+    cout << "bye bye!" << endl;
+}
+void Pet::setPetName(string name, int age)//類別/物件的介面
+{// 類別實作的內容
+    PetName = name; // store the course name in the object
+    PetAge = age;
+} // end function setCourseName
+string Pet::getPetName() const//類別/物件的介面
+{// 類別實作的內容
+    return PetName; // return the object's courseName  //私有資料成員courseName可以透過自家的函數存取
+} // end function getCourseName
+int Pet::getPetAge() const//類別/物件的介面
+{// 類別實作的內容
+    return PetAge; // return the object's courseName  //私有資料成員courseName可以透過自家的函數存取
+} // end function getCourseName
+void Pet::displayMessage() const//類別/物件的介面
+{// 類別實作的內容
+    // this statement calls getCourseName to get the 
+    // name of the course this GradeBook represents
+    cout << "My pet name is:" << getPetName() << "!";
+    cout << "My pet age is:" << getPetAge() << "!"
+        << endl;
+    cout << "My pet was born in " << endl;
+    Birthday.printStandard();
+} // end function displayMessage
+
+
+
+
+
 
 
 
