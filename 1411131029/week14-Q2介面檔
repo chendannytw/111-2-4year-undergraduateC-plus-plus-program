@@ -11,7 +11,7 @@ public:
     ~pet();
     void setdogname(string name);
     void setdogage(int age);
-    void setdogbirth(int y,int m,int d);
+    void setdogbirth(int y, int m, int d);
     string getdogname() const;
     int getdogage() const;
     int getdogyear() const;
@@ -25,3 +25,4 @@ private:
     int month;
     int day;
 }; 
+
