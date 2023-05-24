@@ -67,16 +67,15 @@ void Date::setDate( int h, int m, int s )
 
 void Date::printUniversal()
 {
-   cout << setfill( '0' ) << setw( 4 ) << year << ":" 
-      << setw( 2 ) << month << ":" << setw( 2 ) 
-	  << day << " 西元" << endl;;
+   cout << "西元 " << setfill( '0' ) << setw( 4 ) << year << ":" 
+      << setw( 2 ) << month << ":" << setw( 2 ) << day;
 } 
 
 void Date::printROC()
 {
-   cout << ( ( year < 200  ) ? year : year - 1911 ) << ":" 
+   cout << "民國 " << ( ( year < 200  ) ? year : year - 1911 ) << ":" 
       << setfill( '0' ) << setw( 2 ) << month << ":" << setw( 2 )
-      << day << " 民國" << endl;
+      << day;
 } 
 
 【time.h】
