@@ -17,8 +17,8 @@ Date::Date()
 void Date::setDate(int y, int m, int d)
 {
     // validate hour, minute and second
-    if ((y  < 3000) && (m >= 0 && m <= 12) &&
-        (d >= 0 && d <= 31))
+    if ((y < 999) && (m > 0 && m <= 12) &&
+        (d > 0 && d <= 31))
     {
         year = y;
         month = m;
@@ -32,14 +32,14 @@ void Date::setDate(int y, int m, int d)
 // print Time in universal-time format (HH:MM:SS)
 void Date::printUniversal() const
 {
-    cout << setfill('0') << setw(4) << year << "/"
+    cout << "西元" << setfill('0') << setw(4) << year << "/"
         << setw(2) << month << "/" << setw(2) << day;
 } // end function printUniversal
 
 // print Time in standard-time format (HH:MM:SS AM or PM)
 void Date::printROC() const
 {
-    cout << ((year < 200) ? year : year - 1911) << "/"
+    cout << " 民國 " << ((year < 9999) ? year : year - 1911) << "/"
         << setfill('0') << setw(2) << month << "/" << setw(2)
-        << day << " 民國 " << endl;
+        << day << endl;
 } // end function printStandard
