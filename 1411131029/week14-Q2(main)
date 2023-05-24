@@ -2,29 +2,29 @@
 #include <iomanip>
 #include <stdexcept>
 #include <string>
-#include "pet.h"
+#include "Pet.h"
 using namespace std;
 
 int main()
 {
     string nameofdog;
     int ageofdog;
-    int y=0;
-    int m=0;
-    int d=0;
+    int y = 0;
+    int m = 0;
+    int d = 0;
     pet mypet("coco");
     cout << "Initial dog name is：" << mypet.getdogname() << endl;
     cout << "Initial dog age is：" << 0 << endl;
-    cout << "Initial dog bith is：00/00/00" << endl;
+    cout << "Initial dog birthday is：00/00/00" << endl;
 
     cout << "\nPlease enter the dog name：" << endl;
     getline(cin, nameofdog);
-    
+
     cout << "\nPlease enter the dog age：" << endl;
     cin >> ageofdog;
 
-    cout << "\nPlease enter the dog bith year：" << endl;
-    cin >> y>>m>>d;
+    cout << "\nPlease enter the dog birthday：" << endl;
+    cin >> y >> m >> d;
 
     mypet.setdogname(nameofdog);
     mypet.setdogage(ageofdog);
