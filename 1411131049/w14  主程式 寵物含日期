@@ -1,0 +1,41 @@
+#include <iostream>
+#include <string>
+#include"Pet.h"
+#include"Date.h"
+using namespace std;
+
+int main()
+{
+    string nameOfPet;
+    int ageOfPet,y,m,d;
+    Pet myPet("qw", 10);
+    Date t(1990,01,01);
+
+    cout << "Initial Pet name is: " << myPet.getPetName()
+        << endl;
+    cout << "Initial Pet age is: " << myPet.getPetAge()
+        << endl;
+
+    cout << "\nPlease enter the Pet name:" << endl;
+    getline(cin, nameOfPet);
+    myPet.setPetName(nameOfPet);
+
+    cout << "\nPlease enter the Pet Age:" << endl;
+    cin >> ageOfPet;
+    myPet.setPetAge(ageOfPet);
+
+    cout << "\nenter the Pet birthday:" << endl;
+    cin >> y >> m >> d;
+    t.setDate(y, m, d);
+
+
+    cout << endl;
+    if (myPet.setPetAge(ageOfPet) == 1)
+    {
+        cout << "unreasonabale age" << endl;
+    }
+    else
+        myPet.displayMessage(); 
+    t.printUniversal();
+    t.printStandard();
+}
