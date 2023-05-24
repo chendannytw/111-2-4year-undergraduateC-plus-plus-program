@@ -16,7 +16,7 @@ int main()
     cout << "\nThe initial ROC Date is ";
     t.printROC(); // 12:00:00 AM
 
-    t.setDate(1990, 1, 1); // change time
+    t.setDate(2022, 7, 1); // change time
 
     // output Time object t's new values
     cout << "\n\nUniversal time after setDate is ";
@@ -27,7 +27,7 @@ int main()
     // attempt to set the time with invalid values
     try
     {
-        t.setDate(2017, 03, 32); // all values out of range
+        t.setDate(99, 99, 99); // all values out of range
     } // end try
     catch (invalid_argument& e)
     {
