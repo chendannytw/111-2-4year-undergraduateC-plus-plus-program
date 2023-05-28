@@ -1,61 +1,83 @@
-#include <iostream>
-#include <string> // program uses C++ standard string class
+#ifndef PET_H
+#define PET_H
+
+#include <string> 
+#include"Date.h"
 using namespace std;
 
-// GradeBook class definition
 class Pet
 {
 public:
-    // function that sets the course name
-    void setPetName(string name)
-    {
-        PetName = name; // store the course name in the object
-        //PetAge = age;
-    } // end function setCourseName
+    void setPetName(string name);
+    void setPetAge(int age);
+    string getPetName() const;
+    int getPetAge() const;
+    void displayMessage() const;
 
-    void setPetAge(int age)
-    {
-        while (true)
-        {
-            if (age <= 20 && age >= 0)
-            {
-                PetAge = age;
-                break;
-            }
-            else
-            {
-                cout << "please enter your pet age between 0 to 20" << endl;
-                cin >> age;
-            }
-        }
-    } // end function setCourseName
-
-    // function that gets the course name
-    string getPetName() const
-    {
-        return PetName; // return the object's courseName  //私有資料成員courseName可以透過自家的函數存取
-    } // end function getCourseName
-
-    int getPetAge() const
-    {
-        return PetAge; // return the object's courseName  //私有資料成員courseName可以透過自家的函數存取
-    } // end function getCourseName
-
-    // function that displays a welcome message
-    void displayMessage() const
-    {
-        // this statement calls getCourseName to get the 
-        // name of the course this GradeBook represents
-        cout << "My Pet name is\n" << getPetName() << "!"
-            << "\nMy Pet age is\n" << getPetAge()
-            << endl;
-    } // end function displayMessage
 private:
     string PetName; // course name for this GradeBook
     int PetAge = 0;
 }; // end class GradeBook  
 
-// function main begins program execution
+#endif#pragma once
+
+
+
+#include <iostream>
+#include <string> 
+#include "Pet.h" 
+#include"Date.h"
+
+void Pet::setPetName(string name)
+{
+    PetName = name;
+} 
+
+void Pet::setPetAge(int age)
+{
+    while (true)
+    {
+        if (age <= 20 && age >= 0)
+        {
+            PetAge = age;
+            break;
+        }
+        else
+        {
+            cout << "please enter your pet age between 0 to 20" << endl;
+            cin >> age;
+        }
+    }
+}
+
+string Pet::getPetName() const
+{
+    return PetName; // return the object's courseName  //私有資料成員courseName可以透過自家的函數存取
+} // end function getCourseName
+
+int Pet::getPetAge() const
+{
+    return PetAge; // return the object's courseName  //私有資料成員courseName可以透過自家的函數存取
+} // end function getCourseName
+
+void Pet::displayMessage() const
+{
+    // this statement calls getCourseName to get the 
+    // name of the course this GradeBook represents
+    cout << "My Pet name is\n" << getPetName() << "!"
+        << "\nMy Pet age is\n" << getPetAge()
+        << endl;
+} // end function displayMessage
+
+
+
+
+
+#include <iostream>
+#include <stdexcept> // for invalid_argument exception class
+#include "Pet.h"
+using namespace std;
+
 int main()
 {
     string nameOfPet; // string of characters to store the course name
@@ -76,4 +98,4 @@ int main()
 
     cout << endl; // outputs a blank line
     myPet.displayMessage(); // display message with new course name
-} // end main
+}    
