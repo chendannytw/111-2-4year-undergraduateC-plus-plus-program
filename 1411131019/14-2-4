@@ -1,0 +1,21 @@
+date.h
+
+#ifndef date_h
+#define date_h
+#include <iostream>
+#include <string>
+
+class Date							//建立一個類別Date
+{
+public:									//公開成員有
+	Date(int, int, int);								//明確建構子
+	void setDate(int, int, int);		//設定日期
+	void printDate()const;				  //印出西元日期
+	void printROCDate()const;			  //印出民國日期
+private:								//私有成員有
+	int year;							//年
+	int month;						//月
+	int day;							//日
+};
+
+#endif
