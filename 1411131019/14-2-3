@@ -1,13 +1,11 @@
 #include <iostream>
-#include <iomanip>
-#include <stdexcept>
 #include <string>
 #include "pet.h"
 using namespace std;
 
-pet::pet(string name)                         //設定狗狗名字副程式
+pet::pet(string name,int age) : birthday(Date(2023, 5, 27))                         //設定狗狗名字副程式
 {
-    dogname = name;
+    setdogname(name, age);
 }
 
 
@@ -16,14 +14,16 @@ pet:: ~pet() {
 }
 
 
-void pet::setdogname(string name)                         //設定狗狗名字副程式
+void pet::setdogname(string name, int age)                         //設定狗狗名字副程式
 {
     dogname = name;
+    dogage = age;
+    birthday.setDate(2021, 1, 20);
 }
 
 
 
-void pet::setdogage(int age)                              //設定狗狗年齡副程式
+/*void pet::setdogage(int age)                              //設定狗狗年齡副程式
 {
     while (age > 20) {
         cout << "Please enter again" << endl;
@@ -31,13 +31,8 @@ void pet::setdogage(int age)                              //設定狗狗年齡�
     }
     dogage = age;
 }
+*/
 
-void pet::setdogbirth(int y, int m, int d)
-{
-    year = y;
-    month = m;
-    day = d;
-}
 
 string pet::getdogname() const                            //取得狗狗名字副程式
 {
@@ -51,24 +46,10 @@ int pet::getdogage() const                                //取得狗狗年齡�
     return dogage;
 }
 
-int pet::getdogyear() const                                
-{
-    return year;
-}
-
-int pet::getdogmonth() const
-{
-    return month;
-}
-
-int pet::getdogday() const
-{
-    return day;
-}
-
 
 void pet::displaymessage() const                          //列印最終結果副程式
 {
-    cout << "The dog name is  " << getdogname() << "  age is：" << getdogage() <<endl;
-    cout <<getdogyear() << "/"<< getdogmonth() << "/" << getdogday();
+    cout << "The dog name is ： " << getdogname() << "  age is：" << getdogage() << endl;
+    cout << "The dog birthday is：";
+    birthday.printDate();
 }
