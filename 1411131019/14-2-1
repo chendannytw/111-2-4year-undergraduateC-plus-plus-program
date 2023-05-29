@@ -1,3 +1,5 @@
+主程式
+
 #include <iostream>
 #include <string>
 #include "pet.h"
