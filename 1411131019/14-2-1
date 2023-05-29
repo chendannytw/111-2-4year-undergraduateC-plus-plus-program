@@ -1,8 +1,7 @@
 #include <iostream>
-#include <iomanip>
-#include <stdexcept>
 #include <string>
 #include "pet.h"
+#include "date.h"
 using namespace std;
 
 
@@ -10,13 +9,9 @@ int main()
 {
     string nameofdog;
     int ageofdog;
-    int y=0;
-    int m=0;
-    int d=0;
-    pet mypet("ABC");
+    pet mypet("ABC",2);
     cout << "Initial dog name is：" << mypet.getdogname() << endl;
     cout << "Initial dog age is：" << 0 << endl;
-    cout << "Initial dog bith is：00/00/00" << endl;
 
     cout << "\nPlease enter the dog name：" << endl;
     getline(cin, nameofdog);
@@ -24,18 +19,7 @@ int main()
     cout << "\nPlease enter the dog age：" << endl;
     cin >> ageofdog;
 
-    cout << "\nPlease enter the dog bith year：" << endl;
-    cin >> y>>m>>d;
-
-   /* cout << "\nPlease enter the dog bith month：" << endl;
-    cin >> m;
-
-    cout << "\nPlease enter the dog bith day：" << endl;
-    cin >> d;*/
-
-    mypet.setdogname(nameofdog);
-    mypet.setdogage(ageofdog);
-    mypet.setdogbirth(y, m, d);
+    mypet.setdogname(nameofdog, ageofdog);
 
     cout << endl;
     mypet.displaymessage();
