@@ -1,27 +1,21 @@
 #include <iostream>
-#include <iomanip>
-#include <stdexcept>
 #include <string>
+#include "date.h"
 using namespace std;
 
 class pet
 {
 public:
-    pet(string name);
+    pet(string name,int age);
+
     ~pet();
-    void setdogname(string name);
 
-    void setdogage(int age);
-
-    void setdogbirth(int y,int m,int d);
+    void setdogname(string name, int age);
 
     string getdogname() const;
 
     int getdogage() const;
 
-    int getdogyear() const;
-    int getdogmonth() const;
-    int getdogday() const;
 
     void displaymessage() const;
 
@@ -29,7 +23,6 @@ public:
 private:
     string dogname;
     int dogage;
-    int year;
-    int month;
-    int day;
-}; 
+    Date birthday;
+};
+
