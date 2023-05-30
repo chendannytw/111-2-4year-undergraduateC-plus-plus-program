@@ -5,22 +5,26 @@ pet.cpp
 #include "pet.h"
 using namespace std;
 
-pet::pet(string name,int age) : birthday(Date(2023, 5, 27))                         //設定狗狗名字副程式
+pet::pet(string name,int age) : birthday(Date(2023, 5, 27))  //給建構子pet、物件birthday預設參數
 {
     setdogname(name, age);
 }
 
 
 pet:: ~pet() {
-    cout << "bye bye！" << endl;
+    cout << "\nbye bye！" << endl;                           //解構子在程式結束前會顯示bye bye！
 }
 
 
-void pet::setdogname(string name, int age)                         //設定狗狗名字副程式
-{
+void pet::setdogname(string name, int age)                   //將使用者輸入的姓名、年齡傳遞到私有成員中
+{                                                            //並判斷年齡是否在合理範圍內
     dogname = name;
+    while (age > 20) {
+        cout << "Please enter again" << endl;
+        cin >> age;
+    }
     dogage = age;
-    birthday.setDate(2021, 1, 20);
+    birthday.setDate(2021, 1, 20);                           //設定狗狗生日為2021/1/20
 }
 
 
