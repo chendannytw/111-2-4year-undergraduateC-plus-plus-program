@@ -2,29 +2,28 @@ pet.h
 
 #include <iostream>
 #include <string>
-#include "date.h"
+#include "date.h"                           //引入date.h給狗狗生日使用
 using namespace std;
 
 class pet
 {
 public:
-    pet(string name,int age);
+    pet(string name,int );                   //建立建構子
 
-    ~pet();
+    ~pet();                                  //建立解構子
 
-    void setdogname(string name, int age);
+    void setdogname(string , int );         //設定狗狗名字、年齡函數
 
-    string getdogname() const;
+    string getdogname() const;              //取得狗狗名字函數
 
-    int getdogage() const;
-
+    int getdogage() const;                  //取得狗狗年齡函數
 
     void displaymessage() const;
 
 
-private:
-    string dogname;
-    int dogage;
-    Date birthday;
+private:                                    //私有成員有：
+    string dogname;                         //dogname狗狗名字
+    int dogage;                             //dogage狗狗年齡
+    Date birthday;                          //根據Date類別建立birthday物件，用來紀錄狗狗生日
 };
 
