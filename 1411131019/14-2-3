@@ -5,7 +5,7 @@ pet.cpp
 #include "pet.h"
 using namespace std;
 
-pet::pet(string name,int age) : birthday(Date(2023, 5, 27))  //給建構子pet、物件birthday預設參數
+pet::pet(string name, int age) : birthday(Date(2023, 5, 27))  //給建構子pet、物件birthday預設參數
 {
     setdogname(name, age);
 }
@@ -24,10 +24,13 @@ void pet::setdogname(string name, int age)                   //將使用者輸�
         cin >> age;
     }
     dogage = age;
-    birthday.setDate(2021, 1, 20);                           //設定狗狗生日為2021/1/20
+                              
 }
 
-
+void pet::setdogbirth(int y, int m, int d)
+{
+    birthday.setDate(y, m, d);                    //設定狗狗生日
+}
 
 /*void pet::setdogage(int age)                              //設定狗狗年齡副程式
 {
