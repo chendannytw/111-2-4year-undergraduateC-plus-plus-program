@@ -2,28 +2,28 @@
 
 #include <iostream>
 #include <string>
-#include "pet.h"
-#include "date.h"
+#include "pet.h"            //引入寵物資料介面檔
+#include "date.h"           //引入日期介面檔
 using namespace std;
 
 
 int main()
 {
-    string nameofdog;
-    int ageofdog;
-    pet mypet("ABC",2);
-    cout << "Initial dog name is：" << mypet.getdogname() << endl;
-    cout << "Initial dog age is：" << 0 << endl;
+    string nameofdog;               //字串nameofdog用來儲存使用者輸入的狗狗姓名
+    int ageofdog;                   //整數ageofgog用來儲存使用者輸入的狗狗年齡
+    pet mypet("ABC",2);             //根據pet類別建立mypet物件並給定預設參數(姓名，年齡)
+    cout << "Initial dog name is：" << mypet.getdogname() << endl;           //顯示預設狗狗名字呼叫mypet.getdogname取得狗狗名字
+    cout << "Initial dog age is：" << mypet.getdogage() << endl;             //顯示預設狗狗年齡呼叫mypet.getdogage取得狗狗年齡
 
-    cout << "\nPlease enter the dog name：" << endl;
-    getline(cin, nameofdog);
+    cout << "\nPlease enter the dog name：" << endl;             //輸出提示訊息讓使用者輸入狗狗姓名、年齡
+    getline(cin, nameofdog);                                   
 
     cout << "\nPlease enter the dog age：" << endl;
     cin >> ageofdog;
 
-    mypet.setdogname(nameofdog, ageofdog);
+    mypet.setdogname(nameofdog, ageofdog);                          //使用mypet.setgogname函數儲存狗狗姓名、年齡
 
     cout << endl;
-    mypet.displaymessage();
+    mypet.displaymessage();                                     //使用mypet.displaymessage函數印出狗狗全部資料
 
 }
