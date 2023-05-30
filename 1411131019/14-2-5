@@ -27,10 +27,10 @@ void Date::setDate(int y, int m, int d)
 }
 void Date::printDate()const
 {						//setw()設定寬度
-	cout << setfill('0') << setw(4) << year << "/" << setw(2) << month << "/" << setw(2) << day << " 西元";
+	cout << "西元 "<<setfill('0') << setw(4) << year << "/" << setw(2) << month << "/" << setw(2) << day;
 }
 
 void Date::printROCDate()const
 {			//(  ?  :  )三元運算子  若year<2000則印出year否則將year-1911後印出
-	cout << ((year < 2000) ? year : year - 1911) << "/" << setfill('0') << setw(2) << month << "/" << setw(2) << day << " 民國";
+	cout << "民國 "<<((year < 2000) ? year : year - 1911) << "/" << setfill('0') << setw(2) << month << "/" << setw(2) << day ;
 }
