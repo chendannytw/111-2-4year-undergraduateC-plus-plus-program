@@ -8,11 +8,13 @@ using namespace std;
 class pet
 {
 public:
-    pet(string name,int );                   //建立建構子
+    pet(string name, int);                  //建立建構子
 
-    ~pet();                                  //建立解構子
+    ~pet();                                 //建立解構子
 
-    void setdogname(string , int );         //設定狗狗名字、年齡函數
+    void setdogname(string, int);           //設定狗狗名字、年齡函數
+
+    void setdogbirth(int, int, int);        //設定狗狗生日
 
     string getdogname() const;              //取得狗狗名字函數
 
@@ -26,4 +28,5 @@ private:                                    //私有成員有：
     int dogage;                             //dogage狗狗年齡
     Date birthday;                          //根據Date類別建立birthday物件，用來紀錄狗狗生日
 };
+
 
