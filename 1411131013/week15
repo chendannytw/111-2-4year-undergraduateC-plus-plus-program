@@ -10,7 +10,7 @@ int main()
 {
 	Date birth(7, 24, 1949);
 	Date adopt(3, 12, 1988);
-	Pet manager("Bob", "Blue", birth, adopt);
+	Pet manager("Dog", "Blue", birth, adopt);
 
 	cout << endl;
 	manager.print();
@@ -115,20 +115,20 @@ using namespace std;
 // values to constructors of member objects  
 Pet::Pet(const string& first, const string& last,
     const Date& dateOfBirth, const Date& dateOfadopt)
-    : firstName(first), // initialize firstName
-    lastName(last), // initialize lastName
+    : type(first), // initialize firstName
+    Name(last), // initialize lastName
     birthDate(dateOfBirth), // initialize birthDate
     adoptDate(dateOfadopt) // initialize hireDate
 {
     // output Employee object to show when constructor is called
     cout << "Pet object constructor: "
-        << firstName << ' ' << lastName << endl;
+        << type << ' ' << Name << endl;
 } // end Employee constructor
 
 // print Employee object
 void Pet::print() const
 {
-    cout << lastName << ", " << firstName << "  adoptDate: ";
+    cout << type << ", " << Name << "  adoptDate: ";
     adoptDate.print();
     cout << "  Birthday: ";
     birthDate.print();
@@ -139,7 +139,7 @@ void Pet::print() const
 Pet::~Pet()
 {
     cout << "Pet object destructor: "
-        << lastName << ", " << firstName << endl;
+        << Name << ", " << type << endl;
 } // end ~Employee destructor
 ----------------------------------------
 Pet.h
@@ -161,8 +161,8 @@ public:
     void print() const;
     ~Pet(); // provided to confirm destruction order
 private:
-    std::string firstName; // composition: member object
-    std::string lastName; // composition: member object
+    std::string type; // composition: member object
+    std::string Name; // composition: member object
     const Date birthDate; // composition: member object
     const Date adoptDate; // composition: member object
 }; // end class Employee
