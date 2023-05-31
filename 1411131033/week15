@@ -1,0 +1,178 @@
+// 主程式
+// Demonstrating composition--an object with member objects.
+#include <iostream>
+#include "Pet.h" // Pet class definition
+using namespace std;
+
+int main()
+{
+	Date birth(7, 24, 1949);
+	Date adoptDate(3, 12, 1952);
+	Pet happy("Dog", "Jenny", birth, adoptDate);
+
+	cout << endl;
+	happy.print();
+} // end main
+
+
+
+// 寵物介面檔 Pet.h
+// Employee class definition showing composition.
+// Member functions defined in Employee.cpp.
+#ifndef PET_H
+#define PET_H
+
+#include <string>
+#include "Date.h" // include Date class definition
+
+class Pet
+{
+public:
+    Pet(const std::string&, const std::string&,
+        const Date&, const Date&);
+    void print() const;
+    ~Pet(); // provided to confirm destruction order
+private:
+    std::string spec; // string 是系統類別 composition: member object
+    std::string Name; // string 是系統類別 composition: member object
+    const Date birthDate; // Date 是自訂類別 composition: member object
+    const Date adoptDate; // Date 是自訂類別 composition: member object
+}; // end class Employee
+#endif
+
+
+
+
+
+// 寵物實作檔 Pet.cpp
+// Pet class member-function definitions.
+#include <iostream>
+#include "Pet.h" // Pet class definition
+#include "Date.h" // Date class definition
+using namespace std;
+
+// constructor uses member initializer list to pass initializer 
+// values to constructors of member objects  
+Pet::Pet(const string& speci, const string& name,
+    const Date& dateOfBirth, const Date& dateOfAdopt)
+    : spec(speci), // initialize firstName
+    Name(name), // initialize lastName
+    birthDate(dateOfBirth), // initialize birthDate
+    adoptDate(dateOfAdopt) // initialize hireDate
+{
+    // output Pet object to show when constructor is called
+    cout << "Pet object constructor: "
+        << spec << ' ' << Name << endl;
+} // end Employee constructor
+
+// print Pet object
+void Pet::print() const
+{
+    cout << Name << ", " << spec << "  Adopted: ";
+    adoptDate.print();
+    cout << "  Birthday: ";
+    birthDate.print();
+    cout << endl;
+    if (this->adoptDate.year > this->birthDate.year)
+        cout << "adoption date is OK!" << endl;
+    else if((this->adoptDate.year == this->birthDate.year)&& (this->adoptDate.month > this->birthDate.month))
+        cout << "It is adopted on its birth month!" << endl;
+    else cout << "adoption date is illeagel!" << endl;
+} // end function print
+
+// output Employee object to show when its destructor is called
+Pet::~Pet()
+{
+    cout << "Pet object destructor: "
+        << Name << ", " << spec << endl;
+} // end ~Employee destructor
+
+
+
+
+
+// 日期介面檔 Date.h 
+// Date class definition; Member functions defined in Date.cpp
+#ifndef DATE_H
+#define DATE_H
+
+class Date
+{
+public:
+	static const unsigned int monthsPerYear = 12; // months in a year
+	explicit Date(int = 1, int = 1, int = 1900); // default constructor
+	void print() const; // print date in month/day/year format
+	~Date(); // provided to confirm destruction order
+//private:
+	unsigned int month; // 1-12 (January-December)
+	unsigned int day; // 1-31 based on month
+	unsigned int year; // any year
+
+	// utility function to check if day is proper for month and year
+	unsigned int checkDay(int) const;
+}; // end class Date
+
+#endif
+
+
+
+
+
+// 日期實作檔  Date.cpp
+// Date class member-function definitions.
+#include <array>
+#include <iostream>
+#include <stdexcept>
+#include "Date.h" // include Date class definition
+using namespace std;
+
+// constructor confirms proper value for month; calls
+// utility function checkDay to confirm proper value for day
+Date::Date(int mn, int dy, int yr)
+{
+    if (mn > 0 && mn <= monthsPerYear) // validate the month
+        month = mn;
+    else
+        throw invalid_argument("month must be 1-12");
+
+    year = yr; // could validate yr
+    day = checkDay(dy); // validate the day
+
+    // output Date object to show when its constructor is called
+    cout << "Date object constructor for date ";
+    print();
+    cout << endl;
+} // end Date constructor
+
+// print Date object in form month/day/year
+void Date::print() const
+{
+    cout << month << '/' << day << '/' << year;
+} // end function print
+
+// output Date object to show when its destructor is called
+Date::~Date()
+{
+    cout << "Date object destructor for date ";
+    print();
+    cout << endl;
+} // end ~Date destructor
+
+// utility function to confirm proper day value based on 
+// month and year; handles leap years, too
+unsigned int Date::checkDay(int testDay) const
+{
+    static const array< int, monthsPerYear + 1 > daysPerMonth =
+    { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
+    // determine whether testDay is valid for specified month
+    if (testDay > 0 && testDay <= daysPerMonth[month])
+        return testDay;
+
+    // February 29 check for leap year 
+    if (month == 2 && testDay == 29 && (year % 400 == 0 ||
+        (year % 4 == 0 && year % 100 != 0)))
+        return testDay;
+
+    throw invalid_argument("Invalid day for current month and year");
+} // end function checkDay
