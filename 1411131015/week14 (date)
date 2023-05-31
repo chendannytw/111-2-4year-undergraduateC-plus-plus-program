@@ -1,0 +1,124 @@
+主程式
+// Fig. 9.3: fig09_03.cpp
+// Program to test class Time.
+// NOTE: This file must be compiled with Time.cpp.
+#include <iostream>
+#include <stdexcept> // for invalid_argument exception class
+#include "Date.h" // include definitionof class Time from Time.h
+using namespace std;
+
+int main()
+{
+    Date t(1910, 1, 1); // instantiate object t of class Time
+
+    // output Time object t's initial values
+    cout << "The initial universal time is ";
+    t.printUniversal(); // 00:00:00
+    cout << "\nThe initial standard time is ";
+    t.printStandard(); // 12:00:00 AM
+
+    t.setDate(2003, 10, 3); // change time
+
+    // output Time object t's new values
+    cout << "\n\nUniversal time after setTime is ";
+    t.printUniversal(); // 13:27:06
+    cout << "\nStandard time after setTime is ";
+    t.printStandard(); // 1:27:06 PM
+
+    // attempt to set the time with invalid values
+    try
+    {
+        t.setDate(9999, 13, 32); // all values out of range
+    } // end try
+    catch (invalid_argument& e)
+    {
+        cout << "\n\nException: " << e.what() << endl;
+    } // end catch
+
+    // output t's values after specifying invalid values
+    cout << "\nAfter attempting invalid settings:"
+        << "\nUniversal time: ";
+    t.printUniversal(); // 13:27:06
+    cout << "\nStandard time: ";
+    t.printStandard(); // 1:27:06 PM
+    cout << endl;
+} // end main
+
+
+
+
+.cpp
+// Fig. 9.2: Date.cpp
+// Time class member-function definitions.
+#include <iostream>
+#include <iomanip>
+#include <stdexcept> // for illegal_argument exception class
+#include "Date.h" // include definition of class Time from Time.h
+
+using namespace std;
+
+// Time constructor initializes each data member to zero.
+Date::Date(int y, int m, int d)
+{
+    year = y;
+    month = m;
+    day = d;
+} // end Date constructor
+
+// set new Time value using universal time
+void Date::setDate(int y, int m, int d)
+{
+    // validate hour, minute and second
+    if ((y >= 0 && y < 9999) && (m >= 1 && m < 13) &&
+        (d >= 1 && d < 32))
+    {
+        year = y;
+        month = m;
+        day = d;
+    } // end if
+    else
+        throw invalid_argument(
+            "hour, minute and/or second was out of range");
+} // end function setTime
+
+// print Time in universal-time format (HH:MM:SS)
+void Date::printUniversal() const
+{
+    cout << setfill('0') << setw(4) << year << "/"
+        << setw(2) << month << "/" << setw(2) << day;
+} // end function printUniversal
+
+// print Time in standard-time format (HH:MM:SS AM or PM)
+void Date::printStandard() const
+{
+    cout << (year < 1911 ? " 民國前 " : " 民國 ") << ((year > 1911) ? year-1911 : 1911-year) << "/"
+        << setfill('0') << setw(2) << month << "/" << setw(2)
+        << day ;
+} // end function printStandard
+
+
+
+.h
+// Fig. 9.1: Date.h
+// Time class definition.
+// Member functions are defined in Time.cpp
+
+// prevent multiple inclusions of header
+#ifndef DATE_H
+#define DATE_H
+
+// Time class definition
+class Date
+{
+public:
+	Date(int, int, int); // constructor
+	void setDate(int, int, int); // set hour, minute and second
+	void printUniversal() const; // print 西元
+	void printStandard() const; // print 民國
+private:
+	unsigned int year; // 0 - 9999
+	unsigned int month; // 1 - 12
+	unsigned int day; // 1 - 31
+}; // end class Date
+
+#endif
