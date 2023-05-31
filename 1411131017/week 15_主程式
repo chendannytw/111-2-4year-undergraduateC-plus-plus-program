@@ -1,0 +1,14 @@
+
+#include <iostream>
+#include "Pet.h" // Pet class definition
+using namespace std;
+
+int main()
+{
+	Date birth(7, 24, 1949);
+	Date adoptDate(3, 12, 1952);
+	Pet happy("Dog", "Jenny", birth, adoptDate);
+
+	cout << endl;
+	happy.print();
+} // end main
