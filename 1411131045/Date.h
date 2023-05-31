@@ -1,18 +1,21 @@
 #ifndef DATE_H
 #define DATE_H
 
-// Time class definition
 class Date
 {
 public:
-	Date(int, int, int); // constructor
-	void setDate(int, int, int); // set hour, minute and second
-	void printUniversal() const; // 印出西元年格式 format
-	void printStandard() const; // 印出民國年格式 format
-private:
-	unsigned int year; // 0 - 9999 
-	unsigned int month; // 1 - 12
-	unsigned int day; // 1 - 31
-}; // end class Time
+	static const unsigned int monthsPerYear = 12; // months in a year
+	explicit Date(int = 1, int = 1, int = 1900); // default constructor
+	void print()const ; // print date in month/day/year format
+	~Date(); // provided to confirm destruction order
+	unsigned int month; // 1-12 (January-December)
+	unsigned int day; // 1-31 based on month
+	unsigned int year; // any year
+
+	// utility function to check if day is proper for month and year
+	unsigned int checkDay(int)const;
+}; // end class Date
 
 #endif
+
+

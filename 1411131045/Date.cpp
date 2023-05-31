@@ -1,46 +1,56 @@
+#include <array>
 #include <iostream>
-#include <iomanip>
-#include <stdexcept> // for illegal_argument exception class
-#include "Date.h" // include definition of class Time from Time.h
-
+#include <stdexcept>
+#include "Date.h" // include Date class definition
 using namespace std;
 
-// Time constructor initializes each data member to zero.
-Date::Date(int y, int m, int d)
+// constructor confirms proper value for month; calls
+// utility function checkDay to confirm proper value for day
+Date::Date(int mn, int dy, int yr)
 {
-    year = y;
-    month = m;
-    day = d;
-
-} // end Time constructor
-
-// set new Time value using universal time
-void Date::setDate(int y, int m, int d)
-{
-    // validate hour, minute and second
-    if ((y >= 1 && y < 9999) && (m >= 1 && m < 13) &&
-        (d >= 1 && d < 31))
-    {
-        year = y;
-        month = m;
-        day = d;
-    } // end if
+    if (mn > 0 && mn <= monthsPerYear) // validate the month
+        month = mn;
     else
-        throw invalid_argument(
-            "year, month and/or day was out of range");
-} // end function setTime
+        throw invalid_argument("month must be 1-12");
 
-// print Time in universal-time format (HH:MM:SS)
-void Date::printUniversal() const   //印出西元年
-{
-    cout << setfill('0') << setw(4) << year << "/"
-        << setw(2) << month << "/" << setw(2) << day;
-} // end function printUniversal
+    year = yr; // could validate yr
+    day = checkDay(dy); // validate the day
 
-// print Time in standard-time format//印出民國年
-void Date::printStandard() const
+    // output Date object to show when its constructor is called
+    cout << "Date object constructor for date ";
+    print();
+    cout << endl;
+} // end Date constructor
+
+// print Date object in form month/day/year
+void Date::print() const
 {
-    cout << ((year > 1911) ? year - 1911 : 1911 - year) << "/"
-        << setfill('0') << setw(2) << month << "/" << setw(2)
-        << day << (year < 1911 ? " 民國前" : " 民國");
-} // end function printStandard
+    cout << month << '/' << day << '/' << year;
+} // end function print
+
+// output Date object to show when its destructor is called
+Date::~Date()
+{
+    cout << "Date object destructor for date ";
+    print();
+    cout << endl;
+} // end ~Date destructor
+
+// utility function to confirm proper day value based on 
+// month and year; handles leap years, too
+unsigned int Date::checkDay(int testDay)const
+{
+    static const array< int, monthsPerYear + 1 > daysPerMonth =
+    { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
+    // determine whether testDay is valid for specified month
+    if (testDay > 0 && testDay <= daysPerMonth[month])
+        return testDay;
+
+    // February 29 check for leap year 
+    if (month == 2 && testDay == 29 && (year % 400 == 0 ||
+        (year % 4 == 0 && year % 100 != 0)))
+        return testDay;
+
+    throw invalid_argument("Invalid day for current month and year");
+} // end function checkDay
