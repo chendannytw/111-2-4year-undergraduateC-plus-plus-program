@@ -8,7 +8,7 @@ using namespace std;
 
 int main()
 {
-    Date t; // instantiate object t of class Date
+    Date t(1911,01,01); // instantiate object t of class Date
 
     // output Date object t's initial values
     cout << "The initial universal Date is ";
