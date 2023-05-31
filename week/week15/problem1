@@ -1,0 +1,197 @@
+建立一個可以讓使用者透過鍵盤輸入多隻寵物的種類、名字、生日及領養日的程式。建立Pet類別與Date類別，並使用 p.686、p.687、p.688 的date類別，程式碼內需達成以下條件:
+
+1. 要有建構子、解構子、日期檢查的方法(函數)
+
+2. 用解構子印出寵物所有資料與目前年齡。
+
+3. 日期檢查函數需判斷寵物的年齡是否合理，以及生日不大於領養日。(狗的年齡介於0~20歲，條件寫法不限制)
+
+4. Pet類別內必須使用date類別作為其資料成員(使用composition class)。
+
+********以下提供參考程式碼以供修改
+
+
+
+// 日期介面檔
+#ifndef DATE_H  // if not defined
+#define DATE_H
+
+// Time class definition
+class Date
+{
+public:
+	//Date(int y,int m, int d); // constructor
+	void setDate(int, int, int); // set hour, minute and second
+	void printUniversal() const; // 印出西元年格式 format
+	void printStandard() const; // 印出民國年格式 format
+	//~Date();
+
+	unsigned int year; // 0 - 23 (24-hour clock format)
+	unsigned int month; // 0 - 59
+	unsigned int day; // 0 - 59
+}; // end class Time
+
+#endif
+
+
+
+
+
+// 日期實作檔
+#include <iostream>
+#include <iomanip>
+#include <stdexcept> // for illegal_argument exception class
+#include "Date.h" // include definition of class Time from Time.h
+
+using namespace std;
+
+// Time constructor initializes each data member to zero.
+//Date::Date(int y, int m, int d)///添加明顯建構子的功能:建立物件的當下就可以賦予它預設參數
+//{
+//    year = y;
+//    month = m;
+//    day = d;
+//} // end Time constructor
+
+// set new Time value using universal time
+void Date::setDate(int y, int m, int d)
+{
+    // validate hour, minute and second
+    if ((y >= 1 && y < 10000) && (m >= 1 && m < 13) &&
+        (d >= 1 && d < 32))
+    {
+        year = y;
+        month = m;
+        day = d;
+    } // end if
+    else
+        throw invalid_argument(
+            "year, month and/or day was out of range");
+} // end function setTime
+
+// print Time in universal-time format (HH:MM:SS)
+void Date::printUniversal() const
+{
+    cout << setfill('0') << setw(2) << year << ":"
+        << setw(2) << month << ":" << setw(2) << day;
+} // end function printUniversal
+
+// print Time in standard-time format (HH:MM:SS AM or PM)
+void Date::printStandard() const
+{
+    cout << (year > 1911 ? " 民國" : " 民國前") << ((year >1991 && year < 10000) ? year-1911 : 1911-year) << ":"
+        << setfill('0') << setw(2) << month << ":" << setw(2)
+        << day ;
+} // end function printStandard
+
+
+
+
+
+//寵物介面檔
+#pragma once
+#include <iostream>
+#include <string> // program uses C++ standard string class
+#include "Date.h"
+using namespace std;
+
+// GradeBook class definition
+class Pet
+{
+public:
+    Pet(string , Date);//類別/物件的介面
+    ~Pet();//類別/物件的介面
+    // function that sets the course name
+    void setPetName(string name, int age);//類別/物件的介面  
+    // function that gets the course name
+    string getPetName() const;//類別/物件的介面
+    int getPetAge() const;//類別/物件的介面
+// function that displays a welcome message
+    void displayMessage() const;//類別/物件的介面
+    
+private:
+    string PetName = "unknown"; // course name for this GradeBook
+    int PetAge = 0;
+    Date Birthday;
+}; // end class GradeBook  
+
+
+
+
+
+//寵物實作檔
+#include <iostream>
+#include <string> // program uses C++ standard string class
+#include "Pet.h"
+#include "Date.h"
+using namespace std;
+Pet::Pet(string name, Date birthdate)//類別/物件的介面
+{// 類別實作的內容
+    PetName = name; // store the course name in the object
+    Birthday = birthdate;
+}
+Pet::~Pet()//類別/物件的介面
+{// 類別實作的內容
+    cout << "bye bye!" << endl;
+}
+void Pet::setPetName(string name, int age)//類別/物件的介面
+{// 類別實作的內容
+    PetName = name; // store the course name in the object
+    PetAge = age;
+} // end function setCourseName
+string Pet::getPetName() const//類別/物件的介面
+{// 類別實作的內容
+    return PetName; // return the object's courseName  //私有資料成員courseName可以透過自家的函數存取
+} // end function getCourseName
+int Pet::getPetAge() const//類別/物件的介面
+{// 類別實作的內容
+    return PetAge; // return the object's courseName  //私有資料成員courseName可以透過自家的函數存取
+} // end function getCourseName
+void Pet::displayMessage() const//類別/物件的介面
+{// 類別實作的內容
+    // this statement calls getCourseName to get the 
+    // name of the course this GradeBook represents
+    cout << "My pet name is:" << getPetName() << "!";
+    cout << "My pet age is:" << getPetAge() << "!"
+        << endl;
+    cout << "My pet was born in " << Birthday.year << Birthday.month << Birthday.day << endl;
+} // end function displayMessage
+
+
+
+
+
+
+ //主程式
+   // Define class GradeBook that contains a courseName data member
+   // and member functions to set and get its value; 
+   // Create and manipulate a GradeBook object with these functions.
+#include <iostream>
+#include <string> // program uses C++ standard string class
+#include "pet.h"
+#include "Date.h"
+    using namespace std;
+
+    // function main begins program execution
+    int main()
+    {
+        Date birthday;
+        birthday.setDate(2023, 1, 1);
+        string nameOfPet; // string of characters to store the course name
+        Pet myPet("Jenny", birthday); // 為什麼在建立物件的同時可以給他兩個參數?create a GradeBook object named myGradeBook
+        int ageOfPet;
+        // display initial value of courseName
+        cout << "Initial Pat name is: " << myPet.getPetName()
+            << " Initial Pat age is: " << myPet.getPetAge()
+            << endl;
+
+        // prompt for, input and set course name
+        cout << "\nPlease enter the pet name:" << endl;
+        getline(cin, nameOfPet); // read a course name with blanks
+        myPet.setPetName(nameOfPet, 10); // set the course name
+
+        cout << endl; // outputs a blank line
+        myPet.displayMessage(); // display message with new course name
+
+
+    } // end main
