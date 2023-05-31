@@ -1,0 +1,39 @@
+#include <iostream>
+#include "Pet.h" 
+#include "Date.h" 
+using namespace std;
+
+
+Pet::Pet(const string& a, const string& name,
+    const Date& dateOfBirth, const Date& dateOfAdopt)
+    : A(a), 
+    Name(name),
+    birthDate(dateOfBirth), 
+    adoptDate(dateOfAdopt)
+{
+    
+    /*cout << "Employee object constructor: "
+        << a << ' ' << name << endl;*/
+} 
+
+
+void Pet::print() const
+{
+   /* cout << Name << ", " << A << "  Hired: ";
+    adoptDate.print();
+    cout << "  Birthday: ";
+    birthDate.print();
+    cout << endl;*/
+
+    cout<<"寵物品種："<<A<<"\n寵物名字："<<Name<<"\n寵物領養日：";
+    adoptDate.print();
+    cout << "寵物生日：";
+    birthDate.print();
+} 
+
+
+Pet::~Pet()
+{
+    cout << "Employee object destructor: "
+        << A << ", " << Name << endl;
+}
