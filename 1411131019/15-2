@@ -1,0 +1,23 @@
+#ifndef EMPLOYEE_H
+#define EMPLOYEE_H
+
+#include <string>
+#include "Date.h"
+using namespace std;
+
+class Pet
+{
+public:
+    Pet(const string&, const string&,            //建構子中有4個成員分別為  
+        const Date&, const Date&);                                             
+    void print() const;                                                         
+    ~Pet();
+private:
+    std::string A; 
+    std::string Name;
+    const Date birthDate;
+    const Date adoptDate;
+}; 
+
+#endif
+
