@@ -1,0 +1,170 @@
+/主程式/
+#include <iostream>
+#include "Pet.h"
+using namespace std;
+
+// function main begins program execution
+int main()
+{
+    Date birth(7, 24, 1949);
+    Date adoptDate(1, 1, 2023);
+    Pet happy("Dog", "Jenny", birth, adoptDate); // 為什麼在建立物件的同時可以給他兩個參數?create a GradeBook object named myGradeBook
+
+    // display initial value of courseName
+    cout << endl;
+    happy.print();
+    } 
+    
+    
+    
+/Pet.cpp/
+#include <iostream>
+#include "Pet.h"
+#include "Date.h"
+using namespace std;
+Pet::Pet(const string& speci, const string& name,
+    const Date& dateOfBirth, const Date& dateOfAdopt)//類別/物件的介面
+    : spec(speci),
+    Name(name),
+    birthDate(dateOfBirth),
+    adoptDate(dateOfAdopt)
+{// 類別實作的內容
+    cout << "Pet object constructor:"
+         << speci << ' ' << name << endl;
+}
+
+void Pet::print() const
+{
+    cout << Name << ", " << spec << "  Adopted: ";
+    adoptDate.print();
+    cout << "  Birthday: ";
+    birthDate.print();
+    cout << endl;
+    if ((this->adoptDate.year == this->birthDate.year) && (this->adoptDate.month > this->birthDate.month))
+        cout << "adoption date is OK!" << endl;
+    else if((this->adoptDate.year == this->birthDate.year)&&(this->adoptDate.month > this->birthDate.month))
+        cout << "It is adopted on its birth month!" << endl;
+    else cout << "adoption date is illeagel!" << endl;
+} // end function print
+
+// output Employee object to show when its destructor is called
+Pet::~Pet()
+{
+    cout << "Pet object destructor: "
+        << Name << ", " << spec << endl;
+}
+    
+    
+    
+/Pet.h/
+#pragma once
+#ifndef PET_H
+#define PET_H
+
+#include <string> // program uses C++ standard string class
+#include "Date.h"
+using namespace std;
+
+// GradeBook class definition
+class Pet
+{
+public:
+    Pet(const std::string&, const std::string&,
+        const Date&, const Date&);//類別/物件的介面
+    void print() const;
+    ~Pet();//類別/物件的介面
+    
+private:
+    std::string spec;
+    std::string Name;
+    const Date birthDate;
+    const Date adoptDate;
+}; // end class GradeBook
+#endif
+
+
+
+/Date.cpp/
+#include <array>
+#include <iostream>
+#include <stdexcept>
+#include "Date.h" // include Date class definition
+using namespace std;
+
+// constructor confirms proper value for month; calls
+// utility function checkDay to confirm proper value for day
+Date::Date(int mn, int dy, int yr)
+{
+    if (mn > 0 && mn <= monthsPerYear) // validate the month
+        month = mn;
+    else
+        throw invalid_argument("month must be 1-12");
+
+    year = yr; // could validate yr
+    day = checkDay(dy); // validate the day
+
+    // output Date object to show when its constructor is called
+    cout << "Date object constructor for date ";
+    print();
+    cout << endl;
+} // end Date constructor
+
+// print Date object in form month/day/year
+void Date::print() const
+{
+    cout << month << '/' << day << '/' << year;
+} // end function print
+
+// output Date object to show when its destructor is called
+Date::~Date()
+{
+    cout << "Date object destructor for date ";
+    print();
+    cout << endl;
+} // end ~Date destructor
+
+// utility function to confirm proper day value based on 
+// month and year; handles leap years, too
+unsigned int Date::checkDay(int testDay) const
+{
+    static const array< int, monthsPerYear + 1 > daysPerMonth =
+    { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
+    // determine whether testDay is valid for specified month
+    if (testDay > 0 && testDay <= daysPerMonth[month])
+        return testDay;
+
+    // February 29 check for leap year 
+    if (month == 2 && testDay == 29 && (year % 400 == 0 ||
+        (year % 4 == 0 && year % 100 != 0)))
+        return testDay;
+
+    throw invalid_argument("Invalid day for current month and year");
+} // end function checkDay
+
+
+
+/Date.h/
+#pragma once
+#ifndef DATE_H  // if not defined
+#define DATE_H
+
+// Time class definition
+class Date
+{
+public:
+	//Date(int y,int m, int d); // constructor
+	static const unsigned int monthsPerYear = 12; // months in a year
+	explicit Date(int = 1, int = 1, int = 1900); // default constructor
+	void print() const; // print date in month/day/year format
+	~Date(); // provided to confirm destruction order
+//private:
+	unsigned int month; // 1-12 (January-December)
+	unsigned int day; // 1-31 based on month
+	unsigned int year; // any year
+
+	// utility function to check if day is proper for month and year
+	unsigned int checkDay(int) const;
+}; // end class Date
+
+#endif
