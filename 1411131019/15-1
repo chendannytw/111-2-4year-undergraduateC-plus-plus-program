@@ -1,0 +1,40 @@
+//建立一個可以讓使用者透過鍵盤輸入多隻寵物的種類、名字、生日及領養日(adoptDate)的程式。建立Pet類別與Date類別，並使用 p.686、p.687、p.688 的date類別，程式碼內需達成以下條件:
+
+//1. 要有建構子、解構子、日期檢查的方法(函數)
+
+//2. 用解構子印出寵物所有資料(種類、名字、生日及領養日)與目前年齡(第二題)。
+
+//3. * *日期檢查函數需判斷寵物的年齡是否合理(用checkDay()函數)，以及生日不大於領養日。(狗的年齡介於0~20歲，條件寫法不限制)
+
+//4. Pet類別內必須使用date類別作為其資料成員(使用composition class)。
+
+#include <iostream>
+#include "Pet.h"
+using namespace std;
+
+int main()
+{
+	Date birth(7, 24, 1949);							//根據Date類別建立birth物件存放寵物生日
+	Date adopt(3, 12, 1988);							//根據Date類別建立adopt物件存放寵物領養日
+	/*Pet manager("Bob", "Blue", birth, adopt);*/
+	string A, name;										//字串A存放使用者輸入的寵物種類，字串name存放使用者輸入的寵物姓名
+	int y=0, m=0, d=0,yy=0,mm=0,dd=0;
+
+	cout << "\n請輸入寵物種類：" << endl;			
+	cin >> A;
+
+	cout << "\n請輸入寵物名字：" << endl;
+	cin >> name;
+
+	cout << "\n請輸入寵物生日：" << endl;
+	cin >>m,d,y;
+	birth.setDate( m,d,y);
+
+	cout << "\n請輸入寵物領養日：" << endl;
+	cin >> mm, dd,yy;
+	birth.setDate( mm, dd,yy);
+
+	Pet manager(A, name, birth, adopt);
+
+	manager.print();
+} // end main
