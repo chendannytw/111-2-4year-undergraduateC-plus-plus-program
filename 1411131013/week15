@@ -1,0 +1,170 @@
+main.cpp
+
+// Fig. 9.21: fig9_21.cpp
+// Demonstrating composition--an object with member objects.
+#include <iostream>
+#include "Pet.h" // Employee class definition
+using namespace std;
+
+int main()
+{
+	Date birth(7, 24, 1949);
+	Date adopt(3, 12, 1988);
+	Pet manager("Bob", "Blue", birth, adopt);
+
+	cout << endl;
+	manager.print();
+} // end main
+--------------------------------------------------
+Date.cpp
+
+// Fig. 9.18: Date.cpp
+// Date class member-function definitions.
+#include <array>
+#include <iostream>
+#include <stdexcept>
+#include "Date.h" // include Date class definition
+using namespace std;
+
+// constructor confirms proper value for month; calls
+// utility function checkDay to confirm proper value for day
+Date::Date(int mn, int dy, int yr)
+{
+    if (mn > 0 && mn <= monthsPerYear) // validate the month
+        month = mn;
+    else
+        throw invalid_argument("month must be 1-12");
+
+    year = yr; // could validate yr
+    day = checkDay(dy); // validate the day
+
+    // output Date object to show when its constructor is called
+    cout << "Date object constructor for date ";
+    print();
+    cout << endl;
+} // end Date constructor
+
+// print Date object in form month/day/year
+void Date::print() const
+{
+    cout << month << '/' << day << '/' << year;
+} // end function print
+
+// output Date object to show when its destructor is called
+Date::~Date()
+{
+    cout << "Date object destructor for date ";
+    print();
+    cout << endl;
+} // end ~Date destructor
+
+// utility function to confirm proper day value based on 
+// month and year; handles leap years, too
+unsigned int Date::checkDay(int testDay) const
+{
+    static const array< int, monthsPerYear + 1 > daysPerMonth =
+    { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
+    // determine whether testDay is valid for specified month
+    if (testDay > 0 && testDay <= daysPerMonth[month])
+        return testDay;
+
+    // February 29 check for leap year 
+    if (month == 2 && testDay == 29 && (year % 400 == 0 ||
+        (year % 4 == 0 && year % 100 != 0)))
+        return testDay;
+
+    throw invalid_argument("Invalid day for current month and year");
+} // end function checkDay
+-------------------------------------------
+Date.h
+
+// Fig. 9.17: Date.h 
+// Date class definition; Member functions defined in Date.cpp
+#ifndef DATE_H
+#define DATE_H
+
+class Date
+{
+public:
+	static const unsigned int monthsPerYear = 12; // months in a year
+	explicit Date(int = 1, int = 1, int = 1900); // default constructor
+	void print() const; // print date in month/day/year format
+	~Date(); // provided to confirm destruction order
+//private:
+	unsigned int month; // 1-12 (January-December)
+	unsigned int day; // 1-31 based on month
+	unsigned int year; // any year
+
+	// utility function to check if day is proper for month and year
+	unsigned int checkDay(int) const;
+}; // end class Date
+
+#endif#pragma once
+-----------------------------------------------
+Pet.cpp
+
+// Fig. 9.20: Employee.cpp
+// Employee class member-function definitions.
+#include <iostream>
+#include "Pet.h" // Employee class definition
+#include "Date.h" // Date class definition
+using namespace std;
+
+// constructor uses member initializer list to pass initializer 
+// values to constructors of member objects  
+Pet::Pet(const string& first, const string& last,
+    const Date& dateOfBirth, const Date& dateOfadopt)
+    : firstName(first), // initialize firstName
+    lastName(last), // initialize lastName
+    birthDate(dateOfBirth), // initialize birthDate
+    adoptDate(dateOfadopt) // initialize hireDate
+{
+    // output Employee object to show when constructor is called
+    cout << "Pet object constructor: "
+        << firstName << ' ' << lastName << endl;
+} // end Employee constructor
+
+// print Employee object
+void Pet::print() const
+{
+    cout << lastName << ", " << firstName << "  adoptDate: ";
+    adoptDate.print();
+    cout << "  Birthday: ";
+    birthDate.print();
+    cout << endl;
+} // end function print
+
+// output Employee object to show when its destructor is called
+Pet::~Pet()
+{
+    cout << "Pet object destructor: "
+        << lastName << ", " << firstName << endl;
+} // end ~Employee destructor
+----------------------------------------
+Pet.h
+
+// Fig. 9.19: Employee.h
+// Employee class definition showing composition.
+// Member functions defined in Employee.cpp.
+#ifndef PET_H
+#define PET_H
+
+#include <string>
+#include "Date.h" // include Date class definition
+
+class Pet
+{
+public:
+    Pet(const std::string&, const std::string&,
+        const Date&, const Date&);
+    void print() const;
+    ~Pet(); // provided to confirm destruction order
+private:
+    std::string firstName; // composition: member object
+    std::string lastName; // composition: member object
+    const Date birthDate; // composition: member object
+    const Date adoptDate; // composition: member object
+}; // end class Employee
+
+#endif
