@@ -1,3 +1,5 @@
+Pet.cpp
+
 #include <iostream>
 #include "Pet.h" 
 #include "Date.h" 
@@ -6,34 +8,33 @@ using namespace std;
 
 Pet::Pet(const string& a, const string& name,
     const Date& dateOfBirth, const Date& dateOfAdopt)
-    : A(a), 
+    : A(a),
     Name(name),
-    birthDate(dateOfBirth), 
+    birthDate(dateOfBirth),
     adoptDate(dateOfAdopt)
 {
-    
-    /*cout << "Employee object constructor: "
-        << a << ' ' << name << endl;*/
-} 
+   
+}
 
 
 void Pet::print() const
 {
-   /* cout << Name << ", " << A << "  Hired: ";
-    adoptDate.print();
-    cout << "  Birthday: ";
-    birthDate.print();
-    cout << endl;*/
 
-    cout<<"寵物品種："<<A<<"\n寵物名字："<<Name<<"\n寵物領養日：";
-    adoptDate.print();
-    cout << "寵物生日：";
+    cout << "\n\n寵物品種：" << A << "\n寵物名字：" << Name << "\n寵物生日：";
     birthDate.print();
-} 
+    cout << "寵物領養日：";
+    adoptDate.print();
+    cout << endl;
+    if (this->adoptDate.year > this->birthDate.year)
+        cout << "領養日日期合理\n" << endl;
+    else if ((this->adoptDate.year == this->birthDate.year) && (this->adoptDate.month == this->birthDate.month))
+        cout << "領養日與生日同天\n" << endl;
+    else
+        cout << "領養日日期不合理\n" << endl;
+}
 
 
 Pet::~Pet()
 {
-    cout << "Employee object destructor: "
-        << A << ", " << Name << endl;
+   
 }
