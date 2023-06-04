@@ -9,32 +9,25 @@
 //4. Pet類別內必須使用date類別作為其資料成員(使用composition class)。
 
 #include <iostream>
+#include <string>
 #include "Pet.h"
+#include "Date.h"
 using namespace std;
-
 int main()
 {
-	Date birth(7, 24, 1949);							//根據Date類別建立birth物件存放寵物生日
-	Date adopt(3, 12, 1988);							//根據Date類別建立adopt物件存放寵物領養日
-	/*Pet manager("Bob", "Blue", birth, adopt);*/
-	string A, name;										//字串A存放使用者輸入的寵物種類，字串name存放使用者輸入的寵物姓名
-	int y=0, m=0, d=0,yy=0,mm=0,dd=0;
-
-	cout << "\n請輸入寵物種類：" << endl;			
+	string A,name;
+	int y, m, d;
+	cout << "請輸入寵物種類" << endl;
 	cin >> A;
-
-	cout << "\n請輸入寵物名字：" << endl;
+	cout << "請輸入寵物名字" << endl;
 	cin >> name;
-
-	cout << "\n請輸入寵物生日：" << endl;
-	cin >>m,d,y;
-	birth.setDate( m,d,y);
-
-	cout << "\n請輸入寵物領養日：" << endl;
-	cin >> mm, dd,yy;
-	birth.setDate( mm, dd,yy);
-
-	Pet manager(A, name, birth, adopt);
-
-	manager.print();
-} // end main
+	cout<<"請輸入寵物生日(西元年，月，日)" << endl;
+	cin >> y >> m >> d;
+	Date birthday(y, m, d);
+	cout << "請輸入寵物領養日(西元年，月，日)" << endl;
+	cin >> y >> m >> d;
+	Date adopDate(y, m, d);
+	adopDate.checkDay(d);
+	Pet myPet(A, name, birthday, adopDate);
+	myPet.print();
+}
