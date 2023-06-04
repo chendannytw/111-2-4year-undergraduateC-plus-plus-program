@@ -1,0 +1,145 @@
+//主程式
+#include<iostream>
+#include<stdexcept>
+#include"square_2D.h"
+#include"rect_3D.h"
+using namespace std;
+
+int main(void){
+
+	double length;
+	double width;
+	double height;
+
+	cout << "Enter the length and width for square :" << endl;
+
+	cout << "   Length=";
+	cin >> length;
+
+	cout << "   Width=";
+	cin >> width;
+
+	square_2d userenter(length, width);
+
+	cout << "-------------------------------------------" << endl;
+
+	cout << "Enter the height for rect:" << endl;
+
+	cout << "   Height=";
+	cin >> height;
+
+	rect_3d userenter2(length, width, height);
+
+	cout << "-------------------------------------------" << endl;
+	cout << "The result is:\n\n";
+	cout << "  The result of square:\n";
+	cout << "    Length:" << userenter.getlength() << " cm" << "  | Width:"
+		<< userenter2.getwidth() << "  cm" << " | Height:" << userenter2.getheight()
+		<< "  cm" << "\n    The volume is  " << userenter2.compute_volume() << "cm^3 |  The surface is  "
+		<< userenter2.computer_surface() << "  cm^2\n" << endl;
+
+	system("pause");
+
+}
+
+
+//square_2D.h
+#ifndef square2d_H
+#define square2d_H
+
+using namespace std;
+
+class square_2d {
+public:
+	square_2d(double = 0, double = 0);    //建構子
+	void setlength(const double);         //設定長度
+	void setwidth(const double);          //設定寬度
+	double getlength();                   //取得長度
+	double getwidth();                    //取得寬度
+	double compute_area() const;          //計算面積
+
+	double length;                        //長
+	double width;                         //寬
+};
+#endif
+
+
+//square_2D.cpp
+#include<iostream>
+#include<stdexcept>
+#include"square_2D.h"
+using namespace std;
+
+square_2d::square_2d(const double l, const double w)
+{
+	setlength(l);
+	setwidth(w);
+}
+void square_2d::setlength(const double l)
+{
+	length = l;
+}
+void square_2d::setwidth(const double w)
+{
+	width = w;
+}
+double square_2d::getlength()
+{
+	return length;
+}
+double square_2d::getwidth()
+{
+	return width;
+}
+double square_2d::compute_area() const
+{
+	return length * width;
+}
+
+
+//rect_3D.h
+#ifndef square3d_H
+#define square3d_H
+#include"square_2D.h"
+using namespace std;
+
+class rect_3d :public square_2d
+{
+public:
+	rect_3d(double = 0, double = 0, double = 0);     //建構子
+	void setheight(const double);                    //設定高度
+	double getheight();                              //取得高度
+	double compute_volume() const;                   //計算體積
+	double computer_surface() const;                 //計算表面積
+	double height;                                   //高
+};
+#endif
+
+
+//rect_3D.cpp
+#include<iostream>
+#include<stdexcept>
+#include"rect_3D.h"
+using namespace std;
+
+rect_3d::rect_3d(double l, double w, double h)
+{
+	setlength(l);
+	setwidth(w);
+	setheight(h);
+}
+void rect_3d::setheight(const double h)
+{
+	height = h;
+}
+double rect_3d::getheight() {
+	return height;
+}
+double rect_3d::compute_volume() const
+{
+	return length * width * height;
+}
+double rect_3d::computer_surface() const
+{
+	return(length * width + width * height + length * height) * 2;
+}
