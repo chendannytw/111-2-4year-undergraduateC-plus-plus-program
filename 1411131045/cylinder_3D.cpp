@@ -1,3 +1,4 @@
+//2023/6/7
 #include<iostream>
 
 #include<stdexcept>
@@ -27,7 +28,7 @@ double cylinder_3d::getheight() {
 
 }
 
-//Åé¿n­pºâ¡Gªø*¼e*°ª
+//é«”ç©è¨ˆç®—ï¼šé•·*å¯¬*é«˜
 
 double cylinder_3d::compute_volume()  {
 
@@ -35,7 +36,7 @@ double cylinder_3d::compute_volume()  {
 
 }
 
-//ªí­±¿n­pºâ¡G(ªø*¼e+¼e*°ª+ªø*°ª)*2
+//è¡¨é¢ç©è¨ˆç®—ï¼š(é•·*å¯¬+å¯¬*é«˜+é•·*é«˜)*2
 
 double cylinder_3d::compute_surface()  {
 
