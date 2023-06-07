@@ -35,8 +35,8 @@ int main(void) {
 	cout << "  The result of pi:\n";
 	cout << "    radius:" << userenter.getradius() << " cm" << "  | pi:"
 		<< userenter2.getpi() << "  cm" << " | Height:" << userenter2.getheight()
-		<< "  cm" << "\n    The volume is  " << userenter2.compute_volume() << "cm^3 |  The surface is  "
-		<< userenter2.computer_surface() << "  cm^2\n" << endl;
+		<< "  cm" << "\n    圓柱體體積:  " << userenter2.compute_volume() << "cm^3 |  表面積:  "
+		<< userenter2.computer_surface() << "  cm^2\n" << "圓餅面積： " << userenter2.compute_area() <<"cm2" << endl;
 
 	system("pause");
 
