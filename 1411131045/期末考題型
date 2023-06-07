@@ -169,7 +169,7 @@ double cylinder_3d::getheight() {
 
 }
 
-//體積計算：長*寬*高
+//體積計算：半徑*半徑*3.14*高
 
 double cylinder_3d::compute_volume()  {
 
