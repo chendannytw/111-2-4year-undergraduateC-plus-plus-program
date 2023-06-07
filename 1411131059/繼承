@@ -1,138 +1,121 @@
-// Fig. 11.4: CommissionEmployee.h
-// CommissionEmployee class definition represents a commission employee.
 #ifndef pie_2D_H
 #define pie_2D_H
 
-#include <string> // C++ standard string class
+#include <string>
 
 class pie_2D
 {
 public:
     pie_2D(double = 0);
 
-    void setradius(const double); // set gross sales amount
-    double getradius() const; // return gross sales amount
+    void setradius(const double); 
+    double getradius() const; 
+    double area() const; 
 
-    double area() const; // calculate earnings
-   
 //private:
-    double radius; // gross weekly sales
-    double pi= 3.14; // commission percentage
-}; // end class CommissionEmployee
-
+    double radius; 
+    double pi = 3.14; 
+}; 
 #endif
 
 
+---------------------------------------------------------------
 
-// Fig. 11.5: CommissionEmployee.cpp
-// Class CommissionEmployee member-function definitions.
+
 #include <iostream>
 #include <stdexcept>
-#include "pie_2D.h" // CommissionEmployee class definition
+#include "pie_2D.h"
 using namespace std;
 
-// constructor
 pie_2D::pie_2D(double radius)
 {
-    setradius(radius); // validate and store gross sales
-} // end CommissionEmployee constructor
+    setradius(radius); 
+} 
 
-// set gross sales amount
 void pie_2D::setradius(double a)
 {
     radius = a;
-} // end function setGrossSales
+} 
 
-// return gross sales amount
 double pie_2D::getradius() const
 {
     return radius;
-} // end function getGrossSales
+} 
 
-// calculate earnings
 double pie_2D::area() const
 {
     return pi * radius * radius;
-} // end function earnings
+} 
 
 
+------------------------------------------------------------------------
 
-// Fig. 11.10: BasePlusCommissionEmployee.h
-// BasePlusCommissionEmployee class derived from class 
-// CommissionEmployee.
+
 #ifndef cylinder_3D_H
 #define cylinder_3D_H
 
-#include <string> // C++ standard string class
-#include "pie_2D.h" // CommissionEmployee class declaration
+#include <string> 
+#include "pie_2D.h"
 
 class cylinder_3D : public pie_2D
 {
 public:
-    cylinder_3D(double = 0,double=0);
+    cylinder_3D(double = 0, double = 0);
 
-    void setheight(double); // set base salary
-    double getheight() const; // return base salary
+    void setheight(double); 
+    double getheight() const; 
 
-    double volume() const; // calculate earnings
-    double surface() const; // calculate earnings
-  
+    double volume() const; 
+    double surface() const; 
+
 private:
-    double height; // base salary
-}; // end class BasePlusCommissionEmployee
+    double height; 
+};
 
 #endif
 
 
+--------------------------------------------------------------------------------
 
 
-// Fig. 11.11: BasePlusCommissionEmployee.cpp
-// Class BasePlusCommissionEmployee member-function definitions.
 #include <iostream>
 #include <stdexcept>
-#include "cylinder_3D.h" // class definition
+#include "cylinder_3D.h"
 using namespace std;
 
-// constructor
-cylinder_3D::cylinder_3D(double h,double r)
+cylinder_3D::cylinder_3D(double h, double r)
 {
-    setheight(h); // validate and store base salary
+    setheight(h);
     setradius(r);
-} // end BasePlusCommissionEmployee constructor
+}
 
-// set base salary
 void cylinder_3D::setheight(double h)
 {
     height = h;
-} // end function setBaseSalary
+}
 
-// return base salary
 double cylinder_3D::getheight() const
 {
     return height;
-} // end function getBaseSalary
+} 
 
-// calculate earnings
 double cylinder_3D::volume() const
 {
     return pi * (radius * radius) * height;
-} // end function earnings
+} 
 
 double cylinder_3D::surface() const
 {
     return (2 * pi * (radius * radius)) + (2 * pi * radius * height);
-} // end function earnings
-
-// print BasePlusCommissionEmployee object
+} 
 
 
+------------------------------------------------------------------------------------
 
 
-// Fig. 11.9: fig11_09.cpp
-// Testing class BasePlusCommissionEmployee.
 #include <iostream>
 #include <iomanip>
-#include "cylinder_3D.h" // class definition
+#include "cylinder_3D.h" 
 using namespace std;
 
 int main()
@@ -142,13 +125,15 @@ int main()
     cout << "Enter the radius: ";
     cin >> r;
     pie_2D user(r);
-    cout << "\nArea:" << user.area();
+    cout << "\nArea:" << user.area() << "cm2";
+
+    cout << "\n--------------------------------------\n";
 
     cout << "\nEnter the height: ";
     cin >> h;
-    cylinder_3D userenter(h,r);
-    cout << "\nVolume: " << userenter.volume();
-    cout << "\nSurface: " << userenter.surface();
-
-    
-} // end main
+    cylinder_3D userenter(h, r);
+    cout << "\nHeight: " << userenter.getheight() << "cm";
+    cout << "\nRadius: " << user.getradius() << "cm";
+    cout << "\nVolume: " << userenter.volume() << "cm3";
+    cout << "\nSurface: " << userenter.surface() << "cm2";
+} 
