@@ -51,9 +51,8 @@ int main(void) {
 
     cout << "  The result of pie:\n";
 
-    cout << "     diameter：" << userenter.getdiameter() << " cm" << " | radius："
-
-        << userenter.getdiameter() << " cm" << userenter.getradius() << " cm"
+    cout << "     diameter：" << userenter.getdiameter() << " cm" 
+        << " | radius："<< userenter.getradius() << " cm"
         << "\n     The 面積一 is "<< userenter.compute_area1() << " cm2\n" 
         << "\n     The 面積二 is "<< userenter.compute_area2() << " cm2\n" << endl;
 
@@ -63,7 +62,7 @@ int main(void) {
         << " | radius："<< userenter2.getradius() << " cm" 
         << " | Height：" << userenter2.getheight() << " cm" 
         << "\n     The 體積1 is " << userenter2.compute_volume1() << " cm3  /  "
-        << "\n     The 體積2 is " << userenter2.compute_volume2() << " cm3  \n"
+        << "\n     The 體積2 is " << userenter2.compute_volume2() << " cm3  \n\n"
         << " | The 表面積1 is " << userenter2.compute_surface1() << " cm2\n" 
         << " | The 表面積2 is " << userenter2.compute_surface2() << " cm2\n" << endl;
 
