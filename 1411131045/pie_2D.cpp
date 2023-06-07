@@ -1,3 +1,4 @@
+//2023/6/7
 #include<iostream>
 
 #include<stdexcept>
@@ -29,7 +30,7 @@ double pie_2d::getradious() {
 }
 
 
-//­±¿n­pºâ¡G¥b®|*¥b®|*3.14
+//Â­Ä…Å¼nÂ­pÅŸÃ¢Ä„GÄ½bÅ½|*Ä½bÅ½|*3.14
 
 double pie_2d::compute_area(){
 
