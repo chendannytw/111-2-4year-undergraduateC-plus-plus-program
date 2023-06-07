@@ -33,3 +33,4 @@ int main()
     // display the employee's earnings
     cout << "\n\nEmployee's earnings: $" << employee.earnings() << endl;
 } // end main
+
