@@ -1,0 +1,148 @@
+//主程式
+
+#include<iostream>
+#include<stdexcept>
+#include"square_2D.h"
+#include"rect_3D.h"
+using namespace std;
+
+int main(void) {
+
+	double radius;
+	double height;
+
+	cout << "Enter the radius for circle :" << endl;
+
+	cout << "   radius=";
+	cin >> radius;
+
+	square_2d userenter(radius);
+
+	cout << "-------------------------------------------" << endl;
+
+	cout << "Enter the height for circle:" << endl;
+
+	cout << "   Height=";
+	cin >> height;
+
+	rect_3d userenter2(radius, height);
+
+	cout << "-------------------------------------------" << endl;
+	cout << "The result is:\n\n";
+	cout << "最終結果:\n";
+
+	
+
+	cout << "半徑：" << userenter.getradius() << " cm";
+	cout << "\n面積：  " << userenter.compute_area() << "com^2";
+
+	cout << "\n\n半徑：" << userenter.getradius() << " cm";
+	cout << "\n高：" << userenter2.getheight() << " cm";
+	cout << "\n體積：  " << userenter2.compute_volume() << "com^3";
+
+
+	cout << "\n\n表面積：  " << userenter2.computer_surface() << "com^2";
+
+	system("pause");
+
+}
+
+
+//square2d.h
+
+#ifndef square2d_H
+#define square2d_H
+
+using namespace std;
+
+class square_2d {
+public:
+	square_2d(double = 0);    //建構子
+	void setradius(const double);         //設定半徑
+	double getradius();                   //取得半徑
+	double compute_area() const;          //計算面積
+
+	double radius;                        //半徑
+
+};
+#endif
+
+
+
+
+//square2d.cpp
+
+#include<iostream>
+#include<stdexcept>
+#include"square_2D.h"
+using namespace std;
+
+square_2d::square_2d(const double r)
+{
+	setradius(r);
+}
+void square_2d::setradius(const double r)
+{
+	radius = r;
+}
+
+double square_2d::getradius()
+{
+	return radius;
+}
+
+double square_2d::compute_area() const
+{
+	return radius * radius*3.14;
+}
+
+
+
+//rect_3D.h
+
+#ifndef square3d_H
+#define square3d_H
+#include"square_2D.h"
+using namespace std;
+
+class rect_3d :public square_2d		//繼承square_2D.h類別
+{
+public:
+	rect_3d(double = 0, double = 0);     //建構子
+	void setheight(const double);                    //設定高度
+	double getheight();                              //取得高度
+	double compute_volume() const;                   //計算體積
+	double computer_surface() const;               //計算表面積
+	double height;                                   //高
+};
+#endif
+
+
+
+//rect_3D.cpp
+
+#include<iostream>
+#include<stdexcept>
+#include"rect_3D.h"
+using namespace std;
+
+rect_3d::rect_3d(double r, double h)
+{
+	setradius(r);
+	setheight(h);
+}
+void rect_3d::setheight(const double h)
+{
+	height = h;
+}
+double rect_3d::getheight() {
+	return height;
+}
+double rect_3d::compute_volume() const
+{
+	return radius * radius *3.14* height;
+}
+double rect_3d::computer_surface() const
+{
+	return(radius* radius * 3.14)*2+(radius * 3.14 * height);
+}
