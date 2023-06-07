@@ -1,24 +1,25 @@
+//2023/6/7
 #ifndef pie2d_H
 
 #define pie2d_H
 
 using namespace std;
 
-//square_2dªºÃş§O(¥]§t6­Ó¦¨­û¨ç¼Æ»P2­Ó¸ê®Æ¦¨­û)
+//square_2dçš„é¡åˆ¥(åŒ…å«6å€‹æˆå“¡å‡½æ•¸èˆ‡2å€‹è³‡æ–™æˆå“¡)
 
 class pie_2d {
 
 public:
 
-    pie_2d(double = 0);           //«Øºc¤l
+    pie_2d(double = 0);           //å»ºæ§‹å­
 
-    void setradious(double);           //³]©w¥b®|
+    void setradious(double);           //è¨­å®šåŠå¾‘
 
-    double getradious();                     //¨ú±o¥b®|
+    double getradious();                     //å–å¾—åŠå¾‘
 
-    double compute_area();            //­pºâ­±¿n
+    double compute_area();            //è¨ˆç®—é¢ç©
 
-    double radious;                          //¥b®|
+    double radious;                          //åŠå¾‘
 
 
 };
