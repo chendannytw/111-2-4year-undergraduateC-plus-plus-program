@@ -1,0 +1,264 @@
+@@@main.cpp@@@
+#include<iostream>
+
+#include<stdexcept>
+
+#include"pie_2D.h"
+
+#include"cylinder_3D.h"
+
+using namespace std;
+
+int main(void) {
+
+    double diameter;
+
+    double radius;
+
+    double height;
+
+    //視窗輸出配置
+
+    cout << "Enter the diameter and radius for pie：" << endl;
+
+    cout << "  diameter=";
+
+    cin >> diameter;
+
+
+
+    cout << "  radius =";
+
+    cin >> radius;
+
+    pie_2D userenter(diameter, radius);
+
+    cout << "-------------------------------------------------" << endl;
+
+
+
+    cout << "Enter the height for cylinder:" << endl;
+
+    cout << "  Height=";
+
+    cin >> height;
+
+    cylinder_3D userenter2(diameter, radius, height);
+
+    cout << "-------------------------------------------------" << endl;
+
+    cout << "The result is:\n\n";
+
+    cout << "  The result of pie:\n";
+
+    cout << "     diameter：" << userenter.getdiameter() << " cm" << " | radius："
+
+        << userenter.getdiameter() << " cm" << userenter.getradius() << " cm"
+        << "\n     The 面積一 is "<< userenter.compute_area1() << " cm2\n" 
+        << "\n     The 面積二 is "<< userenter.compute_area2() << " cm2\n" << endl;
+
+    cout << "  The result of cylinder:\n";
+
+    cout << "     diameter：" << userenter2.getdiameter() << " cm"
+        << " | radius："<< userenter2.getradius() << " cm" 
+        << " | Height：" << userenter2.getheight() << " cm" 
+        << "\n     The 體積1 is " << userenter2.compute_volume1() << " cm3  /  "
+        << "\n     The 體積2 is " << userenter2.compute_volume2() << " cm3  \n"
+        << " | The 表面積1 is " << userenter2.compute_surface1() << " cm2\n" 
+        << " | The 表面積2 is " << userenter2.compute_surface2() << " cm2\n" << endl;
+
+
+
+    system("pause");
+
+}
+
+
+@@@pie_2D.h@@@
+#ifndef pie2D_H
+
+#define pie2D_H
+
+using namespace std;
+
+//pie_2d的類別(包含6個成員函數與2個資料成員)
+
+class pie_2D {
+
+public:
+
+    pie_2D(double = 0, double = 0);           //建構子
+
+    void setdiameter(const double);           //設定長度
+
+    void setradius(const double);            //設定寬度
+
+    double getdiameter();                     //取得直徑   
+
+    double getradius();                      //取得半徑   
+
+    double compute_area1() const;            //計算面積
+    double compute_area2() const;            //計算面積
+
+    double diameter;                          //長
+
+    double radius;                           //寬
+
+};
+
+#endif
+
+
+@@@pie_2D.cpp@@@
+#include<iostream>
+
+#include<stdexcept>
+
+#include"pie_2D.h"
+
+using namespace std;
+
+pie_2D::pie_2D(const double l, const double w)
+
+{
+
+    setdiameter(l);
+
+    setradius(w);
+
+}
+
+void pie_2D::setdiameter(const double l) {
+
+    diameter = l;
+
+}
+
+void pie_2D::setradius(const double w) {
+
+    radius = w;
+
+}
+
+double pie_2D::getdiameter() {
+
+    return diameter;
+
+}
+
+double pie_2D::getradius() {
+
+    return radius;
+
+}
+
+//面積計算：長*寬
+
+double pie_2D::compute_area1() const {
+
+    return (diameter/2)  * (diameter / 2) * 3.14;
+
+}
+double pie_2D::compute_area2() const {
+
+    return radius * radius * 3.14;
+
+}
+
+
+@@@cylinder_3D.h@@@
+#ifndef cylinder3D_H
+
+#define cylinder3D_H
+
+#include"pie_2D.h"
+
+using namespace std;
+
+/*繼承類別的宣告方法為「衍生類別：基礎類別」*/
+
+//繼承cylinder_2d類別的rect_3d類別(包含5個成員函數與1個資料成員 + cylinder_2d內的函數與資料成員)
+
+class cylinder_3D :public pie_2D
+
+{
+
+public:
+
+    cylinder_3D(double = 0, double = 0, double = 0);            //建構子
+
+    void setheight(const double);                           //設定高度
+
+    double getheight();                                     //取得高度   
+
+    double compute_volume1() const;                          //計算體積
+    double compute_volume2() const;                          //計算體積
+
+    double compute_surface1() const;                         //計算表面積
+    double compute_surface2() const;                         //計算表面積
+
+    double height;                                          //高
+
+};
+
+#endif
+
+
+@@@cylinder_3D.cpp@@@
+#include<iostream>
+
+#include<stdexcept>
+
+#include"cylinder_3D.h"
+
+using namespace std;
+
+cylinder_3D::cylinder_3D(double l, double w, double h)
+
+{
+
+    setdiameter(l);
+
+    setradius(w);
+
+    setheight(h);
+
+}
+
+void cylinder_3D::setheight(const double h) {
+
+    height = h;
+
+}
+
+double cylinder_3D::getheight() {
+
+    return height;
+
+}
+
+//體積計算：圓柱的體積＝底面積×高
+
+double cylinder_3D::compute_volume1() const {
+
+    return (diameter / 2) * (diameter / 2) * 3.14 * height;
+
+}
+double cylinder_3D::compute_volume2() const {
+
+    return radius * radius * 3.14 * height;
+
+}
+
+//表面積計算：圓柱的表面積＝兩底面的圓面積和＋底面圓周長×高。
+
+double cylinder_3D::compute_surface1() const {
+
+    return ((diameter / 2) * (diameter / 2) * 3.14 * 2) +  (diameter * 3.14 * height);
+
+}
+double cylinder_3D::compute_surface2() const {
+
+    return (radius * radius * 3.14 * 2) + (radius * 2 * 3.14 * height);
+
+}
