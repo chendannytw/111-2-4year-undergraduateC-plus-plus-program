@@ -1,3 +1,4 @@
+//2023/6/7
 #ifndef cylinder3d_H
 
 #define cylinder3d_H
@@ -6,9 +7,9 @@
 
 using namespace std;
 
-/*Ä~©ÓÃş§Oªº«Å§i¤èªk¬°¡u­l¥ÍÃş§O¡G°òÂ¦Ãş§O¡v*/
+/*ç¹¼æ‰¿é¡åˆ¥çš„å®£å‘Šæ–¹æ³•ç‚ºã€Œè¡ç”Ÿé¡åˆ¥ï¼šåŸºç¤é¡åˆ¥ã€*/
 
-//Ä~©Ópie_2dÃş§Oªºcylinder_3dÃş§O(¥]§t5­Ó¦¨­û¨ç¼Æ»P1­Ó¸ê®Æ¦¨­û + pie_2d¤ºªº¨ç¼Æ»P¸ê®Æ¦¨­û)
+//ç¹¼æ‰¿pie_2dé¡åˆ¥çš„cylinder_3dé¡åˆ¥(åŒ…å«5å€‹æˆå“¡å‡½æ•¸èˆ‡1å€‹è³‡æ–™æˆå“¡ + pie_2då…§çš„å‡½æ•¸èˆ‡è³‡æ–™æˆå“¡)
 
 class cylinder_3d:public pie_2d
 
@@ -16,17 +17,17 @@ class cylinder_3d:public pie_2d
 
 public:
 
-    cylinder_3d(double = 0, double = 0);            //«Øºc¤l
+    cylinder_3d(double = 0, double = 0);            //å»ºæ§‹å­
 
-    void setheight(double);                           //³]©w°ª«×
+    void setheight(double);                           //è¨­å®šé«˜åº¦
 
-    double getheight();                                     //¨ú±o°ª«×   
+    double getheight();                                     //å–å¾—é«˜åº¦   
 
-    double compute_volume();                          //­pºâÅé¿n
+    double compute_volume();                          //è¨ˆç®—é«”ç©
 
-    double compute_surface();                         //­pºâªí­±¿n
+    double compute_surface();                         //è¨ˆç®—è¡¨é¢ç©
 
-    double height;                                          //°ª
+    double height;                                          //é«˜
 
 };
 
