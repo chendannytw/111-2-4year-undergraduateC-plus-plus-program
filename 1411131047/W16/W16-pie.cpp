@@ -1,6 +1,5 @@
 #include<iostream>
 #include<stdexcept>
-#include"pie_2D.h"
 #include"cylinder_3D.h"
 
 
@@ -9,7 +8,7 @@ using namespace std;
 int main(void) {
 
     double R,H;
-    cout << "Enter the length and width for square¡G" << endl;
+    cout << "Enter the length and width for squareÂ¡G" << endl;
     cout << "  R=";
 
     cin >> R;
