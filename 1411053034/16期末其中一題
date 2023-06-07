@@ -1,3 +1,5 @@
+建立兩個類別pie_2D與cylinder_3D，分別為基本類別與衍生類別(也就是cylinder_3D繼承於pie_2D)，輸入半徑(或直徑)、高，分別印出圓餅面積與圓柱體的體積與表面積。
+
 主程式
 #include<iostream>
 
