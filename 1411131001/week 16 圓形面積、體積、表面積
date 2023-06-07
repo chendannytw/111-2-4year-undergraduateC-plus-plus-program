@@ -1,0 +1,146 @@
+//主程式
+#include<iostream>
+#include<stdexcept>
+#include"pie_2D.h"
+#include"cylinder_3D.h"
+using namespace std;
+
+int main(void) {
+
+	double radius;
+	double pi;
+	double height;
+
+	cout << "Enter the radius and pi for pie :" << endl;
+
+	cout << "   radius=";
+	cin >> radius;
+
+	cout << "   pi=";
+	cin >> pi;
+
+	pie_2d userenter(radius, pi);
+
+	cout << "-------------------------------------------" << endl;
+
+	cout << "Enter the height for rect:" << endl;
+
+	cout << "   Height=";
+	cin >> height;
+
+	rect_3d userenter2(radius, pi, height);
+
+	cout << "-------------------------------------------" << endl;
+	cout << "The result is:\n\n";
+	cout << "  The result of pi:\n";
+	cout << "    radius:" << userenter.getradius() << " cm" << "  | pi:"
+		<< userenter2.getpi() << "  cm" << " | Height:" << userenter2.getheight()
+		<< "  cm" << "\n    The volume is  " << userenter2.compute_volume() << "cm^3 |  The surface is  "
+		<< userenter2.computer_surface() << "  cm^2\n" << endl;
+
+	system("pause");
+
+}
+
+
+//pie_2D.h
+#ifndef square2d_H
+#define square2d_H
+
+using namespace std;
+
+class pie_2d {
+public:
+	pie_2d(double = 0.0, double = 0.0);    //建構子
+	void setradius(const double);         //設定長度
+	void setpi(const double);          //設定寬度
+	double getradius();                   //取得長度
+	double getpi();                    //取得寬度
+	double compute_area() const;          //計算面積
+
+	double radius;                        //半徑
+	double pi;							  //圓周率
+};
+#endif
+
+
+//pie_2D.cpp
+#include<iostream>
+#include<stdexcept>
+#include"pie_2D.h"
+using namespace std;
+
+pie_2d::pie_2d(const double r, const double p)
+{
+	setradius(r);
+	setpi(p);
+}
+void pie_2d::setradius(const double r)
+{
+	radius = r;
+}
+void pie_2d::setpi(const double p)
+{
+	pi = p;
+}
+double pie_2d::getradius()
+{
+	return radius;
+}
+double pie_2d::getpi()
+{
+	return pi;
+}
+double pie_2d::compute_area() const
+{
+	return radius * radius* pi;
+}
+
+
+//rect_3D.h
+#ifndef square3d_H
+#define square3d_H
+#include"pie_2D.h"
+using namespace std;
+
+class rect_3d :public pie_2d
+{
+public:
+	rect_3d(double = 0.0, double = 0.0, double = 0.0);     //建構子
+	void setheight(const double);                    //設定高度
+	double getheight();                              //取得高度
+	double compute_volume() const;                   //計算體積
+	double computer_surface() const;                 //計算表面積
+	double height;                                   //高
+};
+#endif
+
+
+//rect_3D.cpp
+#include<iostream>
+#include<stdexcept>
+#include"cylinder_3D.h"
+using namespace std;
+
+rect_3d::rect_3d(double r, double p, double h)
+{
+	setradius(r);
+	setpi(p);
+	setheight(h);
+}
+void rect_3d::setheight(const double h)
+{
+	height = h;
+}
+double rect_3d::getheight() {
+	return height;
+}
+double rect_3d::compute_volume() const
+{
+	return radius * radius* pi * height;
+}
+double rect_3d::computer_surface() const
+{
+	return(radius* radius* pi)*2+ (radius*2*pi* height);
+}
+
