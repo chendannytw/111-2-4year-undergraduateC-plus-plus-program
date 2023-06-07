@@ -1,0 +1,229 @@
+主程式
+#include<iostream>
+
+#include<stdexcept>
+
+#include"pie_2D.h"
+
+#include"cylinder_3D.h"
+
+using namespace std;
+
+int main(void) {
+
+    double length;
+
+    double radius;
+
+
+    //視窗輸出配置
+
+    cout << "Enter the radius for square：" << endl;
+
+    cout << " radius=";
+
+    cin >> radius;
+
+    pie_2D userenter(radius);
+
+    cout << "-------------------------------------------------" << endl;
+
+
+
+    cout << "Enter the length for rect:" << endl;
+
+    cout << "  length=";
+
+    cin >> length;
+
+    cylinder_3D userenter2(length,radius);
+
+    cout << "-------------------------------------------------" << endl;
+
+    cout << "The result is:\n\n";
+
+    cout << "  The result of square:\n";
+
+    cout << "     Length：" << " | radius："
+
+        << userenter.getradius() << " cm" << "\n     The area is "
+
+        << userenter.compute_area() << " cm2\n" << endl;
+
+    cout << "  The result of cylinder:\n";
+
+    cout << "     Length：" << userenter2.getlength() << " cm" << " | radius："
+
+        << userenter2.getradius() << " cm" << " \n     The volume is " << userenter2.compute_volume() << " cm3 | The surface is " << userenter2.compute_surface() << " cm2\n" << endl;
+
+
+
+    system("pause");
+
+}
+
+pie_2D.cpp檔
+#include<iostream>
+
+#include<stdexcept>
+
+#include"pie_2D.h"
+
+using namespace std;
+
+pie_2D::pie_2D(const double r)
+
+{
+
+    setradius(r);
+
+}
+
+void pie_2D::setradius(const double r) {
+
+    radius = r;
+
+}
+
+double pie_2D::getradius() {
+
+    return radius;
+
+}
+
+
+//面積計算：長*寬
+
+double pie_2D::compute_area() const {
+
+    return radius * radius* 3.14;
+
+}
+pie_2D.h檔
+/*這次程式的重點就是在運用類別的「繼承(inherit)」關係*/
+
+/*「繼承」的定義->先定義基礎類別(base class)，可以依據定義的基礎類別，再定義一個包含基礎類別內的運算子.函數等，且可以再賦予新函數與運算子的衍生類別(derived class)*/
+
+/*例如本題就是利用square_2D當作基礎類別，再自行定義一個rect_3D的衍生類別*/
+
+#ifndef pie2D_H
+
+#define pie2D_H
+
+using namespace std;
+
+//square_2d的類別(包含6個成員函數與2個資料成員)
+
+class pie_2D {
+
+public:
+
+    pie_2D(double = 0);           //建構子
+
+    void setradius(const double);           //設定半徑
+
+    double getradius();                     //取得半徑   
+
+    double compute_area() const;            //計算面積
+
+    double radius;                          //半徑
+
+
+};
+
+#endif
+
+cylinder_3D.cpp檔
+#include<iostream>
+
+#include<stdexcept>
+
+#include"cylinder_3D.h"
+
+using namespace std;
+
+cylinder_3D::cylinder_3D(double l, double r)
+
+{
+
+    setlength(l);
+    setradius(r);
+
+}
+
+void cylinder_3D::setlength(const double l) {
+
+    length = l;
+
+}
+
+double cylinder_3D::getlength() {
+
+    return length;
+
+}
+void cylinder_3D::setradius(const double r) {
+
+    radius = r;
+
+}
+
+double cylinder_3D::getradius() {
+
+    return length;
+
+}
+
+//體積計算：長*面積
+
+double cylinder_3D::compute_volume() const {
+
+    return (length *3.14159 * radius);
+
+}
+
+//表面積計算：(長*寬+寬*高+長*高)*2
+
+double cylinder_3D::compute_surface() const {
+
+    return radius* 2+ length * 3.14159 * radius;
+
+}
+
+cylinder_3D.h檔
+#ifndef cylinder3D_H
+
+#define cylinder3D_H
+
+#include "pie_2D.h"
+
+using namespace std;
+
+/*繼承類別的宣告方法為「衍生類別：基礎類別」*/
+
+//繼承square_2d類別的rect_3d類別(包含5個成員函數與1個資料成員 + square_2d內的函數與資料成員)
+
+class cylinder_3D :public pie_2D
+
+{
+
+public:
+
+    cylinder_3D(double = 0, double = 0);            //建構子
+
+    void setlength(const double);                           //設定長度
+
+    double getlength();                                     //取得長度   
+
+    void setradius(const double);                           //設定長度
+
+    double getradius();
+
+    double compute_volume() const;                          //計算體積
+
+    double compute_surface() const;                         //計算表面積
+
+    double length;
+};
+
+#endif#pragma once
