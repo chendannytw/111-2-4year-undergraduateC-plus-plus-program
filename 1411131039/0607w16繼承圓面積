@@ -1,0 +1,110 @@
+//主程式
+#include<iostream>
+#include<stdexcept>
+#include"pie_2D.h"
+#include"cylinder_3D.h"
+using namespace std;
+
+int main(){
+	double r1,h;
+	cout << "請輸入圓的半徑：" << endl;
+	cin >> r1;
+	cout << "請輸入圓柱體的高：" << endl;
+	cin >> h;
+	pie_2d area(r1);
+	cylinder vom(r1,h);
+	cout << "圓面積為：" << area.compute_area() << " cm^2";
+	cout << "圓體積為：" << vom.compute_volume() << " cm^3";
+	cout << "圓表面積為：" << vom.compute_surface() << " cm^2";
+}
+//pie_2d.h
+#ifndef pie2d_H
+#define pie2d_H
+using namespace std;
+
+class pie_2d {
+public:
+    pie_2d(double = 0);
+    void setr(const double);                     
+    double getr();                     
+    double compute_area() const;            
+    double r;                          
+    double pie = 3.14159;                       
+};
+
+#endif
+
+//pie_2d.cPP
+#include<iostream>
+#include<stdexcept>
+#include"pie_2D.h"
+using namespace std;
+pie_2d::pie_2d(const double r1)
+{
+    setr(r1);
+}
+
+void  pie_2d::setr(const double r1) {
+    r = r1;
+}
+
+double  pie_2d::getr() {
+    return r;
+}
+
+double  pie_2d::compute_area() const {
+    return r*r*pie;
+}
+
+//cylinder_3D.cpp
+#include<iostream>
+#include<stdexcept>
+#include"cylinder_3D.h"
+
+using namespace std;
+cylinder::cylinder(double r, double h)
+
+{
+    setr(r);
+    setheight(h);
+
+}
+
+void cylinder::setheight(const double h) {
+    height = h;
+}
+
+double cylinder::getheight() {
+    return height;
+}
+
+
+double cylinder::compute_volume() const {
+    return r * r * pie* height;
+}
+
+//表面積計算：(長*寬+寬*高+長*高)*2
+
+double cylinder::compute_surface() const {
+
+    return (r * r * pie*2 + r*2*pie*height);
+
+}
+//cylinder_3D.h
+#ifndef cylinder_3D_H
+#define cylinder_3D_H
+#include"pie_2d.h"
+using namespace std;
+
+class cylinder :public pie_2d{
+public:
+    cylinder(double = 0, double = 0);            //建構子
+    void setheight(const double);
+    double getheight();                                     //取得高度   
+    double compute_volume() const;                          //計算體積
+    double compute_surface() const;                         //計算表面積
+    double height;                                          //高
+
+};
+
+#endif
