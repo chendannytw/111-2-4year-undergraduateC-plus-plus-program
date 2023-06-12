@@ -6,7 +6,7 @@
 
 using namespace std;
 
-square_2d::square_2d(const double r, const double h)
+pie_2d::pie_2d(const double r, const double h)
 
 {
 
@@ -16,34 +16,34 @@ square_2d::square_2d(const double r, const double h)
 
 }
 
-void square_2d::setradius(const double r) {
+void pie_2d::setradius(const double r) {
 
     radius = r;
 
 }
 
-void square_2d::setheight(const double h) {
+void pie_2d::setheight(const double h) {
 
     height = h;
 
 }
 
-double square_2d::getradius() {
+double pie_2d::getradius() {
 
     return radius;
 
 }
 
-double square_2d::getheight() {
+double pie_2d::getheight() {
 
     return height;
 
 }
 
-//­±¿n­pºâ¡G(ªø*¼e+¼e*°ª+ªø*°ª)*2
+//é¢ç©è¨ˆç®—ï¼š(é•·*å¯¬+å¯¬*é«˜+é•·*é«˜)*2
 
-double square_2d::compute_surface() const {
+double pie_2d::compute_surface() const {
 
-    return 2 * radious * 3.14 * height + 2 * radious * radious * 3.14;
+    return 2 * radius * 3.14 * height + 2 * radius * radius * 3.14;
 
 }
