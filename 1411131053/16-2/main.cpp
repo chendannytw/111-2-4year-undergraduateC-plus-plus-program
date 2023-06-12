@@ -14,9 +14,9 @@ int main(void) {
 
     double radius;
 
-    //µøµ¡¿é¥X°t¸m
+    //è¦–çª—è¼¸å‡ºé…ç½®
 
-    cout << "Enter the length and width for square¡G" << endl;
+    cout << "Enter the length and width for squareï¼š" << endl;
 
     cout << "  Length=";
 
@@ -28,11 +28,11 @@ int main(void) {
 
     cin >> radius;
 
-    square_2d userenter(length, radius);
+    pie_2d userenter(length, radius);
 
     cout << "-------------------------------------------------" << endl;
 
-    rect_3d userenter2(length, radius);
+    cylinder_3d userenter2(length, radius);
 
     cout << "-------------------------------------------------" << endl;
 
@@ -40,17 +40,17 @@ int main(void) {
 
     cout << "  The result of square:\n";
 
-    cout << "     Length¡G" << userenter.getlength() << " cm" << " | radius¡G"
+    cout << " Lengthï¼š" << userenter.getlength() << " cm" << " radiusï¼š"
 
-        << userenter.radius() << " cm" << "\n   The volume is "
+        << userenter.getradius() << " cm" << "\n   The volume is "
 
         << userenter.compute_volume() << " cm2\n" << endl;
 
     cout << "  The result of rect:\n";
 
-    cout << "     Length¡G" << userenter2.getlength() << " cm" << " | Width¡G"
+    cout << "     Lengthï¼š" << userenter2.getlength() << " cm" << " | Widthï¼š"
 
-        << userenter2.getwidth() << " cm" << " | Height¡G" << userenter2.getheight()
+        << userenter2.getradius() << " cm" << " | Heightï¼š" << userenter2.getheight()
 
         << " cm" << "\n     The volume is " << userenter2.compute_volume() << " cm3 | The surface is " << userenter2.compute_surface() << " cm2\n" << endl;
 
