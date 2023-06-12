@@ -6,18 +6,25 @@
 
 using namespace std;
 
-cylinder_3d::cylinder_3d(double l, double r)
+cylinder_3d::cylinder_3d(double h, double r)
 
 {
-    setlength(l);
+    setheight(h);
 
     setradius(r);
 }
 
-//Åé¿n­pºâ¡G¶ê©P²v*¥b®|^2*ªø«×
+void cylinder_3d::setheight(double h) {
+    height = h;
+}
+
+double cylinder_3d::getheight() {
+    return height;
+}
+//é«”ç©è¨ˆç®—ï¼šåœ“å‘¨ç‡*åŠå¾‘^2*é•·åº¦
 
 double cylinder_3d::compute_volume() const {
 
-    return 3.14 * radius * radius * length;
+    return 3.14 * radius * radius * height;
 
 }
