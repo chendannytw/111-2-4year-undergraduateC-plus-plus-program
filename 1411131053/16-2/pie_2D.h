@@ -4,27 +4,31 @@
 
 using namespace std;
 
-//square_2dªºÃş§O(¥]§t6­Ó¦¨­û¨ç¼Æ»P2­Ó¸ê®Æ¦¨­û)
+//square_2dçš„é¡åˆ¥(åŒ…å«6å€‹æˆå“¡å‡½æ•¸èˆ‡2å€‹è³‡æ–™æˆå“¡)
 
-class square_2d {
+class pie_2d {
 
 public:
 
-    square_2d(double = 0, double = 0);           //«Øºc¤l
+    pie_2d(double = 0, double = 0);           //å»ºæ§‹å­
 
-    void setradius(const double);           //³]©w¥b®|
+    void setradius(const double);           //è¨­å®šåŠå¾‘
 
-    void setheight(const double);            //³]©w°ª«×
+    void setheight(const double);            //è¨­å®šé«˜åº¦
 
-    double getradius();                     //¨ú±o¥b®|   
+    double getradius();                     //å–å¾—åŠå¾‘   
 
-    double getheight();                      //¨ú±o°ª«×   
+    double getlength();                     //å–å¾—é•·åº¦
 
-    double compute_area() const;            //­pºâªí­±¿n
+    double getheight();                      //å–å¾—é«˜åº¦   
 
-    double radius;                          //ªø
+    double compute_surface() const;            //è¨ˆç®—è¡¨é¢ç©
 
-    double height;                           //¼e
+    double compute_volume() const;          //è¨ˆç®—é«”ç©
+
+    double radius;                          //åŠå¾‘
+
+    double height;                          //é«˜
 
 };
 
