@@ -6,23 +6,33 @@
 
 using namespace std;
 
-/*Ä~©ÓÃş§Oªº«Å§i¤èªk¬°¡u­l¥ÍÃş§O¡G°òÂ¦Ãş§O¡v*/
+/*ç¹¼æ‰¿é¡åˆ¥çš„å®£å‘Šæ–¹æ³•ç‚ºã€Œè¡ç”Ÿé¡åˆ¥ï¼šåŸºç¤é¡åˆ¥ã€*/
 
-//Ä~©Ósquare_2dÃş§Oªºrect_3dÃş§O(¥]§t5­Ó¦¨­û¨ç¼Æ»P1­Ó¸ê®Æ¦¨­û + square_2d¤ºªº¨ç¼Æ»P¸ê®Æ¦¨­û)
+//ç¹¼æ‰¿square_2dé¡åˆ¥çš„rect_3dé¡åˆ¥(åŒ…å«5å€‹æˆå“¡å‡½æ•¸èˆ‡1å€‹è³‡æ–™æˆå“¡ + square_2då…§çš„å‡½æ•¸èˆ‡è³‡æ–™æˆå“¡)
 
-class cylinder_3d :public cylinder_3d
+class cylinder_3d :public pie_2d
 
 {
 
 public:
 
-    cylinder_3d(double = 0, double = 0);            //«Øºc¤l
+    cylinder_3d(double = 0, double = 0);            //å»ºæ§‹å­
 
-    void setlength(const double);                   //³]©wªø«×
+    void setlength(const double);                   //è¨­å®šé•·åº¦
 
-    double setradius();                             //¨ú±o¥b®|   
+    void setheight(const double);                   //è¨­å®šé«˜åº¦
 
-    double compute_volume() const;                  //­pºâÅé¿n
+    double setradius(const double);                 //è¨­å®šåŠå¾‘   
+
+    double getlength();                             //å–å¾—é•·åº¦
+
+    double getheight();                             //å–å¾—é«˜åº¦
+
+    double getradius();                             //å–å¾—åŠå¾‘
+
+    double compute_volume() const;                  //è¨ˆç®—é«”ç©
+
+    double compute_surface() const;                 //è¨ˆç®—é¢ç©
 };
 
 #endif#pragma once
