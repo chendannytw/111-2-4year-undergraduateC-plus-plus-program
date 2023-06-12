@@ -1,3 +1,4 @@
+main
 #include<iostream>
 
 #include<stdexcept>
@@ -10,59 +11,53 @@ using namespace std;
 
 int main(void) {
 
-    double radius;
+    double length;
 
-
+   
 
     double height;
 
     //視窗輸出配置
 
-    cout << "Enter the length and width for pie：" << endl;
+    cout << "Enter the R ：" << endl;
 
     cout << "  R=";
 
-    cin >> radius;
+    cin >> length;
 
 
 
-    cout << "  Width =3.14";
+    
 
-
-
-    square_2d userenter(radius);
+    pie_2D userenter(length);
 
     cout << "-------------------------------------------------" << endl;
 
 
 
-    cout << "Enter the height for cylinder:" << endl;
+    cout << "Enter the height:" << endl;
 
     cout << "  Height=";
 
     cin >> height;
 
-    rect_3d userenter2(radius , height);
+    cylinder_3D userenter2(length, height);
 
     cout << "-------------------------------------------------" << endl;
 
     cout << "The result is:\n\n";
 
-    cout << "  The result of pie:\n";
+    cout << "  The result of square:\n";
 
-    cout << "     radius：" << userenter.getlength() << " cm" << " | Width："
-
-        << userenter.getwidth() << " cm" << "\n     The area is "
+    cout << "     Length：" << userenter.getlength() << " cm" << "\n     The area is "
 
         << userenter.compute_area() << " cm2\n" << endl;
 
-    cout << "  The result of cylinder:\n";
+    cout << "  The result of rect:\n";
 
-    cout << "     radius：" << userenter2.getlength() << " cm" << " | Width："
+    cout << "     Length：" << userenter2.getlength() << " cm" << " | Height：" << userenter2.getheight()
 
-        << userenter2.getwidth() << " cm" << " | Height：" << userenter2.getheight()
-
-        << " cm" << "\n     The volume is " << userenter2.compute_volume()  <<" cm3 | The surface is " << userenter2.compute_surface() << " cm2\n" << endl;
+        << " cm" << "\n     The volume is " << userenter2.compute_volume() << " cm3 | The surface is " << userenter2.compute_surface() << " cm2\n" << endl;
 
 
 
@@ -70,8 +65,8 @@ int main(void) {
 
 }
 
-
 -----------------------------
+cylinder_3D.cpp
 
 #include<iostream>
 
@@ -81,24 +76,25 @@ int main(void) {
 
 using namespace std;
 
-rect_3d::rect_3d(double r, double h)
+cylinder_3D::cylinder_3D(double r, double h)
 
 {
 
     setlength(r);
 
+    
 
     setheight(h);
 
 }
 
-void rect_3d::setheight(const double h) {
+void cylinder_3D::setheight(const double h) {
 
     height = h;
 
 }
 
-double rect_3d::getheight() {
+double cylinder_3D::getheight() {
 
     return height;
 
@@ -106,20 +102,22 @@ double rect_3d::getheight() {
 
 //體積計算：長*寬*高
 
-double rect_3d::compute_volume() const {
+double cylinder_3D::compute_volume() const {
 
-    return radius* radius * width * height;
+    return length * length * height *3.14;
 
 }
 
 //表面積計算：(長*寬+寬*高+長*高)*2
 
-double rect_3d::compute_surface() const {
+double cylinder_3D::compute_surface() const {
 
-    return  radius * radius * width+ radius *2*width* height;
+    return length * 2*3.14* height + length* length*3.14*2;
 
 }
 -----------------------------
+cylinder_3D.h
+
 #ifndef square3d_H
 
 #define square3d_H
@@ -132,13 +130,13 @@ using namespace std;
 
 //繼承square_2d類別的rect_3d類別(包含5個成員函數與1個資料成員 + square_2d內的函數與資料成員)
 
-class rect_3d :public square_2d
+class cylinder_3D :public pie_2D
 
 {
 
 public:
 
-    rect_3d(double = 0, double = 0);            //建構子
+    cylinder_3D(double = 0, double = 0);            //建構子
 
     void setheight(const double);                           //設定高度
 
@@ -154,6 +152,8 @@ public:
 
 #endif
 --------------------------------
+pie_2D.cpp
+
 #include<iostream>
 
 #include<stdexcept>
@@ -162,48 +162,42 @@ public:
 
 using namespace std;
 
-square_2d::square_2d(const double r)
+pie_2D::pie_2D(const double r)
 
 {
 
     setlength(r);
 
- 
+    
 
 }
 
-void square_2d::setlength(const double r){
+void pie_2D::setlength(const double r) {
 
-    radius = r;
-
-}
-
-void square_2d::setwidth(const double w){
-
-    width = w;
+    length = r;
 
 }
 
-double square_2d::getlength(){
 
-    return radius;
 
-}
+double pie_2D::getlength() {
 
-double square_2d::getwidth(){
-
-    return width;
+    return length;
 
 }
+
+
 
 //面積計算：長*寬
 
-double square_2d::compute_area() const{
+double pie_2D::compute_area() const {
 
-    return radius *radius *width;
+    return length * length *3.14;
 
 }
 --------------------------------------------------------------
+pie_2D.h
+
 #ifndef square2d_H
 
 #define square2d_H
@@ -212,25 +206,25 @@ using namespace std;
 
 //square_2d的類別(包含6個成員函數與2個資料成員)
 
-class square_2d{
+class pie_2D {
 
 public:
 
-    square_2d(double=0);           //建構子
+    pie_2D(double = 0);           //建構子
 
     void setlength(const double);           //設定長度
 
-    void setwidth(const double);            //設定寬度
+    
 
     double getlength();                     //取得長度   
 
-    double getwidth();                      //取得寬度   
+    
 
     double compute_area() const;            //計算面積
 
-    double radius;                          //長
+    double length;                          //長
 
-    double width=3.14;                           //寬
+   
 
 };
 
