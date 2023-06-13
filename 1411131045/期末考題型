@@ -258,6 +258,8 @@ unsigned int Date::checkDay(int testDay)const
 } // end function checkDay
 
 //Date.h
+
+//Pet.cpp
 #include <iostream>
 #include "Pet.h" // Pet class definition
 #include "Date.h" // Date class definition
@@ -305,7 +307,5 @@ Pet::~Pet()
     cout << "Pet object destructor: "
         << Name << ", " << type << endl;
 } // end ~Pet destructor
-
-//Pet.cpp
 
 //Pet.h
