@@ -181,6 +181,6 @@ double cylinder_3d::compute_volume()  {
 
 double cylinder_3d::compute_surface()  {
 
-    return 2 * radious  * 3.14*height + 2*radious * 3.14 ;
+    return 2 * radious  * 3.14+height*2*radious * 3.14 ;
 
 }
