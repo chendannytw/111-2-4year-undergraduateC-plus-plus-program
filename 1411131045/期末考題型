@@ -177,7 +177,7 @@ double cylinder_3d::compute_volume()  {
 
 }
 
-//表面積計算：(長*寬+寬*高+長*高)*2
+//表面積計算：2*圓面積+2*圓周長*高
 
 double cylinder_3d::compute_surface()  {
 
