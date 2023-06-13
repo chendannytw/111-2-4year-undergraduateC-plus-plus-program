@@ -177,10 +177,10 @@ double cylinder_3d::compute_volume()  {
 
 }
 
-//表面積計算：2*圓面積+2*圓周長*高
+//表面積計算：2*圓面積+圓周長*高
 
 double cylinder_3d::compute_surface()  {
 
-    return 2 * radious  * 3.14*height + 2*radious * radious * 3.14 ;
+    return 2 * radious  * 3.14*height + 2*radious * 3.14 ;
 
 }
