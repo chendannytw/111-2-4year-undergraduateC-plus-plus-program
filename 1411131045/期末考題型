@@ -185,6 +185,19 @@ double cylinder_3d::compute_surface()  {
 
 }
 //2023-5-31main.cpp
+#include <iostream>
+#include "Pet.h" // Pet class definition
+using namespace std;
+
+int main()
+{
+	Date birth(7, 24, 1949);
+	Date adoptDate(3, 12, 1988);
+	Pet data("Dog", "Alan", birth, adoptDate);
+
+	cout << endl;
+	data.print();
+} // end main
 //Date.cpp
 
 //Date.h
