@@ -1,0 +1,284 @@
+/main/
+//// 程式設計期末考專用  主程式檔  (陳大仁老師修改)
+// BasePlusCommissionEmployee class test program.
+#include <iostream>
+#include <iomanip>
+#include "AdminBasePlusCommissionEmployee.h" // class definition
+using namespace std;
+
+int main()
+{
+    // instantiate BasePlusCommissionEmployee object
+    AdminBasePlusCommissionEmployee
+        employee("Bob", "Lewis", "333-33-3333", 5000, .04, 300);
+
+    // set floating-point output formatting
+    cout << fixed << setprecision(2);
+
+    // get commission employee data
+    cout << "Employee information obtained by get functions: \n"
+        << "\nFirst name is " << employee.getFirstName()
+        << "\nLast name is " << employee.getLastName()
+        << "\nSocial security number is "
+        << employee.getSocialSecurityNumber()
+        << "\nGross sales is " << employee.getGrossSales()
+        << "\nCommission rate is " << employee.getCommissionRate()
+        << "\nBase salary is " << employee.getBaseSalary() << endl;
+
+    employee.setBaseSalary(1000); // set base salary
+    employee.setAdministrativePay(500);
+
+    cout << "\nUpdated employee information output by print function: \n"
+        << endl;
+    employee.print(); // display the new employee information
+
+    // display the employee's earnings
+    cout << "\n\nEmployee's earnings: $" << employee.earnings() << endl;
+} // end main
+
+
+/c.h/
+#pragma once
+// 程式設計期末考專用  無底薪的員工類別介面檔  (陳大仁老師修改)
+// CommissionEmployee class definition represents a commission employee.
+#ifndef COMMISSION_H
+#define COMMISSION_H
+
+#include <string> // C++ standard string class
+
+class CommissionEmployee
+{
+public:
+    CommissionEmployee(const std::string&, const std::string&,
+        const std::string&, double = 0.0, double = 0.0, double = 0.0);
+
+    void setFirstName(const std::string&); // set first name
+    std::string getFirstName() const; // return first name
+
+    void setLastName(const std::string&); // set last name
+    std::string getLastName() const; // return last name
+
+    void setSocialSecurityNumber(const std::string&); // set SSN
+    std::string getSocialSecurityNumber() const; // return SSN
+
+    void setGrossSales(double); // set gross sales amount
+    double getGrossSales() const; // return gross sales amount
+
+    void setCommissionRate(double); // set commission rate (percentage)
+    double getCommissionRate() const; // return commission rate
+
+    void setAdministrativePay(double); // set commission rate (percentage)
+    double getAdministrativePay() const; // return commission rate
+
+    double earnings() const; // calculate earnings
+    void print() const; // print CommissionEmployee object
+//private:
+    std::string firstName;
+    std::string lastName;
+    std::string socialSecurityNumber;
+    double grossSales; // gross weekly sales
+    double commissionRate; // commission percentage
+    double administrativePay;
+}; // end class CommissionEmployee
+
+#endif
+
+
+/c.cpp/
+// 程式設計期末考專用  無底薪的員工類別實作檔  (陳大仁老師修改)
+// Class CommissionEmployee member-function definitions.
+#include <iostream>
+#include <stdexcept>
+#include "CommissionEmployee.h" // CommissionEmployee class definition
+using namespace std;
+
+// constructor
+CommissionEmployee::CommissionEmployee(
+    const string& first, const string& last, const string& ssn,                 
+    double sales, double rate, double pay)
+{
+    firstName = first; // should validate
+    lastName = last; // should validate
+    socialSecurityNumber = ssn; // should validate
+    setGrossSales(sales); // validate and store gross sales
+    setCommissionRate(rate); // validate and store commission rate
+    setAdministrativePay(pay);
+} // end CommissionEmployee constructor
+
+// set first name
+void CommissionEmployee::setFirstName(const string& first)
+{
+    firstName = first; // should validate
+} // end function setFirstName
+
+// return first name
+string CommissionEmployee::getFirstName() const
+{
+    return firstName;
+} // end function getFirstName
+
+// set last name
+void CommissionEmployee::setLastName(const string& last)
+{
+    lastName = last; // should validate
+} // end function setLastName
+
+// return last name
+string CommissionEmployee::getLastName() const
+{
+    return lastName;
+} // end function getLastName
+
+// set social security number
+void CommissionEmployee::setSocialSecurityNumber(const string& ssn)
+{
+    socialSecurityNumber = ssn; // should validate
+} // end function setSocialSecurityNumber
+
+// return social security number
+string CommissionEmployee::getSocialSecurityNumber() const
+{
+    return socialSecurityNumber;
+} // end function getSocialSecurityNumber
+
+// set gross sales amount
+void CommissionEmployee::setGrossSales(double sales)
+{
+    if (sales >= 0.0)
+        grossSales = sales;
+    else
+        throw invalid_argument("Gross sales must be >= 0.0");
+} // end function setGrossSales
+
+// return gross sales amount
+double CommissionEmployee::getGrossSales() const
+{
+    return grossSales;
+} // end function getGrossSales
+
+// set commission rate
+void CommissionEmployee::setCommissionRate(double rate)
+{
+    if (rate > 0.0 && rate < 1.0)
+        commissionRate = rate;
+    else
+        throw invalid_argument("Commission rate must be > 0.0 and < 1.0");
+} // end function setCommissionRate
+
+// return commission rate
+double CommissionEmployee::getCommissionRate() const
+{
+    return commissionRate;
+} // end function getCommissionRate
+
+void CommissionEmployee::setAdministrativePay(double pay)
+{
+    if (pay >= 0.0)
+        administrativePay = pay;
+    else
+        throw invalid_argument("tAdministrative Pay must be >= 0.0");
+} // end function setGrossSales
+
+// calculate earnings
+double CommissionEmployee::getAdministrativePay() const
+{
+    return administrativePay;
+} // end function getAdministrativePay
+
+double CommissionEmployee::earnings() const
+{
+    return commissionRate * grossSales + administrativePay;
+} // end function earnings
+
+// print CommissionEmployee object
+void CommissionEmployee::print() const
+{
+    cout << "commission employee: " << firstName << ' ' << lastName
+        << "\nsocial security number: " << socialSecurityNumber
+        << "\ngross sales: " << grossSales
+        << "\ncommission rate: " << commissionRate
+        << "\n administrative pay: " << administrativePay << endl;
+} // end function print
+
+
+
+/ad.h/
+#pragma once
+// 程式設計期末考專用  有底薪的員工類別介面檔  (陳大仁老師修改)
+// BasePlusCommissionEmployee class derived from class 
+// CommissionEmployee.
+#ifndef BASEPLUS_H
+#define BASEPLUS_H
+
+#include <string> // C++ standard string class
+#include "CommissionEmployee.h" // CommissionEmployee class declaration
+
+class AdminBasePlusCommissionEmployee : public CommissionEmployee
+{
+public:
+    AdminBasePlusCommissionEmployee(const std::string&, const std::string&,
+        const std::string&, double = 0.0, double = 0.0, double = 0.0);
+
+    void setBaseSalary(double); // set base salary
+    double getBaseSalary() const; // return base salary
+
+    double earnings() const; // calculate earnings
+    void print() const; // print BasePlusCommissionEmployee object
+private:
+    double baseSalary; // base salary
+}; // end class BasePlusCommissionEmployee
+
+#endif
+
+
+
+/ad.cpp/
+// 程式設計期末考專用  有底薪的員工類別實作檔  (陳大仁老師修改)
+// Class BasePlusCommissionEmployee member-function definitions.
+#include <iostream>
+#include <stdexcept>
+#include "AdminBasePlusCommissionEmployee.h" // class definition
+using namespace std;
+
+// constructor
+AdminBasePlusCommissionEmployee::AdminBasePlusCommissionEmployee(
+    const string& first, const string& last, const string& ssn,
+    double sales, double rate, double salary)
+    // explicitly call base-class constructor
+    : CommissionEmployee(first, last, ssn, sales, rate)
+{
+    setBaseSalary(salary); // validate and store base salary
+} // end BasePlusCommissionEmployee constructor
+
+// set base salary
+void AdminBasePlusCommissionEmployee::setBaseSalary(double salary)
+{
+    if (salary >= 0.0)
+        baseSalary = salary;
+    else
+        throw invalid_argument("Salary must be >= 0.0");
+} // end function setBaseSalary
+
+// return base salary
+double AdminBasePlusCommissionEmployee::getBaseSalary() const
+{
+    return baseSalary;
+} // end function getBaseSalary
+
+// calculate earnings
+double AdminBasePlusCommissionEmployee::earnings() const
+{
+    // derived class cannot access the base class's private data
+    return baseSalary + (commissionRate * grossSales);
+} // end function earnings
+
+// print BasePlusCommissionEmployee object
+void AdminBasePlusCommissionEmployee::print() const
+{
+    // derived class cannot access the base class's private data
+    cout << "base-salaried commission employee: " << firstName << ' '
+        << lastName << "\nsocial security number: " << socialSecurityNumber
+        << "\ngross sales: " << grossSales
+        << "\ncommission rate: " << commissionRate
+        << "\nbase salary: " << baseSalary;
+} // end function print
